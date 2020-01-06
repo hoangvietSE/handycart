@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">HandyCart</string>
+
+    <string name="login_title">Đăng nhập</string>
+    <string name="login_username">Email/Số điện thoại</string>
+    <string name="login_password">Mật khẩu</string>
+    <string name="login_button">Đăng nhập</string>
+    <string name="login_forgot_password">Quên mật khẩu</string>
+    <string name="login_user_already">Đă là thành viên</string>
+    <string name="login_social_fb">Đăng nhập Facebook</string>
+    <string name="login_social_kakao">Đăng nhập Kakaotalk</string>
+    <string name="login_social_google">Đăng nhập Google</string>
+    <string name="login_register">Không phải thành viên? <font color="#1976D2"><b>Đăng ký</b></font></string>
+    <string name="login_validate_email_empty">Vui lòng nhập Email hoặc số điện thoại</string>
+    <string name="login_validate_email_error">Vui lòng nhập Email hoặc số điện thoại đúng định dạng</string>
+    <string name="login_validate_password_empty">Vui lòng nhập mật khẩu</string>
+    <string name="login_validate_password_error">Mật khẩu phải lớn hơn 6 kí tự bao gồm chữ cái và số</string>
+</resources>

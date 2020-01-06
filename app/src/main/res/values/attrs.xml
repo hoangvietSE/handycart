@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseRecyclerView">
+        <attr name="brv_padding" format="dimension" />
+        <attr name="brv_padding_start" format="dimension" />
+        <attr name="brv_padding_end" format="dimension" />
+        <attr name="brv_padding_top" format="dimension" />
+        <attr name="brv_padding_bottom" format="dimension" />
+        <attr name="brv_enable_refresh" format="boolean" />
+        <attr name="brv_text_no_result" format="string|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseToolbar">
+        <attr name="icon_left" format="enum">
+            <enum name="none" value="0" />
+            <enum name="menu" value="1" />
+            <enum name="back" value="2" />
+        </attr>
+        <attr name="icon_right" format="enum">
+            <enum name="none" value="0" />
+            <enum name="search" value="1" />
+            <enum name="save" value="2" />
+            <enum name="sale_off" value="3" />
+            <enum name="menu" value="4" />
+        </attr>
+        <attr name="title" format="string" />
+        <attr name="title_right" format="string" />
+    </declare-styleable>
+</resources>
