@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.soict.hoangviet.handycart.BuildConfig;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
+import com.soict.hoangviet.handycart.data.network.LanguageInterceptor;
 import com.soict.hoangviet.handycart.data.network.NetworkCheckerInterceptor;
 import com.soict.hoangviet.handycart.data.network.TokenInterceptor;
 import com.soict.hoangviet.handycart.utils.Define;
@@ -31,6 +32,7 @@ public class NetworkModule {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+        LanguageInterceptor languageInterceptor = new LanguageInterceptor();
         TokenInterceptor tokenInterceptor = new TokenInterceptor();
         NetworkCheckerInterceptor networkCheckerInterceptor = new NetworkCheckerInterceptor(context);
 
@@ -38,6 +40,7 @@ public class NetworkModule {
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(tokenInterceptor)
                 .addInterceptor(networkCheckerInterceptor)
+                .addInterceptor(languageInterceptor)
                 .connectTimeout(Define.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(Define.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(Define.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
