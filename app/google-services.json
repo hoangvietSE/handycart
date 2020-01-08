@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "955177677547",
+    "firebase_url": "https://handycart-9b5c2.firebaseio.com",
+    "project_id": "handycart-9b5c2",
+    "storage_bucket": "handycart-9b5c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955177677547:android:bd606cc6a4665f8b8384ae",
+        "android_client_info": {
+          "package_name": "com.soict.hoangviet.handycart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955177677547-hk1md4r7qudvd2u96j9bkc4u7glrcst9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soict.hoangviet.handycart",
+            "certificate_hash": "1ec95054b363151645e46c3f8b78fe0ab2b9e179"
+          }
+        },
+        {
+          "client_id": "955177677547-k0j5kn2m0udv4j2to8npo00tk6lq61f2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQCRg83CKxBC3wOEVYJC_FSzhszhk_c_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955177677547-k0j5kn2m0udv4j2to8npo00tk6lq61f2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

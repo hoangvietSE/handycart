@@ -35,6 +35,7 @@ public class Define {
             public static final String LOGIN_NAME = "login_name";
             public static final String PASSWORD = "password";
             public static final String TOKEN = "token";
+            public static final String DEVICE_TOKEN_ID = "device_token_id";
         }
 
         public static class Http {
