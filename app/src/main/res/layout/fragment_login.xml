@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="loginViewModel"
             type="com.soict.hoangviet.handycart.ui.login.LoginViewModel" />
@@ -46,7 +47,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8_dp">
+                android:layout_marginTop="@dimen/margin_4_dp">
 
                 <EditText
                     android:id="@+id/edt_password"
@@ -60,11 +61,11 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_32_dp"
                 android:background="@drawable/bg_primary_4_dp"
+                android:clickable="true"
                 android:gravity="center"
                 android:onClick="@{loginViewModel::onLoginClick}"
                 android:padding="@dimen/content_padding_10_dp"
@@ -77,7 +78,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8_dp">
+                android:layout_marginTop="@dimen/margin_10_dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -123,7 +124,7 @@
                 android:gravity="center"
                 android:padding="@dimen/content_padding_4_dp"
                 android:text="@string/login_social_kakao"
-                android:textColor="@color/md_white_1000"
+                android:textColor="@color/md_black_1000"
                 android:textSize="@dimen/textsize_16_sp"
                 android:textStyle="bold" />
 

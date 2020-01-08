@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">HandyCart</string>
 
+    <!--    Master-->
+    <string name="master_home_title">Trang chủ</string>
+    <string name="master_favorite_title">Yêu thích</string>
+    <string name="master_search_title">Tìm kiếm</string>
+    <string name="master_notification_title">Thông báo</string>
+    <string name="master_profile_title">Cá nhân</string>
+
+    <!--    Login-->
     <string name="login_title">Đăng nhập</string>
     <string name="login_username">Email/Số điện thoại</string>
     <string name="login_password">Mật khẩu</string>

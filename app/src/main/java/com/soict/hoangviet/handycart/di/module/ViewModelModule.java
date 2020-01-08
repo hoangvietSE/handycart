@@ -4,9 +4,15 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.soict.hoangviet.handycart.di.ViewModelFactory;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.home.HomeViewModel;
 import com.soict.hoangviet.handycart.ui.login.LoginViewModel;
 import com.soict.hoangviet.handycart.ui.main.MainViewModel;
+import com.soict.hoangviet.handycart.ui.master.MasterFragment;
+import com.soict.hoangviet.handycart.ui.master.MasterViewModel;
+import com.soict.hoangviet.handycart.ui.notification.NotificationViewModel;
+import com.soict.hoangviet.handycart.ui.profile.ProfileViewModel;
+import com.soict.hoangviet.handycart.ui.search.SearchViewModel;
 import com.soict.hoangviet.handycart.ui.splash.SplashViewModel;
 
 import dagger.Binds;
@@ -36,6 +42,31 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel.class)
     abstract ViewModel bindLoginViewModel(LoginViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MasterViewModel.class)
+    abstract ViewModel bindMasterViewModel(MasterViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoriteViewModel.class)
+    abstract ViewModel bindFavoriteViewModel(FavoriteViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel.class)
+    abstract ViewModel bindSearchViewModel(SearchViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NotificationViewModel.class)
+    abstract ViewModel bindNotificationViewModel(NotificationViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel.class)
+    abstract ViewModel bindProfileViewModel(ProfileViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

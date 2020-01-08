@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.soict.hoangviet.handycart.custom.BaseToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+
+            <com.soict.hoangviet.handycart.custom.LockedViewPager
+                android:id="@+id/master_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/line"
+                android:layout_below="@id/toolbar" />
+
+            <View
+                android:id="@+id/line"
+                style="@style/LineHorizontal"
+                android:layout_above="@id/bottom_bar" />
+
+            <com.soict.hoangviet.handycart.custom.BaseBottomBar
+                android:id="@+id/bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <include layout="@layout/layout_navigation" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
