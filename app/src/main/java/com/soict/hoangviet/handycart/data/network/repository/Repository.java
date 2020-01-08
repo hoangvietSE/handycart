@@ -2,12 +2,15 @@ package com.soict.hoangviet.handycart.data.network.repository;
 
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
+import com.soict.hoangviet.handycart.entity.BannerResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import javax.inject.Inject;
 
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class Repository {
@@ -19,7 +22,13 @@ public class Repository {
     }
 
     public Single<ListResponse<SearchResponse>> search(int pageIndex) {
-        return apiInterface.search("h",pageIndex)
+        return apiInterface.search("h", pageIndex)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<BannerResponse> getListBanners() {
+        return apiInterface.getListBanners()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

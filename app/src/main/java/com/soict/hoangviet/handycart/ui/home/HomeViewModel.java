@@ -6,6 +6,7 @@ import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.handycart.entity.BannerResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class HomeViewModel extends BaseViewModel {
     private Repository repository;
     private MutableLiveData<ListLoadmoreReponse<SearchResponse>> search = new MutableLiveData<>();
+    private MutableLiveData<BannerResponse> listBanners = new MutableLiveData<>();
     private int pageIndex = 1;
 
     @Inject
@@ -25,6 +27,27 @@ public class HomeViewModel extends BaseViewModel {
 
     public MutableLiveData<ListLoadmoreReponse<SearchResponse>> getSearch() {
         return search;
+    }
+
+    public MutableLiveData<BannerResponse> getListBanners() {
+        if (listBanners == null) listBanners = new MutableLiveData<>();
+        return listBanners;
+    }
+
+    public void setListBanners() {
+        mCompositeDisposable.add(
+                repository.getListBanners()
+                        .doOnSubscribe(disposable -> {
+                        })
+                        .subscribe(
+                                bannerResponse -> {
+                                    listBanners.setValue(bannerResponse);
+                                },
+                                throwable -> {
+
+                                })
+
+        );
     }
 
     public void search(boolean isRefresh) {

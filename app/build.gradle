@@ -28,7 +28,7 @@ android {
             //signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'BASE_URL', '"http://api.handycart.vn/api/v1/"'
+            buildConfigField 'String', 'BASE_URL', '"http://handycart.beetechdev.vn/api/v1/"'
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
         stage {
@@ -98,13 +98,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-    implementation "androidx.recyclerview:recyclerview:$recyclerviewsVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
     //Glide
-    implementation "com.github.bumptech.glide:glide:$glidesVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glidesVersion"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     //Firebase
-    implementation "com.google.firebase:firebase-messaging:$firebaseMessagingsVersion"
+    implementation "com.google.firebase:firebase-messaging:$firebase_messaging_version"
+
+    //LoopingViewPager
+    implementation "com.asksira.android:loopingviewpager:$looping_view_pager_version"
 
 }

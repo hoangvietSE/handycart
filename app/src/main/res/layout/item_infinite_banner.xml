@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="dataItem"
+            type="com.soict.hoangviet.handycart.entity.DataItem" />
+    </data>
+
+    <ImageView
+        android:id="@+id/imv_banner"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:src="@{dataItem.image}" />
+</layout>

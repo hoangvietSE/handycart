@@ -6,18 +6,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.soict.hoangviet.handycart.R;
+import com.soict.hoangviet.handycart.adapter.BannerInfiniteAdapter;
 import com.soict.hoangviet.handycart.adapter.SearchAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
-import com.soict.hoangviet.handycart.databinding.HomeFragmentBinding;
+import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment<HomeFragmentBinding> {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     private HomeViewModel mViewModel;
     private SearchAdapter searchAdapter;
+    private BannerInfiniteAdapter bannerInfiniteAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -36,12 +38,21 @@ public class HomeFragment extends BaseFragment<HomeFragmentBinding> {
 
     @Override
     public void initView() {
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel.class);
+        mViewModel.setListBanners();
+        initListener();
+    }
 
+    private void initListener() {
+        mViewModel.getListBanners().observe(this, bannerResponse -> {
+            binding.setBanner(bannerResponse);
+            bannerInfiniteAdapter = new BannerInfiniteAdapter(getContext(), bannerResponse.getData(), true);
+            binding.viewpagerLooping.setAdapter(bannerInfiniteAdapter);
+        });
     }
 
     @Override
     public void initData() {
-        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel.class);
         searchAdapter = new SearchAdapter(getContext());
         binding.rcvSearch.setListLayoutManager(LinearLayoutManager.VERTICAL);
         binding.rcvSearch.setAdapter(searchAdapter);
