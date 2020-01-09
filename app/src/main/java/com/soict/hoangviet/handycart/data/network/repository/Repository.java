@@ -4,6 +4,7 @@ import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
+import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import java.util.HashMap;
@@ -36,8 +37,14 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ListResponse<HomeProductResponse>> getListHomeProduct(HashMap<String, Object> data){
-        return apiInterface.getListHomeProduct(data)
+    public Single<ListResponse<HomeProductResponse>> getListHomeProductNoAuth(HashMap<String, Object> data){
+        return apiInterface.getListHomeProductNoAuth(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierNoAuth(HashMap<String, Object> data){
+        return apiInterface.getListHomeSupplierNoAuth(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

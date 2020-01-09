@@ -4,6 +4,7 @@ package com.soict.hoangviet.handycart.data.network;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
+import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import java.util.HashMap;
@@ -26,5 +27,11 @@ public interface ApiInterface {
 
     @GET(ApiConstant.PRODUCT_CATEGORY)
     @Headers("Content-Type: application/json")
-    Single<ListResponse<HomeProductResponse>> getListHomeProduct(@QueryMap HashMap<String, Object> data);
+    Single<ListResponse<HomeProductResponse>> getListHomeProductNoAuth(@QueryMap HashMap<String, Object> data);
+
+    @GET(ApiConstant.SUPPLIER)
+    @Headers("Content-Type: application/json")
+    Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierNoAuth(@QueryMap HashMap<String, Object> data);
+
+
 }

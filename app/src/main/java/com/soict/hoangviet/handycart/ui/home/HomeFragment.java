@@ -1,18 +1,17 @@
 package com.soict.hoangviet.handycart.ui.home;
 
-import android.widget.Toast;
-
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.BannerInfiniteAdapter;
 import com.soict.hoangviet.handycart.adapter.HomeProductAdapter;
-import com.soict.hoangviet.handycart.adapter.SearchAdapter;
+import com.soict.hoangviet.handycart.adapter.HomeSupplierAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
-import com.soict.hoangviet.handycart.entity.SearchResponse;
+import com.soict.hoangviet.handycart.entity.HomeProductResponse;
+import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
 
 import java.util.List;
 
@@ -24,9 +23,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     @Inject
     public ISharePreference mSharePreference;
     private HomeViewModel mViewModel;
-    private SearchAdapter searchAdapter;
     private BannerInfiniteAdapter bannerInfiniteAdapter;
     private HomeProductAdapter homeProductAdapter;
+    private HomeSupplierAdapter homeSupplierAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -51,11 +50,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
         } else {
             getListProductNoAuth();
+            getListSupplierNoAuth();
         }
     }
 
+    private void getListSupplierNoAuth() {
+        mViewModel.setListHomeSupplierNoAuth();
+    }
+
     private void getListProductNoAuth() {
-        mViewModel.setListHomeProduct();
+        mViewModel.setListHomeProductNoAuth();
     }
 
     private void initViewModel() {
@@ -76,27 +80,31 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel.getListHomeProduct().observe(this, reponse -> {
             handleLoadMoreResponse(reponse, reponse.isRefresh(), reponse.isCanLoadmore());
         });
+        mViewModel.getListHomeSupplier().observe(this, response -> {
+            handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());
+        });
     }
 
     @Override
     public void initData() {
-        initHomeAdapter();
-        searchAdapter = new SearchAdapter(getContext());
-        binding.rcvSearch.setListLayoutManager(LinearLayoutManager.VERTICAL);
-        binding.rcvSearch.setAdapter(searchAdapter);
-        binding.rcvSearch.setOnLoadingMoreListener(() -> mViewModel.search(false));
-
-        binding.rcvSearch.setOnRefreshListener(() -> mViewModel.search(true));
-        binding.rcvSearch.setOnItemClickListener((adapter, viewHolder, viewType, position) -> {
-            SearchResponse searchResponse = searchAdapter.getItem(position, SearchResponse.class);
-            Toast.makeText(getContext(), searchResponse.getName() + "  " + searchResponse.getPrice(), Toast.LENGTH_SHORT).show();
-        });
-        mViewModel.search(true);
-        mViewModel.getSearch().observe(getViewLifecycleOwner(),
-                searchResponseListResponse -> handleLoadMoreResponse(searchResponseListResponse, searchResponseListResponse.isRefresh(), searchResponseListResponse.isCanLoadmore()));
+        initHomeProductAdapter();
+        initHomeSupplierAdapter();
     }
 
-    private void initHomeAdapter() {
+    private void initHomeSupplierAdapter() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        homeSupplierAdapter = new HomeSupplierAdapter(getContext(), false);
+        binding.rcvHomeSupplier.setLayoutManager(layoutManager);
+        homeSupplierAdapter.setLoadingMoreListener(() -> {
+
+        });
+        homeSupplierAdapter.addOnItemClickListener((adapter, viewHolder, viewType, position) -> {
+
+        });
+        binding.rcvHomeSupplier.setAdapter(homeSupplierAdapter);
+    }
+
+    private void initHomeProductAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         homeProductAdapter = new HomeProductAdapter(getContext(), false);
         binding.rcvHomeProduct.setLayoutManager(layoutManager);
@@ -109,14 +117,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         binding.rcvHomeProduct.setAdapter(homeProductAdapter);
     }
 
+
     @Override
-    protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
-        binding.rcvSearch.enableLoadmore(canLoadmore);
+    protected void  getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
         if (isRefresh) {
-            binding.rcvSearch.refresh(data);
         } else {
-            binding.rcvSearch.addItem(data);
-            homeProductAdapter.addModels(data, false);
+            if(data.get(0) instanceof HomeProductResponse){
+                homeProductAdapter.addModels(data, false);
+            }else if(data.get(0) instanceof HomeSupplierResponse){
+                homeSupplierAdapter.addModels(data, false);
+            }
         }
     }
 }
