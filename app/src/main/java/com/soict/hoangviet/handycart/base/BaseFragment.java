@@ -50,6 +50,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
         super.onViewCreated(view, savedInstanceState);
         initView();
         initData();
+        initListener();
     }
 
     protected abstract int getLayoutId();
@@ -168,4 +169,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     public abstract void initView();
 
     public abstract void initData();
+
+    public abstract void initListener();
 }

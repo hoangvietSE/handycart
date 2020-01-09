@@ -7,4 +7,8 @@ public interface ISharePreference {
 
     String getDeviceTokenId();
 
+    void setLoginStatus(boolean isLogin);
+
+    boolean isLogin();
+
 }

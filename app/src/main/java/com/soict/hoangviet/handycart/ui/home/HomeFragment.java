@@ -7,19 +7,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.BannerInfiniteAdapter;
+import com.soict.hoangviet.handycart.adapter.HomeProductAdapter;
 import com.soict.hoangviet.handycart.adapter.SearchAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
+import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
+    @Inject
+    public ISharePreference mSharePreference;
     private HomeViewModel mViewModel;
     private SearchAdapter searchAdapter;
     private BannerInfiniteAdapter bannerInfiniteAdapter;
+    private HomeProductAdapter homeProductAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -38,21 +45,42 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     @Override
     public void initView() {
-        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel.class);
-        mViewModel.setListBanners();
-        initListener();
+        initViewModel();
+        getListBanner();
+        if (mSharePreference.isLogin()) {
+
+        } else {
+            getListProductNoAuth();
+        }
     }
 
-    private void initListener() {
+    private void getListProductNoAuth() {
+        mViewModel.setListHomeProduct();
+    }
+
+    private void initViewModel() {
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel.class);
+    }
+
+    private void getListBanner() {
+        mViewModel.setListBanners();
+    }
+
+    @Override
+    public void initListener() {
         mViewModel.getListBanners().observe(this, bannerResponse -> {
             binding.setBanner(bannerResponse);
             bannerInfiniteAdapter = new BannerInfiniteAdapter(getContext(), bannerResponse.getData(), true);
             binding.viewpagerLooping.setAdapter(bannerInfiniteAdapter);
         });
+        mViewModel.getListHomeProduct().observe(this, reponse -> {
+            handleLoadMoreResponse(reponse, reponse.isRefresh(), reponse.isCanLoadmore());
+        });
     }
 
     @Override
     public void initData() {
+        initHomeAdapter();
         searchAdapter = new SearchAdapter(getContext());
         binding.rcvSearch.setListLayoutManager(LinearLayoutManager.VERTICAL);
         binding.rcvSearch.setAdapter(searchAdapter);
@@ -68,6 +96,19 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
                 searchResponseListResponse -> handleLoadMoreResponse(searchResponseListResponse, searchResponseListResponse.isRefresh(), searchResponseListResponse.isCanLoadmore()));
     }
 
+    private void initHomeAdapter() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        homeProductAdapter = new HomeProductAdapter(getContext(), false);
+        binding.rcvHomeProduct.setLayoutManager(layoutManager);
+        homeProductAdapter.setLoadingMoreListener(() -> {
+
+        });
+        homeProductAdapter.addOnItemClickListener((adapter, viewHolder, viewType, position) -> {
+
+        });
+        binding.rcvHomeProduct.setAdapter(homeProductAdapter);
+    }
+
     @Override
     protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
         binding.rcvSearch.enableLoadmore(canLoadmore);
@@ -75,6 +116,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             binding.rcvSearch.refresh(data);
         } else {
             binding.rcvSearch.addItem(data);
+            homeProductAdapter.addModels(data, false);
         }
     }
 }

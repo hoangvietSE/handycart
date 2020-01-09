@@ -16,11 +16,17 @@ public class Define {
 
         public static class BaseResponse {
             public static final String SUCCESS = "success";
+            public static final String STATUS = "status";
+            public static final String MESSAGE = "msg";
             public static final String DATA = "data";
             public static final String PAGE = "page";
+            public static final String CURRENT_PAGE = "current_page";
+            public static final String TOTAL_PAGE = "total_page";
             public static final String ERROR = "error";
             public static final String ERROR_CODE = "error_code";
             public static final String ERROR_MESSAGE = "error_message";
+            public static final int DEFAULT_INDEX = 1;
+            public static final int LIMIT = 10;
         }
 
         public static class Error {
@@ -36,6 +42,7 @@ public class Define {
             public static final String PASSWORD = "password";
             public static final String TOKEN = "token";
             public static final String DEVICE_TOKEN_ID = "device_token_id";
+            public static final String IS_LOGIN = "is_login";
         }
 
         public static class Http {
@@ -87,5 +94,10 @@ public class Define {
         public static final String IS_FIRST_LAUNCH = "isHaveMasterData";
         public static final String USER_INFO = "userInfo";
         public static final String MASTER_DATA = "masterData";
+    }
+
+    public static class Product{
+        public static final int OUT_OF_STOCK = 0;
+        public static final int IN_STOCK = 1;
     }
 }

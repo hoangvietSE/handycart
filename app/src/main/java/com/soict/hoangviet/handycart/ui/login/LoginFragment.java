@@ -36,4 +36,9 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
         binding.setLoginViewModel(loginViewModel);
         loginViewModel.getValidateLogin().observe(this, error -> ToastUtil.show(getContext(), error));
     }
+
+    @Override
+    public void initListener() {
+
+    }
 }

@@ -3,7 +3,10 @@ package com.soict.hoangviet.handycart.data.network.repository;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
+import com.soict.hoangviet.handycart.entity.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
+
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -29,6 +32,12 @@ public class Repository {
 
     public Single<BannerResponse> getListBanners() {
         return apiInterface.getListBanners()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListResponse<HomeProductResponse>> getListHomeProduct(HashMap<String, Object> data){
+        return apiInterface.getListHomeProduct(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

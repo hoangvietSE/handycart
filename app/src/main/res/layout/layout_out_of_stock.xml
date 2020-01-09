@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="isVisible"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.soict.hoangviet.handycart.custom.SquareTextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center"
+            android:text="Hết Hàng"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/textsize_20_sp"
+            android:textStyle="bold"
+            app:backgroundColor="@color/color_black_trans"
+            app:cornerRadius="@dimen/radius_10_dp" />
+
+    </LinearLayout>
+</layout>

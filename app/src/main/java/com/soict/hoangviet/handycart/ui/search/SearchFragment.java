@@ -29,4 +29,9 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding> {
     public void initData() {
 
     }
+
+    @Override
+    public void initListener() {
+
+    }
 }

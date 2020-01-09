@@ -76,14 +76,13 @@ public class BaseBottomBar extends CustomViewConstraintLayout {
         for(int index = 0; index < mTabs.size(); index++){
             int finalIndex = index;
             mTabs.get(index).setOnClickListener(view -> {
-                listener.onBottomBarClick(finalIndex);
                 onTabClick(finalIndex);
             });
         }
-        onTabClick(0);
     }
 
-    private void onTabClick(int position) {
+    public void onTabClick(int position) {
+        listener.onBottomBarClick(position);
         for (int index = 0; index < mTabs.size(); index++) {
             if (index == position) {
                 mTabs.get(index).setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));

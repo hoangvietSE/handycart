@@ -46,4 +46,9 @@ public class SplashFragment extends BaseFragment<SplashFragmentBinding> {
         }, SPLASH_TIME);
     }
 
+    @Override
+    public void initListener() {
+
+    }
+
 }

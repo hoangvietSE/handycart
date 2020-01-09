@@ -44,4 +44,14 @@ public class SharePreference implements ISharePreference {
     public String getDeviceTokenId() {
         return getString(Define.Api.Key.DEVICE_TOKEN_ID);
     }
+
+    @Override
+    public void setLoginStatus(boolean isLogin) {
+        setBoolean(Define.Api.Key.IS_LOGIN, isLogin);
+    }
+
+    @Override
+    public boolean isLogin() {
+        return getBoolean(Define.Api.Key.IS_LOGIN);
+    }
 }

@@ -29,4 +29,9 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
     public void initData() {
 
     }
+
+    @Override
+    public void initListener() {
+
+    }
 }

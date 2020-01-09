@@ -8,4 +8,11 @@
     <color name="colorKakaoTalk">#fee900</color>
     <color name="colorGoogle">#cf4332</color>
     <color name="color_bottom_tab_line">#b5b3a4</color>
+    <color name="color_black_trans">#4D000000</color>
+    <color name="color_brown">#534741</color>
+
+    <!--Product-->
+    <color name="discount_color">#ff6666</color>
+    <color name="color_sale">#999999</color>
+    <!--Product-->
 </resources>

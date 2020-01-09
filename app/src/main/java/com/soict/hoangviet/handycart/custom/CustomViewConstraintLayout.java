@@ -44,7 +44,7 @@ public abstract class CustomViewConstraintLayout extends ConstraintLayout {
         initView();
         initListener();
         initData();
-        if (styableRes != null) {
+        if(styableRes!=null){
             TypedArray mTypedArray = getContext().getTheme().obtainStyledAttributes(attrs, styableRes, 0, 0);
             initDataFromStyable(mTypedArray);
         }

@@ -29,4 +29,9 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     public void initData() {
 
     }
+
+    @Override
+    public void initListener() {
+
+    }
 }

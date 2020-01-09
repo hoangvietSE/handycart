@@ -2,13 +2,13 @@ package com.soict.hoangviet.handycart.base;
 
 public class BaseResponse {
     private int status;
-    private int msg;
+    private String msg;
 
     public int getStatus() {
         return status;
     }
 
-    public int getMsg() {
+    public String getMsg() {
         return msg;
     }
 }

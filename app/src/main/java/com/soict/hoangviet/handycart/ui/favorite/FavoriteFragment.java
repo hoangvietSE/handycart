@@ -29,4 +29,9 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding> {
     public void initData() {
 
     }
+
+    @Override
+    public void initListener() {
+
+    }
 }
