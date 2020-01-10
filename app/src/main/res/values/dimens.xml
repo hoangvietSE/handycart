@@ -29,6 +29,7 @@
     <dimen name="textsize_6_sp">6sp</dimen>
     <dimen name="textsize_4_sp">4sp</dimen>
     <dimen name="textsize_20_sp">20sp</dimen>
+    <dimen name="textsize_24_sp">24sp</dimen>
     <dimen name="textsize_26_sp">26sp</dimen>
     <dimen name="textsize_22_sp">22sp</dimen>
 

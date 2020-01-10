@@ -4,4 +4,5 @@ public class ApiConstant {
     public static final String BANNER = "banner";
     public static final String PRODUCT_CATEGORY = "product_category";
     public static final String SUPPLIER = "supplier";
+    public static final String SEARCH = "search";
 }

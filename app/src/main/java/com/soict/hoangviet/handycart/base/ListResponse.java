@@ -16,6 +16,9 @@ public class ListResponse<T> extends BaseResponse{
     @SerializedName("total_page")
     private int totalPage;
 
+    @SerializedName("total_item")
+    private int totalItem;
+
     @Nullable
     private List<T> data;
 
@@ -45,6 +48,14 @@ public class ListResponse<T> extends BaseResponse{
 
     public List<T> getData() {
         return data;
+    }
+
+    public int getTotalItem() {
+        return totalItem;
+    }
+
+    public void setTotalItem(int totalItem) {
+        this.totalItem = totalItem;
     }
 
     public Throwable getError() {

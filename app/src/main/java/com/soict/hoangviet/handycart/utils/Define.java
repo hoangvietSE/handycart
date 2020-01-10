@@ -26,7 +26,7 @@ public class Define {
             public static final String ERROR_CODE = "error_code";
             public static final String ERROR_MESSAGE = "error_message";
             public static final int DEFAULT_INDEX = 1;
-            public static final int LIMIT = 10;
+            public static final int DEFAULT_LIMIT = 10;
         }
 
         public static class Error {
@@ -47,6 +47,13 @@ public class Define {
 
         public static class Http {
             public static final int RESPONSE_CODE_ACCESS_TOKEN_EXPIRED = 403;
+        }
+
+        public static class Query{
+            public static final String CATEGORY = "category_id";
+            public static final String PAGE = "page";
+            public static final String LIMIT = "limit";
+            public static final String KEYWORD_SEARCH = "s";
         }
     }
 

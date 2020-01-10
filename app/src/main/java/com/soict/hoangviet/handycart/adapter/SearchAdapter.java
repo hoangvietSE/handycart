@@ -3,46 +3,44 @@ package com.soict.hoangviet.handycart.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
-import com.soict.hoangviet.handycart.databinding.ItemSearchBinding;
-import com.soict.hoangviet.handycart.entity.SearchResponse;
+import com.soict.hoangviet.handycart.databinding.ItemSearchProductBinding;
+import com.soict.hoangviet.handycart.entity.SearchProductResponse;
 
-public class SearchAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSearchBinding> {
-
-    public SearchAdapter(Context context) {
-        super(context, false);
+public class SearchAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSearchProductBinding> {
+    public SearchAdapter(Context context, boolean enableSelectedMode) {
+        super(context, enableSelectedMode);
     }
 
     @Override
-    protected RecyclerView.ViewHolder initNormalViewHolder(ItemSearchBinding binding, ViewGroup parent) {
+    protected RecyclerView.ViewHolder initNormalViewHolder(ItemSearchProductBinding binding, ViewGroup parent) {
         return new SearchViewHolder(binding);
     }
 
     @Override
     protected void bindNormalViewHolder(NormalViewHolder holder, int position) {
         SearchViewHolder searchViewHolder = (SearchViewHolder) holder;
-        searchViewHolder.bind(getItem(position, SearchResponse.class));
+        searchViewHolder.bind(getItem(position, SearchProductResponse.class));
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.item_search;
+        return R.layout.item_search_product;
     }
 
-    public class SearchViewHolder extends NormalViewHolder<SearchResponse> {
-        private ItemSearchBinding binding;
+    public class SearchViewHolder extends NormalViewHolder<SearchProductResponse> {
 
-        SearchViewHolder(ItemSearchBinding binding) {
+        public SearchViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
-            this.binding = binding;
         }
 
         @Override
-        public void bind(SearchResponse data) {
-            binding.setSearch(data);
+        public void bind(SearchProductResponse data) {
+            binding.setSearchProductResponse(data);
         }
     }
 }

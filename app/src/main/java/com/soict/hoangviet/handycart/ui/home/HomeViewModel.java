@@ -65,9 +65,9 @@ public class HomeViewModel extends BaseViewModel {
 
     public void setListHomeProductNoAuth() {
         HashMap<String, Object> data = new HashMap<>();
-        data.put("category_id", Define.Api.BaseResponse.DEFAULT_INDEX);
-        data.put("page", Define.Api.BaseResponse.DEFAULT_INDEX);
-        data.put("limit", Define.Api.BaseResponse.LIMIT);
+        data.put(Define.Api.Query.CATEGORY, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
         mCompositeDisposable.add(
                 repository.getListHomeProductNoAuth(data)
                         .doOnSubscribe(disposable -> {
@@ -91,8 +91,8 @@ public class HomeViewModel extends BaseViewModel {
 
     public void setListHomeSupplierNoAuth() {
         HashMap<String, Object> data = new HashMap<>();
-        data.put("page", Define.Api.BaseResponse.DEFAULT_INDEX);
-        data.put("limit", Define.Api.BaseResponse.LIMIT);
+        data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
         mCompositeDisposable.add(
                 repository.getListHomeSupplierNoAuth(data)
                         .doOnSubscribe(disposable -> {

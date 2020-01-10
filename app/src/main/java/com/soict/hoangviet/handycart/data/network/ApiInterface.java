@@ -5,6 +5,7 @@ import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.SearchProductResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import java.util.HashMap;
@@ -16,11 +17,6 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface ApiInterface {
-    @GET("search")
-    @Headers({"lang: vi", "Content-Type: application/json"})
-    Single<ListResponse<SearchResponse>> search(@Query("s") String keyword,
-                                                @Query("page") int pageIndex);
-
     @GET(ApiConstant.BANNER)
     @Headers("Content-Type: application/json")
     Single<BannerResponse> getListBanners();
@@ -32,6 +28,10 @@ public interface ApiInterface {
     @GET(ApiConstant.SUPPLIER)
     @Headers("Content-Type: application/json")
     Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierNoAuth(@QueryMap HashMap<String, Object> data);
+
+    @GET(ApiConstant.SEARCH)
+    @Headers("Content-Type: application/json")
+    Single<ListResponse<SearchProductResponse>> getListSearchProduct(@QueryMap HashMap<String, Object> data);
 
 
 }

@@ -109,7 +109,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     protected void handleLoadMoreResponse(ListResponse<?> response, boolean isRefresh, boolean canLoadmore) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-//                DialogUtil.getInstance(getContext()).show();
+                DialogUtil.getInstance(getContext()).show();
                 break;
             case Define.ResponseStatus.SUCCESS:
                 getListResponse(response.getData(), isRefresh, canLoadmore);

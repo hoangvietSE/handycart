@@ -15,4 +15,7 @@
     <color name="discount_color">#ff6666</color>
     <color name="color_sale">#999999</color>
     <!--Product-->
+
+    <color name="color_grey">#e6e6e6</color>
+    <color name="color_home_line">#ccbcc9</color>
 </resources>

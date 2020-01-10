@@ -5,6 +5,7 @@ import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.SearchProductResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
 
 import java.util.HashMap;
@@ -25,8 +26,8 @@ public class Repository {
         this.apiInterface = apiInterface;
     }
 
-    public Single<ListResponse<SearchResponse>> search(int pageIndex) {
-        return apiInterface.search("h", pageIndex)
+    public Single<ListResponse<SearchProductResponse>> getListSearchProduct(HashMap<String,Object> data) {
+        return apiInterface.getListSearchProduct(data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
