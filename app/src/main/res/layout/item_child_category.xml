@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="subCategoriesItem"
+            type="com.soict.hoangviet.handycart.entity.SubCategoriesItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="@{subCategoriesItem.name}"
+            android:textColor="@color/md_black_1000"
+            android:id="@+id/tv_title"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/margin_16_dp"
+            android:layout_marginEnd="@dimen/textsize_20_sp"
+            android:ellipsize="end"
+            android:fontFamily="@font/lato_regular"
+            android:maxLines="2"
+            android:padding="@dimen/margin_8_dp"
+            android:textSize="@dimen/textsize_12_sp"
+            tools:text="Ahuhu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

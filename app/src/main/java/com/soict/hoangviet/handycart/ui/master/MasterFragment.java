@@ -1,9 +1,14 @@
 package com.soict.hoangviet.handycart.ui.master;
 
+import androidx.lifecycle.ViewModelProviders;
+
 import com.soict.hoangviet.handycart.R;
+import com.soict.hoangviet.handycart.adapter.CategoryAdapter;
 import com.soict.hoangviet.handycart.adapter.MasterAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
+import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.databinding.FragmentMasterBinding;
+import com.soict.hoangviet.handycart.entity.CategoryResponse;
 
 public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int HOME_FRAGMENT = 0;
@@ -12,7 +17,9 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int NOTIFICATION_FRAGMENT = 3;
     private static final int PROFILE_FRAGMENT = 4;
 
+    private MasterViewModel mViewModel;
     private MasterAdapter masterAdapter;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -31,7 +38,13 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     @Override
     public void initView() {
+        initViewModel();
         initViewPager();
+    }
+
+    private void initViewModel() {
+        mViewModel = ViewModelProviders.of(this, viewModelFactory).get(MasterViewModel.class);
+        binding.setMasterViewModel(mViewModel);
     }
 
     private void initViewPager() {
@@ -47,6 +60,14 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
             setToolbar(position);
         });
         binding.bottomBar.onTabClick(0);
+        mViewModel.getListCategory().observe(this, response->{
+            initCategoryAdapter(response);
+        });
+    }
+
+    private void initCategoryAdapter(ListResponse<CategoryResponse> response) {
+        categoryAdapter = new CategoryAdapter(getContext(), response.getData());
+        binding.navigation.elvCategory.setAdapter(categoryAdapter);
     }
 
     private void setToolbar(int position) {
@@ -69,6 +90,10 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     @Override
     public void initData() {
+        getListCategory();
+    }
 
+    private void getListCategory() {
+        mViewModel.setListCategory();
     }
 }

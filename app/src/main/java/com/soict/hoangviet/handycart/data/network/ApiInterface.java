@@ -3,10 +3,11 @@ package com.soict.hoangviet.handycart.data.network;
 
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
+import com.soict.hoangviet.handycart.entity.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.SearchProductResponse;
-import com.soict.hoangviet.handycart.entity.SearchResponse;
+import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.HashMap;
 
@@ -33,5 +34,8 @@ public interface ApiInterface {
     @Headers("Content-Type: application/json")
     Single<ListResponse<SearchProductResponse>> getListSearchProduct(@QueryMap HashMap<String, Object> data);
 
+    @GET(ApiConstant.CATEGORY)
+    @Headers("Content-Type: application/json")
+    Single<ListResponse<CategoryResponse>> getCategory(@Query(Define.Api.Query.LIMIT) int limit);
 
 }

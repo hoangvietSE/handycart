@@ -1,5 +1,7 @@
 package com.soict.hoangviet.handycart.ui.search;
 
+import android.view.View;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.soict.hoangviet.handycart.base.BaseViewModel;
@@ -9,6 +11,7 @@ import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.entity.SearchProductResponse;
 import com.soict.hoangviet.handycart.utils.Define;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -57,7 +60,9 @@ public class SearchViewModel extends BaseViewModel {
         mCompositeDisposable.add(
                 repository.getListSearchProduct(data)
                         .doOnSubscribe(disposable -> {
-                            getSearch().setValue(new ListLoadmoreReponse<SearchProductResponse>().loading());
+                            if (pageIndex == 1) {
+                                getSearch().setValue(new ListLoadmoreReponse<SearchProductResponse>().loading());
+                            }
                         })
                         .doFinally(() -> {
                         })
@@ -80,5 +85,14 @@ public class SearchViewModel extends BaseViewModel {
                                     getSearch().setValue(new ListLoadmoreReponse<SearchProductResponse>().error(throwable));
                                 })
         );
+    }
+
+    public void onCloseClick(View view) {
+        getKeyWord().setValue("");
+        getSearch().setValue(new ListLoadmoreReponse<SearchProductResponse>().success(
+                new ArrayList<>(),
+                true,
+                false
+        ));
     }
 }

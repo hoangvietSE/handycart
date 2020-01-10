@@ -52,6 +52,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding> {
 
         });
         searchAdapter.setLoadingMoreListener(() -> {
+            searchAdapter.showLoadingItem(true);
             mViewModel.onSearch(false);
         });
         binding.rcvSearch.setAdapter(searchAdapter);
@@ -75,7 +76,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding> {
         if (isRefresh) {
             searchAdapter.clear();
         }
-        searchAdapter.addModels(data, false);
         searchAdapter.hideLoadingItem();
+        searchAdapter.addModels(data, false);
     }
 }

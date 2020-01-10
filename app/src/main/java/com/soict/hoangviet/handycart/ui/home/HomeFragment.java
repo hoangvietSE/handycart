@@ -5,11 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.BannerInfiniteAdapter;
+import com.soict.hoangviet.handycart.adapter.CategoryAdapter;
 import com.soict.hoangviet.handycart.adapter.HomeProductAdapter;
 import com.soict.hoangviet.handycart.adapter.HomeSupplierAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
+import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
+import com.soict.hoangviet.handycart.entity.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
 
@@ -26,6 +29,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     private BannerInfiniteAdapter bannerInfiniteAdapter;
     private HomeProductAdapter homeProductAdapter;
     private HomeSupplierAdapter homeSupplierAdapter;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -85,6 +89,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         });
     }
 
+    private void initCategoryAdapter(ListResponse<CategoryResponse> response) {
+        categoryAdapter = new CategoryAdapter(getContext(),response.getData());
+    }
+
     @Override
     public void initData() {
         initHomeProductAdapter();
@@ -119,12 +127,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
 
     @Override
-    protected void  getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
+    protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
         if (isRefresh) {
         } else {
-            if(data.get(0) instanceof HomeProductResponse){
+            if (data.get(0) instanceof HomeProductResponse) {
                 homeProductAdapter.addModels(data, false);
-            }else if(data.get(0) instanceof HomeSupplierResponse){
+            } else if (data.get(0) instanceof HomeSupplierResponse) {
                 homeSupplierAdapter.addModels(data, false);
             }
         }

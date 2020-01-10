@@ -4,9 +4,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
+import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.entity.BannerResponse;
+import com.soict.hoangviet.handycart.entity.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.SearchResponse;
@@ -41,7 +43,7 @@ public class HomeViewModel extends BaseViewModel {
         return listHomeProduct;
     }
 
-    public MutableLiveData<ListLoadmoreReponse<HomeSupplierResponse>> getListHomeSupplier(){
+    public MutableLiveData<ListLoadmoreReponse<HomeSupplierResponse>> getListHomeSupplier() {
         if (listHomeSupplier == null) listHomeSupplier = new MutableLiveData<>();
         return listHomeSupplier;
     }

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        
+        <variable
+            name="masterViewModel"
+            type="com.soict.hoangviet.handycart.ui.master.MasterViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -40,7 +42,9 @@
                 android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
-        <include layout="@layout/layout_navigation" />
+        <include
+            android:id="@+id/navigation"
+            layout="@layout/layout_navigation" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
