@@ -30,4 +30,19 @@
     <!--    Favorite Fragment-->
     <string name="favorite_product_title">Sản phẩm yêu thích</string>
     <string name="favorite_supplier_title">Nhà hàng yêu thích</string>
+
+    <!--    Global-->
+    <string name="need_login">Tính năng yêu cầu đăng nhập</string>
+
+    <!--    Profile-->
+    <string name="profile_person_title">Thông tin cá nhân</string>
+    <string name="profile_faq_title">FAQ</string>
+    <string name="profile_notification_title">Cài đặt thông báo</string>
+    <string name="profile_language_title">Cài đặt ngôn ngữ</string>
+    <string name="profile_link_title">Liên kết tài khoản</string>
+    <string name="profile_contact_title">Liên hệ</string>
+    <string name="profile_changepassword_title">Đổi mật khẩu</string>
+    <string name="profile_login_title">Đăng nhập</string>
+    <string name="profile_logout_title">Đăng xuất</string>
+
 </resources>

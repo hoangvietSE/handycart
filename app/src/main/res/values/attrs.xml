@@ -65,4 +65,11 @@
         <attr name="backgroundColor" format="color" />
         <attr name="cornerRadius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="BaseRowMainProfile">
+        <attr name="rmp_image" format="reference" />
+        <attr name="rmp_detail" format="string" />
+        <attr name="rmp_divider" format="boolean" />
+        <attr name="rmp_enable_navigate" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -17,4 +17,8 @@ public class ProductFavoriteViewModel extends BaseViewModel {
         super(mCompositeDisposable, mSharePreference);
         this.repository = repository;
     }
+
+    public boolean isLogin(){
+        return mSharePreference.isLogin();
+    }
 }

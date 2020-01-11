@@ -4,20 +4,85 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="profileViewModel"
+            type="com.soict.hoangviet.handycart.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ca nhan"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/margin_16_dp"
+            app:cardCornerRadius="@dimen/radius_10_dp"
+            app:cardElevation="@dimen/radius_8_dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_detail="@string/profile_person_title"
+                    app:rmp_image="@drawable/ic_canhan" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_detail="@string/profile_faq_title"
+                    app:rmp_image="@drawable/ic_faq" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_detail="@string/profile_notification_title"
+                    app:rmp_image="@drawable/ic_thongbao" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_detail="@string/profile_language_title"
+                    app:rmp_image="@drawable/ic_ngonngu" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_detail="@string/profile_link_title"
+                    app:rmp_image="@drawable/ic_contact_us" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_detail="@string/profile_contact_title"
+                    app:rmp_image="@drawable/ic_contact" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{profileViewModel.login?View.VISIBLE:View.GONE}"
+                    app:rmp_detail="@string/profile_changepassword_title"
+                    app:rmp_image="@drawable/ic_changepass" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:id="@+id/row_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_divider="false"
+                    app:rmp_image="@drawable/ic_dangnhap" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

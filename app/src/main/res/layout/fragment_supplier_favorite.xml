@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="supplierFavoriteViewModel"
+            type="com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,10 +16,10 @@
             android:id="@+id/rcv_supplier_favorite"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <TextView
-            android:text="Nhà hàng"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+        <include
+            bind:isVisible="@{supplierFavoriteViewModel.login}"
+            layout="@layout/layout_need_login" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
