@@ -32,10 +32,10 @@ public class SearchAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSearchP
         return R.layout.item_search_product;
     }
 
-    public class SearchViewHolder extends NormalViewHolder<SearchProductResponse> {
+    public class SearchViewHolder extends NormalViewHolder<ItemSearchProductBinding, SearchProductResponse> {
 
-        public SearchViewHolder(ViewDataBinding binding) {
-            super(binding.getRoot());
+        public SearchViewHolder(ItemSearchProductBinding binding) {
+            super(binding);
         }
 
         @Override

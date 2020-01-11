@@ -32,7 +32,6 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
     private boolean selectedMode;
     private RecyclerView recyclerView;
     private Context context;
-    protected T binding;
 
 
     public RecyclerViewAdapter(Context context, boolean enableSelectedMode) {
@@ -305,8 +304,8 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        binding = DataBindingUtil.inflate(layoutInflater, getLayoutId(), parent, false);
-        final RecyclerView.ViewHolder viewHolder = solvedOnCreateViewHolder(parent, viewType);
+        T binding = DataBindingUtil.inflate(layoutInflater, getLayoutId(), parent, false);
+        final RecyclerView.ViewHolder viewHolder = solvedOnCreateViewHolder(binding, parent, viewType);
         setClickStateBackground(viewHolder.itemView, viewType, false);
         viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -347,7 +346,7 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
         return recyclerView.getChildLayoutPosition(view);
     }
 
-    protected RecyclerView.ViewHolder solvedOnCreateViewHolder(ViewGroup parent, int viewType) {
+    protected RecyclerView.ViewHolder solvedOnCreateViewHolder(T binding, ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_NORMAL) {
             return initNormalViewHolder(binding,parent);
         }
@@ -421,9 +420,11 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
         void onItemRelease(RecyclerView.ViewHolder viewHolder, int viewType);
     }
 
-    public abstract class NormalViewHolder<U> extends RecyclerView.ViewHolder {
-        public NormalViewHolder(View itemView) {
-            super(itemView);
+    public abstract class NormalViewHolder<T, U> extends RecyclerView.ViewHolder {
+        protected T binding;
+        public NormalViewHolder(T binding) {
+            super(((ViewDataBinding)binding).getRoot());
+            this.binding = binding;
         }
         public abstract void bind(U data);
     }

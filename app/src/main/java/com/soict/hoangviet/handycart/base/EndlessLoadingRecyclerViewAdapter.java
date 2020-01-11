@@ -76,7 +76,7 @@ public abstract class EndlessLoadingRecyclerViewAdapter<T extends ViewDataBindin
     }
 
     @Override
-    protected RecyclerView.ViewHolder solvedOnCreateViewHolder(ViewGroup parent, int viewType) {
+    protected RecyclerView.ViewHolder solvedOnCreateViewHolder(T binding, ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder result;
         switch (viewType) {
             case VIEW_TYPE_LOADING: {

@@ -32,10 +32,10 @@ public class HomeSupplierAdapter extends EndlessLoadingRecyclerViewAdapter<ItemH
         return R.layout.item_home_supplier;
     }
 
-    public class HomeSupplierViewHolder extends NormalViewHolder<HomeSupplierResponse> {
+    public class HomeSupplierViewHolder extends NormalViewHolder<ItemHomeSupplierBinding,HomeSupplierResponse> {
 
-        public HomeSupplierViewHolder(ViewDataBinding binding) {
-            super(binding.getRoot());
+        public HomeSupplierViewHolder(ItemHomeSupplierBinding binding) {
+            super(binding);
         }
 
         @Override

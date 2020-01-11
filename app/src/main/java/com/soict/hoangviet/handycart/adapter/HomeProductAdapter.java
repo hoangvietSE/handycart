@@ -34,10 +34,11 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
         return R.layout.item_home_product;
     }
 
-    public class HomeProductViewHolder extends NormalViewHolder<HomeProductResponse> {
+    public class HomeProductViewHolder extends NormalViewHolder<ItemHomeProductBinding, HomeProductResponse> {
 
-        public HomeProductViewHolder(ViewDataBinding view) {
-            super(view.getRoot());
+
+        public HomeProductViewHolder(ItemHomeProductBinding binding) {
+            super(binding);
         }
 
         @Override
