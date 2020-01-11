@@ -26,4 +26,8 @@
 
     <!--    Search-->
     <string name="search_hint">Nhập từ khóa</string>
+
+    <!--    Favorite Fragment-->
+    <string name="favorite_product_title">Sản phẩm yêu thích</string>
+    <string name="favorite_supplier_title">Nhà hàng yêu thích</string>
 </resources>

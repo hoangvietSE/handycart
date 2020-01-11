@@ -46,9 +46,6 @@ public class SearchProductResponse{
 	@SerializedName("id")
 	private int id;
 
-	@SerializedName("sku")
-	private long sku;
-
 	@SerializedName("stock")
 	private int stock;
 
@@ -160,14 +157,6 @@ public class SearchProductResponse{
 		return id;
 	}
 
-	public void setSku(long sku){
-		this.sku = sku;
-	}
-
-	public long getSku(){
-		return sku;
-	}
-
 	public void setStock(int stock){
 		this.stock = stock;
 	}
@@ -223,8 +212,7 @@ public class SearchProductResponse{
 			",seller_price = '" + sellerPrice + '\'' + 
 			",updated_at = '" + updatedAt + '\'' + 
 			",name = '" + name + '\'' + 
-			",id = '" + id + '\'' + 
-			",sku = '" + sku + '\'' + 
+			",id = '" + id + '\'' +
 			",stock = '" + stock + '\'' + 
 			",flag_expiry = '" + flagExpiry + '\'' + 
 			",slug = '" + slug + '\'' + 

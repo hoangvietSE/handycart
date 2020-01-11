@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.soict.hoangviet.handycart.di.ViewModelFactory;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteViewModel;
+import com.soict.hoangviet.handycart.ui.favorite.product.ProductFavoriteViewModel;
+import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.home.HomeViewModel;
 import com.soict.hoangviet.handycart.ui.login.LoginViewModel;
 import com.soict.hoangviet.handycart.ui.main.MainViewModel;
@@ -67,6 +69,16 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel.class)
     abstract ViewModel bindProfileViewModel(ProfileViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductFavoriteViewModel.class)
+    abstract ViewModel bindProductFavoriteViewModel(ProductFavoriteViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SupplierFavoriteViewModel.class)
+    abstract ViewModel bindSupplierFavoriteViewModel(SupplierFavoriteViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

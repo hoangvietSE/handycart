@@ -76,6 +76,7 @@ public class SearchFragment extends BaseFragment<FragmentSearchBinding> {
         if (isRefresh) {
             searchAdapter.clear();
         }
+        searchAdapter.enableLoadingMore(canLoadmore);
         searchAdapter.hideLoadingItem();
         searchAdapter.addModels(data, false);
     }
