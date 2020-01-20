@@ -113,28 +113,54 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
+    public void setListHomeProductWithAuth() {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put(Define.Api.Query.CATEGORY, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
+        mCompositeDisposable.add(
+                repository.getListHomeProductWithAuth(mSharePreference.getAccessToken(), data)
+                        .doOnSubscribe(disposable -> {
+                        })
+                        .doFinally(() -> {
 
-//    public void search(boolean isRefresh) {
-//        if (isRefresh) {
-//            pageIndex = 1;
-//        }
-//        mCompositeDisposable.add(
-//                repository.search(pageIndex)
-//                        .doOnSubscribe(disposable -> {
-//                            if (isRefresh) {
-//                                search.setValue(new ListLoadmoreReponse<SearchResponse>().loading());
-//                            }
-//                        })
-//                        .subscribe(
-//                                response -> {
-//                                    pageIndex++;
-//                                    search.setValue(new ListLoadmoreReponse<SearchResponse>().success(response.getData(), isRefresh,
-//                                            pageIndex <= response.getTotalPage()));
-//                                },
-//                                throwable -> {
-//                                    search.setValue(new ListLoadmoreReponse<SearchResponse>().error(throwable));
-//                                }
-//                        )
-//        );
-//    }
+                        })
+                        .subscribe(response -> {
+                                    pageIndex++;
+                                    getListHomeProduct().setValue(new ListLoadmoreReponse<HomeProductResponse>().success(
+                                            response.getData(),
+                                            false,
+                                            pageIndex <= response.getTotalPage()
+                                    ));
+                                },
+                                throwable -> {
+                                    getListHomeProduct().setValue(new ListLoadmoreReponse<HomeProductResponse>().error(throwable));
+                                })
+        );
+    }
+
+    public void setListHomeSupplierWithAuth() {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
+        mCompositeDisposable.add(
+                repository.getListHomeSupplierWithAuth(mSharePreference.getAccessToken(), data)
+                        .doOnSubscribe(disposable -> {
+                        })
+                        .doFinally(() -> {
+
+                        })
+                        .subscribe(response -> {
+                                    pageIndex++;
+                                    getListHomeSupplier().setValue(new ListLoadmoreReponse<HomeSupplierResponse>().success(
+                                            response.getData(),
+                                            false,
+                                            pageIndex <= response.getTotalPage()
+                                    ));
+                                },
+                                throwable -> {
+                                    getListHomeProduct().setValue(new ListLoadmoreReponse<HomeProductResponse>().error(throwable));
+                                })
+        );
+    }
 }

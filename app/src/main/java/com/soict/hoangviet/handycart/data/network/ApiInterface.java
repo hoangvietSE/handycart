@@ -17,6 +17,7 @@ import io.reactivex.Single;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -34,6 +35,19 @@ public interface ApiInterface {
     @GET(ApiConstant.SUPPLIER)
     @Headers("Content-Type: application/json")
     Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierNoAuth(@QueryMap HashMap<String, Object> data);
+
+    @GET(ApiConstant.PRODUCT_CATEGORY)
+    @Headers("Content-Type: application/json")
+    Single<ListResponse<HomeProductResponse>> getListHomeProductWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @QueryMap HashMap<String, Object> data);
+
+    @GET(ApiConstant.SUPPLIER)
+    @Headers("Content-Type: application/json")
+    Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @QueryMap HashMap<String, Object> data);
+
 
     @GET(ApiConstant.SEARCH)
     @Headers("Content-Type: application/json")

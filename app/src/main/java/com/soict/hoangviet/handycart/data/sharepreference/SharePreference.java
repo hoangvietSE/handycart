@@ -39,7 +39,7 @@ public class SharePreference implements ISharePreference {
     }
 
     private void setBoolean(String key, boolean value) {
-        getSharePreference().edit().putBoolean(key, value);
+        getSharePreference().edit().putBoolean(key, value).apply();
     }
 
     private boolean getBoolean(String key) {
@@ -75,5 +75,14 @@ public class SharePreference implements ISharePreference {
     @Override
     public LoginResponse getLoginResponse() {
         return toGsonFromJson(getString(Define.Api.Key.LOGIN_RESPONSE), LoginResponse.class);
+    }
+
+    @Override
+    public String getAccessToken() {
+        if (getLoginResponse() != null) {
+            return Define.Api.Query.BEARER + getLoginResponse().getAccessToken();
+        } else {
+            return "";
+        }
     }
 }

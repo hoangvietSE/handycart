@@ -59,6 +59,18 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<ListResponse<HomeProductResponse>> getListHomeProductWithAuth(String accessToken, HashMap<String, Object> data) {
+        return apiInterface.getListHomeProductWithAuth(accessToken, data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierWithAuth(String accessToken, HashMap<String, Object> data) {
+        return apiInterface.getListHomeSupplierWithAuth(accessToken, data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Single<ListResponse<CategoryResponse>> getCategory(int limit) {
         return apiInterface.getCategory(limit)
                 .subscribeOn(Schedulers.io())

@@ -8,8 +8,6 @@ import com.soict.hoangviet.handycart.databinding.FragmentProfileBinding;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.ToastUtil;
 
-import java.util.HashMap;
-
 public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     public static final String LOGIN_RESULT = "login_result";
     private ProfileViewModel mViewModel;
@@ -59,7 +57,11 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     @Override
     public void initListener() {
         binding.rowLogin.setOnClickListener(view -> {
-            getViewController().addFragment(LoginFragment.class, null);
+            if(mViewModel.isLogin()){
+                getViewController().addFragment(LoginFragment.class, null);
+            }else{
+
+            }
         });
         mViewModel.getIsLogin().observe(this, login -> {
             binding.rowLogin.setDetail(login);

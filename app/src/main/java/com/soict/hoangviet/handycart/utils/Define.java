@@ -55,6 +55,9 @@ public class Define {
             public static final String PAGE = "page";
             public static final String LIMIT = "limit";
             public static final String KEYWORD_SEARCH = "s";
+            public static final String BEARER = "Bearer ";
+            public static final String AUTHORIZATION = "Authorization";
+
         }
     }
 

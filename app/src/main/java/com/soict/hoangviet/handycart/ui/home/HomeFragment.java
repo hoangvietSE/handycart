@@ -51,11 +51,20 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         initViewModel();
         getListBanner();
         if (mSharePreference.isLogin()) {
-
+            getListProductWithAuth();
+            getListSupplierWithAuth();
         } else {
             getListProductNoAuth();
             getListSupplierNoAuth();
         }
+    }
+
+    private void getListSupplierWithAuth() {
+        mViewModel.setListHomeProductWithAuth();
+    }
+
+    private void getListProductWithAuth() {
+        mViewModel.setListHomeSupplierWithAuth();
     }
 
     private void getListSupplierNoAuth() {

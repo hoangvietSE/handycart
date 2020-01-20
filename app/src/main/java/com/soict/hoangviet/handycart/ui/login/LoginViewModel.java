@@ -11,6 +11,7 @@ import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.handycart.data.sharepreference.SharePreference;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
 import com.soict.hoangviet.handycart.utils.CommonExtensionUtil;
@@ -98,6 +99,7 @@ public class LoginViewModel extends BaseViewModel {
                 })
                 .subscribe(
                         response -> {
+                            mSharePreference.setLoginData(response.getData());
                             getLogin().setValue(new ObjectResponse<LoginResponse>().success(response.getData()));
                         },
                         throwable -> {

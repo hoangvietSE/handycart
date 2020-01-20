@@ -17,4 +17,6 @@ public interface ISharePreference {
 
     LoginResponse getLoginResponse();
 
+    String getAccessToken();
+
 }
