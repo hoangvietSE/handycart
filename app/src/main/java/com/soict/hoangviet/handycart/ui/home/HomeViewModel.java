@@ -4,14 +4,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
-import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
-import com.soict.hoangviet.handycart.entity.BannerResponse;
-import com.soict.hoangviet.handycart.entity.CategoryResponse;
-import com.soict.hoangviet.handycart.entity.HomeProductResponse;
-import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
-import com.soict.hoangviet.handycart.entity.SearchResponse;
+import com.soict.hoangviet.handycart.entity.response.BannerResponse;
+import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
+import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.HashMap;

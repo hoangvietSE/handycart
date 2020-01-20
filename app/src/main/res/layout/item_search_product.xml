@@ -10,7 +10,7 @@
 
         <variable
             name="searchProductResponse"
-            type="com.soict.hoangviet.handycart.entity.SearchProductResponse" />
+            type="com.soict.hoangviet.handycart.entity.response.SearchProductResponse" />
     </data>
 
     <LinearLayout

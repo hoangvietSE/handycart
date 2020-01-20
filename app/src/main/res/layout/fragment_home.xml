@@ -7,7 +7,7 @@
 
         <variable
             name="banner"
-            type="com.soict.hoangviet.handycart.entity.BannerResponse" />
+            type="com.soict.hoangviet.handycart.entity.response.BannerResponse" />
     </data>
 
     <androidx.core.widget.NestedScrollView

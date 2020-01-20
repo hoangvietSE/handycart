@@ -15,7 +15,7 @@
 
         <variable
             name="categoryResponse"
-            type="com.soict.hoangviet.handycart.entity.CategoryResponse" />
+            type="com.soict.hoangviet.handycart.entity.response.CategoryResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

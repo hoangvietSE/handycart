@@ -1,5 +1,6 @@
 package com.soict.hoangviet.handycart.ui.master;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
@@ -8,7 +9,15 @@ import com.soict.hoangviet.handycart.adapter.MasterAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.databinding.FragmentMasterBinding;
-import com.soict.hoangviet.handycart.entity.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteFragment;
+import com.soict.hoangviet.handycart.ui.home.HomeFragment;
+import com.soict.hoangviet.handycart.ui.notification.NotificationFragment;
+import com.soict.hoangviet.handycart.ui.profile.ProfileFragment;
+import com.soict.hoangviet.handycart.ui.search.SearchFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int HOME_FRAGMENT = 0;
@@ -18,6 +27,7 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int PROFILE_FRAGMENT = 4;
 
     private MasterViewModel mViewModel;
+    private List<Fragment> fragments = new ArrayList<>();
     private MasterAdapter masterAdapter;
     private CategoryAdapter categoryAdapter;
 
@@ -28,7 +38,20 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     @Override
     public void backFromAddFragment() {
-
+        switch (binding.masterContainer.getCurrentItem()) {
+            case HOME_FRAGMENT:
+                break;
+            case FAVORITE_FRAGMENT:
+                break;
+            case SEARCH_FRAGMENT:
+                break;
+            case NOTIFICATION_FRAGMENT:
+                break;
+            case PROFILE_FRAGMENT:
+                Boolean loginResult = getArguments().getBoolean(ProfileFragment.LOGIN_RESULT);
+                ((ProfileFragment)fragments.get(PROFILE_FRAGMENT)).setLoginResult(loginResult);
+                break;
+        }
     }
 
     @Override
@@ -48,9 +71,18 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     }
 
     private void initViewPager() {
-        masterAdapter = new MasterAdapter(getChildFragmentManager());
+        initFragment();
+        masterAdapter = new MasterAdapter(getChildFragmentManager(), fragments);
         binding.masterContainer.setAdapter(masterAdapter);
         binding.masterContainer.setOffscreenPageLimit(4);
+    }
+
+    private void initFragment() {
+        fragments.add(new HomeFragment());
+        fragments.add(new FavoriteFragment());
+        fragments.add(new SearchFragment());
+        fragments.add(new NotificationFragment());
+        fragments.add(new ProfileFragment());
     }
 
     @Override
@@ -60,7 +92,7 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
             setToolbar(position);
         });
         binding.bottomBar.onTabClick(0);
-        mViewModel.getListCategory().observe(this, response->{
+        mViewModel.getListCategory().observe(this, response -> {
             initCategoryAdapter(response);
         });
     }

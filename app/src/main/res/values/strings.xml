@@ -23,6 +23,7 @@
     <string name="login_validate_email_error">Vui lòng nhập Email hoặc số điện thoại đúng định dạng</string>
     <string name="login_validate_password_empty">Vui lòng nhập mật khẩu</string>
     <string name="login_validate_password_error">Mật khẩu phải lớn hơn 6 kí tự bao gồm chữ cái và số</string>
+    <string name="login_success_request">Đăng nhập thành công</string>
 
     <!--    Search-->
     <string name="search_hint">Nhập từ khóa</string>

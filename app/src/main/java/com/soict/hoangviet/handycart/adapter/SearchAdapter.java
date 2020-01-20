@@ -3,13 +3,12 @@ package com.soict.hoangviet.handycart.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemSearchProductBinding;
-import com.soict.hoangviet.handycart.entity.SearchProductResponse;
+import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
 
 public class SearchAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSearchProductBinding> {
     public SearchAdapter(Context context, boolean enableSelectedMode) {
@@ -28,9 +27,7 @@ public class SearchAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSearchP
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.item_search_product;
-    }
+    protected int getLayoutId() { return R.layout.item_search_product; }
 
     public class SearchViewHolder extends NormalViewHolder<ItemSearchProductBinding, SearchProductResponse> {
 

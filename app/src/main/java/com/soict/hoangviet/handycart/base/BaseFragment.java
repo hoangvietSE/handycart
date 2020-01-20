@@ -122,17 +122,25 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     }
 
     protected <U> void handleObjectResponse(ObjectResponse<U> response) {
-        switch (response.getStatus()) {
+        switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
                 DialogUtil.getInstance(getContext()).show();
                 break;
             case Define.ResponseStatus.SUCCESS:
-                getObjectResponse(response.getData());
                 DialogUtil.getInstance(getContext()).hidden();
+                getObjectResponse(response.getData());
                 break;
             case Define.ResponseStatus.ERROR:
                 handleNetworkError(response.getError(), true);
                 DialogUtil.getInstance(getContext()).hidden();
+        }
+    }
+
+    public ViewController getViewController() {
+        if (mViewController == null) {
+            return ((BaseActivity) getActivity()).getViewController();
+        } else {
+            return mViewController;
         }
     }
 

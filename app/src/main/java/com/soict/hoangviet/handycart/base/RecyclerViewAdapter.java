@@ -348,7 +348,7 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
 
     protected RecyclerView.ViewHolder solvedOnCreateViewHolder(T binding, ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_NORMAL) {
-            return initNormalViewHolder(binding,parent);
+            return initNormalViewHolder(binding, parent);
         }
         return null;
     }
@@ -369,7 +369,7 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
         }
     }
 
-    protected abstract RecyclerView.ViewHolder initNormalViewHolder(T binding,ViewGroup parent);
+    protected abstract RecyclerView.ViewHolder initNormalViewHolder(T binding, ViewGroup parent);
 
     protected abstract void bindNormalViewHolder(NormalViewHolder holder, int position);
 
@@ -422,10 +422,12 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
 
     public abstract class NormalViewHolder<T, U> extends RecyclerView.ViewHolder {
         protected T binding;
+
         public NormalViewHolder(T binding) {
-            super(((ViewDataBinding)binding).getRoot());
+            super(((ViewDataBinding) binding).getRoot());
             this.binding = binding;
         }
+
         public abstract void bind(U data);
     }
 

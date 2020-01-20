@@ -6,5 +6,6 @@ public class ApiConstant {
     public static final String SUPPLIER = "supplier";
     public static final String SEARCH = "search";
     public static final String CATEGORY = "categories";
+    public static final String LOGIN = "user_sessions";
 
 }

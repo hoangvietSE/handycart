@@ -3,6 +3,8 @@ package com.soict.hoangviet.handycart.data.sharepreference;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.soict.hoangviet.handycart.entity.response.LoginResponse;
 import com.soict.hoangviet.handycart.utils.Define;
 
 public class SharePreference implements ISharePreference {
@@ -17,6 +19,15 @@ public class SharePreference implements ISharePreference {
             return context.getSharedPreferences(Define.PREF_FILE_NAME, Context.MODE_PRIVATE);
         }
         return null;
+    }
+
+    private <T> String toJsonFromObject(T object) {
+        String rawString = new Gson().toJson(object);
+        return rawString;
+    }
+
+    private <T> T toGsonFromJson(String json, Class<T> tClass) {
+        return new Gson().fromJson(json, tClass);
     }
 
     private void setString(String key, String value) {
@@ -53,5 +64,15 @@ public class SharePreference implements ISharePreference {
     @Override
     public boolean isLogin() {
         return getBoolean(Define.Api.Key.IS_LOGIN);
+    }
+
+    @Override
+    public void setLoginData(LoginResponse loginResponse) {
+        setString(Define.Api.Key.LOGIN_RESPONSE, toJsonFromObject(loginResponse));
+    }
+
+    @Override
+    public LoginResponse getLoginResponse() {
+        return toGsonFromJson(getString(Define.Api.Key.LOGIN_RESPONSE), LoginResponse.class);
     }
 }

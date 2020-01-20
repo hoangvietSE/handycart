@@ -30,8 +30,8 @@ public class ObjectResponse<T> extends BaseResponse {
         return error;
     }
 
-    private ObjectResponse(int status, T data, Throwable error) {
-        this.type = status;
+    private ObjectResponse(int type, T data, Throwable error) {
+        this.type = type;
         this.data = data;
         this.error = error;
     }

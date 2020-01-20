@@ -1,10 +1,14 @@
 package com.soict.hoangviet.handycart.ui.profile;
 
+import android.view.View;
+
 import androidx.lifecycle.MutableLiveData;
 
+import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import javax.inject.Inject;
 
@@ -28,11 +32,24 @@ public class ProfileViewModel extends BaseViewModel {
 
     public boolean isLogin(){
         if(mSharePreference.isLogin()){
-            getIsLogin().setValue("Đăng nhập");
             return true;
         }else{
-            getIsLogin().setValue("Đăng xuất");
             return false;
+        }
+    }
+
+    public void loginFunction(){
+        if(isLogin()){
+            getIsLogin().setValue("Đăng xuất");
+        }else{
+            getIsLogin().setValue("Đăng nhập");
+        }
+    }
+
+    public void onRowClick(View view){
+        switch (view.getId()){
+            case R.id.row_login:
+
         }
     }
 }

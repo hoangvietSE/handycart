@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentLoginBinding;
+import com.soict.hoangviet.handycart.ui.profile.ProfileFragment;
 import com.soict.hoangviet.handycart.utils.ToastUtil;
+
+import java.util.HashMap;
 
 public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
     private LoginViewModel loginViewModel;
@@ -22,23 +25,45 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
 
     @Override
     public boolean backPressed() {
-        return true;
+        getViewController().backFromAddFragment(null);
+        return false;
     }
 
     @Override
     public void initView() {
-
+        binding.toolbar.setOnToolbarClickListener(viewId -> {
+            switch (viewId) {
+                case R.id.imv_left:
+                    getViewController().backFromAddFragment(null);
+            }
+        });
     }
 
     @Override
     public void initData() {
         loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
         binding.setLoginViewModel(loginViewModel);
-        loginViewModel.getValidateLogin().observe(this, error -> ToastUtil.show(getContext(), error));
+        loginViewModel.getValidateLoginEmail().observe(this, error -> {
+            ToastUtil.show(getContext(), error);
+            binding.edtUsername.requestFocus();
+        });
+        loginViewModel.getValidateLoginPassword().observe(this, error -> {
+            ToastUtil.show(getContext(), error);
+            binding.edtPassword.requestFocus();
+        });
     }
 
     @Override
     public void initListener() {
+        loginViewModel.getLogin().observe(this, response -> {
+            handleObjectResponse(response);
+        });
+    }
 
+    @Override
+    protected <U> void getObjectResponse(U data) {
+        HashMap<String, Object> dataResult = new HashMap<>();
+        dataResult.put(ProfileFragment.LOGIN_RESULT,true);
+        getViewController().backFromAddFragment(dataResult);
     }
 }

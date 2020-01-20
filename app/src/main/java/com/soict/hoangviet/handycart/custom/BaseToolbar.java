@@ -29,6 +29,7 @@ public class BaseToolbar extends CustomViewConstraintLayout {
     private ImageView leftButton;
     private ImageView imvLogoApp;
     private AppCompatTextView tvMenu;
+    private OnToolbarClickListener listener;
 
     public BaseToolbar(Context context) {
         super(context);
@@ -63,7 +64,9 @@ public class BaseToolbar extends CustomViewConstraintLayout {
 
     @Override
     void initListener() {
-
+        leftButton.setOnClickListener(view -> {
+            listener.onClick(view.getId());
+        });
     }
 
     @Override
@@ -84,6 +87,7 @@ public class BaseToolbar extends CustomViewConstraintLayout {
     private void setIconRight(int iconRight) {
         switch (iconRight) {
             case ICON_RIGHT_NONE:
+                tvMenu.setVisibility(GONE);
                 break;
             case ICON_RIGHT_SEARCH:
                 break;
@@ -144,6 +148,14 @@ public class BaseToolbar extends CustomViewConstraintLayout {
 
     public void setToolbarTitle(String title) {
         if (title != null) tvTitle.setText(title);
+    }
+
+    public void setOnToolbarClickListener(OnToolbarClickListener listener){
+        this.listener = listener;
+    }
+
+    public interface OnToolbarClickListener{
+        void onClick(int id);
     }
 
 }

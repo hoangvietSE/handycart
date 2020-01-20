@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import com.asksira.loopingviewpager.LoopingPagerAdapter;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.databinding.ItemInfiniteBannerBinding;
-import com.soict.hoangviet.handycart.entity.DataItem;
+import com.soict.hoangviet.handycart.entity.response.DataItem;
 
 import java.util.List;
 

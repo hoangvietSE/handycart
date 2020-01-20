@@ -15,15 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MasterAdapter extends FragmentPagerAdapter {
-    private List<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> fragments;
 
-    public MasterAdapter(@NonNull FragmentManager fm) {
+    public MasterAdapter(@NonNull FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        fragments.add(new HomeFragment());
-        fragments.add(new FavoriteFragment());
-        fragments.add(new SearchFragment());
-        fragments.add(new NotificationFragment());
-        fragments.add(new ProfileFragment());
+        this.fragments = fragments;
     }
 
     @NonNull

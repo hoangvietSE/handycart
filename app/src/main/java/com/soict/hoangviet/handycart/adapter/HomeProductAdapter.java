@@ -3,13 +3,12 @@ package com.soict.hoangviet.handycart.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemHomeProductBinding;
-import com.soict.hoangviet.handycart.entity.HomeProductResponse;
+import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 
 public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHomeProductBinding> {
 

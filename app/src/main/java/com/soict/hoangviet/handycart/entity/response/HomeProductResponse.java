@@ -1,4 +1,4 @@
-package com.soict.hoangviet.handycart.entity;
+package com.soict.hoangviet.handycart.entity.response;
 
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;

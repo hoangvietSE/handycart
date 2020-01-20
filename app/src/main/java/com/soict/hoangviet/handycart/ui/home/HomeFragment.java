@@ -12,9 +12,9 @@ import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
-import com.soict.hoangviet.handycart.entity.CategoryResponse;
-import com.soict.hoangviet.handycart.entity.HomeProductResponse;
-import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
+import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 
 import java.util.List;
 

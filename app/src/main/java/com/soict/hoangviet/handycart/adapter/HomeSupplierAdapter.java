@@ -3,13 +3,12 @@ package com.soict.hoangviet.handycart.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemHomeSupplierBinding;
-import com.soict.hoangviet.handycart.entity.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 
 public class HomeSupplierAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHomeSupplierBinding> {
     public HomeSupplierAdapter(Context context, boolean enableSelectedMode) {

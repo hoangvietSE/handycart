@@ -5,14 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
 
 import androidx.databinding.DataBindingUtil;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.databinding.ItemChildCategoryBinding;
 import com.soict.hoangviet.handycart.databinding.ItemParentCategoryBinding;
-import com.soict.hoangviet.handycart.entity.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 
 import java.util.List;
 

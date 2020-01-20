@@ -6,7 +6,7 @@ import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
-import com.soict.hoangviet.handycart.entity.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.utils.Define;
 
 import javax.inject.Inject;

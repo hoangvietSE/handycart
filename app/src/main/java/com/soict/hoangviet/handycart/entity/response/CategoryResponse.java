@@ -1,6 +1,5 @@
-package com.soict.hoangviet.handycart.entity;
+package com.soict.hoangviet.handycart.entity.response;
 
-import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
@@ -9,7 +8,6 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 import com.soict.hoangviet.handycart.R;
-import com.soict.hoangviet.handycart.module.GlideApp;
 
 public class CategoryResponse {
 

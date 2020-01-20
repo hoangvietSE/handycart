@@ -33,7 +33,7 @@ android {
         }
         stage {
             //signingConfig signingConfigs.debug
-            buildConfigField 'String', 'BASE_URL', '"http://api.handycart.vn/api/v1/"'
+            buildConfigField 'String', 'BASE_URL', '"http://handycart.beetechdev.vn/api/v1/"'
             buildConfigField("String", "API_KEY", "\"ABCXYZ123TEST\"")
         }
         release {

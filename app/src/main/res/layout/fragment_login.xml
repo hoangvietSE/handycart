@@ -19,7 +19,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             app:icon_left="back"
+            app:icon_right="none"
             app:title="@string/login_title" />
 
         <LinearLayout

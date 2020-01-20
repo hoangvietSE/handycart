@@ -43,6 +43,7 @@ public class Define {
             public static final String TOKEN = "token";
             public static final String DEVICE_TOKEN_ID = "device_token_id";
             public static final String IS_LOGIN = "is_login";
+            public static final String LOGIN_RESPONSE = "login_response";
         }
 
         public static class Http {

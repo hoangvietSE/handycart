@@ -73,6 +73,13 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppC
         }
     }
 
+    public ViewController getViewController() {
+        if (mViewController == null) {
+            mViewController = new ViewController(getSupportFragmentManager(), getFragmentContainerId());
+        }
+        return mViewController;
+    }
+
     /**
      * Used for hide softKeyboard when touch outside
      * @param ev

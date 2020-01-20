@@ -12,7 +12,7 @@
 
         <variable
             name="homeProductResponse"
-            type="com.soict.hoangviet.handycart.entity.HomeProductResponse" />
+            type="com.soict.hoangviet.handycart.entity.response.HomeProductResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

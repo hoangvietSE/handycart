@@ -8,7 +8,7 @@ import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
-import com.soict.hoangviet.handycart.entity.SearchProductResponse;
+import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
 import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.ArrayList;

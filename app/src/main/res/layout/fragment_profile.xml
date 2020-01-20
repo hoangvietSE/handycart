@@ -78,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_divider="false"
+                    app:rmp_enable_navigate="false"
                     app:rmp_image="@drawable/ic_dangnhap" />
 
             </LinearLayout>
