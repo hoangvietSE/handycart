@@ -56,7 +56,7 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     @Override
     public boolean backPressed() {
-        return false;
+        return true;
     }
 
     @Override

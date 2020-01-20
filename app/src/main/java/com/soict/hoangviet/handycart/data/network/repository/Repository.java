@@ -1,6 +1,7 @@
 package com.soict.hoangviet.handycart.data.network.repository;
 
 import com.google.gson.Gson;
+import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
@@ -10,7 +11,9 @@ import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
+import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
+import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
 
 import java.util.HashMap;
 
@@ -79,6 +82,18 @@ public class Repository {
 
     public Single<ObjectResponse<LoginResponse>> login(LoginRequest loginRequest){
         return apiInterface.login(createRequestBody(loginRequest))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListLoadmoreReponse<ProductFavoriteResponse>> getListProductFavorite(String accessToken,HashMap<String, Object> data){
+        return apiInterface.getListProductFavorite(accessToken, data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListLoadmoreReponse<SupplierFavoriteResponse>> getListSupplierFavorite(String accessToken, HashMap<String, Object> data){
+        return apiInterface.getListSupplierFavorite(accessToken, data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

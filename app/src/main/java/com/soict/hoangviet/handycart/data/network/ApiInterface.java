@@ -1,6 +1,7 @@
 package com.soict.hoangviet.handycart.data.network;
 
 
+import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
@@ -8,7 +9,9 @@ import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
+import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
+import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
 import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.HashMap;
@@ -24,6 +27,8 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface ApiInterface {
+
+    //Home
     @GET(ApiConstant.BANNER)
     @Headers("Content-Type: application/json")
     Single<BannerResponse> getListBanners();
@@ -47,18 +52,31 @@ public interface ApiInterface {
     Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierWithAuth(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
-
-
-    @GET(ApiConstant.SEARCH)
-    @Headers("Content-Type: application/json")
-    Single<ListResponse<SearchProductResponse>> getListSearchProduct(@QueryMap HashMap<String, Object> data);
-
     @GET(ApiConstant.CATEGORY)
     @Headers("Content-Type: application/json")
     Single<ListResponse<CategoryResponse>> getCategory(@Query(Define.Api.Query.LIMIT) int limit);
 
+
+    //Search
+    @GET(ApiConstant.SEARCH)
+    @Headers("Content-Type: application/json")
+    Single<ListResponse<SearchProductResponse>> getListSearchProduct(@QueryMap HashMap<String, Object> data);
+
     @POST(ApiConstant.LOGIN)
     @Headers("Content-Type: application/json")
     Single<ObjectResponse<LoginResponse>> login(@Body RequestBody requestBody);
+
+    //Favorite
+    @GET(ApiConstant.PRODUCT_FAVORITE)
+    @Headers("Content-Type: application/json")
+    Single<ListLoadmoreReponse<ProductFavoriteResponse>> getListProductFavorite(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @QueryMap HashMap<String, Object> data);
+
+    @GET(ApiConstant.SUPPLIER_FAVORITE)
+    @Headers("Content-Type: application/json")
+    Single<ListLoadmoreReponse<SupplierFavoriteResponse>> getListSupplierFavorite(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @QueryMap HashMap<String, Object> data);
 
 }

@@ -58,9 +58,9 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     public void initListener() {
         binding.rowLogin.setOnClickListener(view -> {
             if(mViewModel.isLogin()){
-                getViewController().addFragment(LoginFragment.class, null);
-            }else{
 
+            }else{
+                getViewController().addFragment(LoginFragment.class, null);
             }
         });
         mViewModel.getIsLogin().observe(this, login -> {
