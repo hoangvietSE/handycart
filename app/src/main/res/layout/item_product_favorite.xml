@@ -5,11 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
-
         <import type="android.view.View" />
-
         <variable
             name="homeProductResponse"
             type="com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse" />
@@ -44,7 +41,7 @@
             android:layout_width="@dimen/margin_24_dp"
             android:layout_height="@dimen/margin_24_dp"
             android:layout_margin="@dimen/margin_8_dp"
-            android:src="@drawable/ic_favourite_not_active"
+            android:src="@drawable/ic_favourite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -107,6 +107,11 @@ public class Define {
         public static final String MASTER_DATA = "masterData";
     }
 
+    public static class Favorite{
+        public static final int STATUS_UNLIKE = 0;
+        public static final int STATUS_LIKE = 1;
+    }
+
     public static class Product{
         public static final int OUT_OF_STOCK = 0;
         public static final int IN_STOCK = 1;

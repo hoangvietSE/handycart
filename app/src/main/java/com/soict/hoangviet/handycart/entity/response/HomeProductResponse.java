@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.google.gson.annotations.SerializedName;
+import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.module.GlideApp;
 import com.soict.hoangviet.handycart.utils.Define;
 
@@ -65,12 +66,23 @@ public class HomeProductResponse {
     @SerializedName("status")
     private int status;
 
+    @SerializedName("flag_favorite")
+    private int flagFavorite;
+
     public boolean isStock() {
         if (getFlagStock() == Define.Product.IN_STOCK) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public int getFlagFavorite() {
+        return flagFavorite;
+    }
+
+    public void setFlagFavorite(int flagFavorite) {
+        this.flagFavorite = flagFavorite;
     }
 
     public void setThumbnail(String thumbnail) {
@@ -249,5 +261,14 @@ public class HomeProductResponse {
                 .placeholder(error)
                 .error(error)
                 .into(view);
+    }
+
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, int fav) {
+        if (fav == Define.Favorite.STATUS_UNLIKE) {
+            view.setImageResource(R.drawable.ic_favourite_not_active);
+        } else if (fav == Define.Favorite.STATUS_LIKE) {
+            view.setImageResource(R.drawable.ic_favourite);
+        }
     }
 }
