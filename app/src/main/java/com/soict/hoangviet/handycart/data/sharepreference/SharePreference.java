@@ -69,6 +69,7 @@ public class SharePreference implements ISharePreference {
     @Override
     public void setLoginData(LoginResponse loginResponse) {
         setString(Define.Api.Key.LOGIN_RESPONSE, toJsonFromObject(loginResponse));
+        setLoginStatus(true);
     }
 
     @Override
