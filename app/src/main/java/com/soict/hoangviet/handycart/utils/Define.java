@@ -51,6 +51,7 @@ public class Define {
         }
 
         public static class Query{
+            public static final String ID = "id";
             public static final String CATEGORY = "category_id";
             public static final String PAGE = "page";
             public static final String LIMIT = "limit";
@@ -58,6 +59,11 @@ public class Define {
             public static final String BEARER = "Bearer ";
             public static final String AUTHORIZATION = "Authorization";
 
+        }
+
+        public static class Method{
+            public static final String PUT = "PUT";
+            public static final String DELETE = "DELETE";
         }
     }
 

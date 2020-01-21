@@ -6,7 +6,11 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.ProductFavoriteAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentProductFavoriteBinding;
-import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel;
+import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -37,10 +41,10 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
 
     private void initAdapter() {
         mProductFavoriteAdapter = new ProductFavoriteAdapter(getContext(), false);
-        binding.rcvProductFavorite.setOnLoadingMoreListener(()->{
+        binding.rcvProductFavorite.setOnLoadingMoreListener(() -> {
             mViewModel.setListProductFavorite(false);
         });
-        binding.rcvProductFavorite.setOnRefreshListener(()->{
+        binding.rcvProductFavorite.setOnRefreshListener(() -> {
             mViewModel.setListProductFavorite(true);
         });
         binding.rcvProductFavorite.setGridLayoutManager(2);
@@ -73,5 +77,22 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
         } else {
             binding.rcvProductFavorite.addItem(data);
         }
+    }
+
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
+        binding.setProductFavoriteViewModel(mViewModel);
     }
 }

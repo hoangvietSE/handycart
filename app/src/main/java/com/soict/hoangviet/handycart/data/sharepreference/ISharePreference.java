@@ -19,4 +19,8 @@ public interface ISharePreference {
 
     String getAccessToken();
 
+    int getUserId();
+
+    void clearAllPreference();
+
 }

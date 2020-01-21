@@ -15,6 +15,11 @@ import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -51,28 +56,28 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         initViewModel();
         getListBanner();
         if (mSharePreference.isLogin()) {
-            getListProductWithAuth();
-            getListSupplierWithAuth();
+            getListProductWithAuth(false);
+            getListSupplierWithAuth(false);
         } else {
-            getListProductNoAuth();
-            getListSupplierNoAuth();
+            getListProductNoAuth(false);
+            getListSupplierNoAuth(false);
         }
     }
 
-    private void getListSupplierWithAuth() {
-        mViewModel.setListHomeProductWithAuth();
+    private void getListSupplierWithAuth(boolean isRefreshing) {
+        mViewModel.setListHomeProductWithAuth(isRefreshing);
     }
 
-    private void getListProductWithAuth() {
-        mViewModel.setListHomeSupplierWithAuth();
+    private void getListProductWithAuth(boolean isRefreshing) {
+        mViewModel.setListHomeSupplierWithAuth(isRefreshing);
     }
 
-    private void getListSupplierNoAuth() {
-        mViewModel.setListHomeSupplierNoAuth();
+    private void getListSupplierNoAuth(boolean isRefreshing) {
+        mViewModel.setListHomeSupplierNoAuth(isRefreshing);
     }
 
-    private void getListProductNoAuth() {
-        mViewModel.setListHomeProductNoAuth();
+    private void getListProductNoAuth(boolean isRefreshing) {
+        mViewModel.setListHomeProductNoAuth(isRefreshing);
     }
 
     private void initViewModel() {
@@ -96,6 +101,19 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel.getListHomeSupplier().observe(this, response -> {
             handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());
         });
+        binding.swipeRefresh.setOnRefreshListener(()->{
+            refreshData();
+        });
+    }
+
+    private void refreshData() {
+        if (mSharePreference.isLogin()) {
+            getListProductWithAuth(true);
+            getListSupplierWithAuth(true);
+        } else {
+            getListProductNoAuth(true);
+            getListSupplierNoAuth(true);
+        }
     }
 
     private void initCategoryAdapter(ListResponse<CategoryResponse> response) {
@@ -138,6 +156,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     @Override
     protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
         if (isRefresh) {
+            if (data.get(0) instanceof HomeProductResponse) {
+                homeProductAdapter.refresh(data);
+            } else if (data.get(0) instanceof HomeSupplierResponse) {
+                homeSupplierAdapter.refresh(data);
+            }
+            hideRefreshing();
         } else {
             if (data.get(0) instanceof HomeProductResponse) {
                 homeProductAdapter.addModels(data, false);
@@ -145,5 +169,26 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
                 homeSupplierAdapter.addModels(data, false);
             }
         }
+    }
+
+    private void hideRefreshing() {
+        binding.swipeRefresh.hideRefreshing();
+    }
+
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
+        refreshData();
     }
 }

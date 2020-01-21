@@ -25,8 +25,7 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
 
     @Override
     public boolean backPressed() {
-        getViewController().backFromAddFragment(null);
-        return false;
+        return true;
     }
 
     @Override

@@ -85,4 +85,17 @@ public class SharePreference implements ISharePreference {
             return "";
         }
     }
+
+    @Override
+    public int getUserId() {
+        if (getLoginResponse() != null) {
+            return getLoginResponse().getId();
+        }
+        return -1;
+    }
+
+    @Override
+    public void clearAllPreference() {
+        getSharePreference().edit().clear().apply();
+    }
 }

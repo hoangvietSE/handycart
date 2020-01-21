@@ -1,11 +1,13 @@
 package com.soict.hoangviet.handycart.data.network.repository;
 
 import com.google.gson.Gson;
+import com.soict.hoangviet.handycart.base.BaseResponse;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
+import com.soict.hoangviet.handycart.entity.request.LogoutRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
@@ -80,20 +82,30 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ObjectResponse<LoginResponse>> login(LoginRequest loginRequest){
+    public Single<ObjectResponse<LoginResponse>> login(LoginRequest loginRequest) {
         return apiInterface.login(createRequestBody(loginRequest))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ListLoadmoreReponse<ProductFavoriteResponse>> getListProductFavorite(String accessToken,HashMap<String, Object> data){
+    public Single<ListLoadmoreReponse<ProductFavoriteResponse>> getListProductFavorite(String accessToken, HashMap<String, Object> data) {
         return apiInterface.getListProductFavorite(accessToken, data)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<ListLoadmoreReponse<SupplierFavoriteResponse>> getListSupplierFavorite(String accessToken, HashMap<String, Object> data){
+    public Single<ListLoadmoreReponse<SupplierFavoriteResponse>> getListSupplierFavorite(String accessToken, HashMap<String, Object> data) {
         return apiInterface.getListSupplierFavorite(accessToken, data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<BaseResponse> logOut(String accessToken, int id, LogoutRequest logoutRequest) {
+        return apiInterface.logOut(
+                accessToken,
+                id,
+                createRequestBody(logoutRequest)
+        )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

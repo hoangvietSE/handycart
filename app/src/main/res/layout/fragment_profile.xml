@@ -67,17 +67,30 @@
                     app:rmp_image="@drawable/ic_contact" />
 
                 <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:id="@+id/row_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="@{profileViewModel.login?View.VISIBLE:View.GONE}"
                     app:rmp_detail="@string/profile_changepassword_title"
-                    app:rmp_image="@drawable/ic_changepass" />
+                    app:rmp_image="@drawable/ic_changepass"
+                    android:visible="@{profileViewModel.isVisibleLiveData}" />
 
                 <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
                     android:id="@+id/row_login"
+                    android:visible="@{!profileViewModel.isVisibleLiveData}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_divider="false"
+                    app:rmp_detail="@string/profile_login_title"
+                    app:rmp_enable_navigate="false"
+                    app:rmp_image="@drawable/ic_dangnhap" />
+
+                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:visible="@{profileViewModel.isVisibleLiveData}"
+                    android:id="@+id/row_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rmp_divider="false"
+                    app:rmp_detail="@string/profile_logout_title"
                     app:rmp_enable_navigate="false"
                     app:rmp_image="@drawable/ic_dangnhap" />
 

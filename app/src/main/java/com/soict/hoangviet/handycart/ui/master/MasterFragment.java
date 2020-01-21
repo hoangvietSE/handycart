@@ -44,9 +44,13 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
                 case NOTIFICATION_FRAGMENT:
                     break;
                 case PROFILE_FRAGMENT:
-                    Boolean loginResult = getArguments().getBoolean(ProfileFragment.LOGIN_RESULT);
-                    ((ProfileFragment)page).setLoginResult(loginResult);
-                    break;
+                    try {
+                        Boolean loginResult = getArguments().getBoolean(ProfileFragment.LOGIN_RESULT);
+                        ((ProfileFragment) page).setLoginResult(loginResult);
+                        getArguments().clear();
+                        break;
+                    }catch (Exception e){
+                    }
             }
         }
     }

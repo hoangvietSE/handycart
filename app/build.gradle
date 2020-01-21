@@ -110,4 +110,7 @@ dependencies {
     //LoopingViewPager
     implementation "com.asksira.android:loopingviewpager:$looping_view_pager_version"
 
+    //Event Bus
+    implementation "org.greenrobot:eventbus:$eventbus_version"
+
 }

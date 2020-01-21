@@ -1,6 +1,7 @@
 package com.soict.hoangviet.handycart.data.network;
 
 
+import com.soict.hoangviet.handycart.base.BaseResponse;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
@@ -23,6 +24,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -52,6 +54,7 @@ public interface ApiInterface {
     Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierWithAuth(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
+
     @GET(ApiConstant.CATEGORY)
     @Headers("Content-Type: application/json")
     Single<ListResponse<CategoryResponse>> getCategory(@Query(Define.Api.Query.LIMIT) int limit);
@@ -78,5 +81,12 @@ public interface ApiInterface {
     Single<ListLoadmoreReponse<SupplierFavoriteResponse>> getListSupplierFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
+
+    @POST(ApiConstant.LOGOUT)
+    @Headers("Content-Type: application/json")
+    Single<BaseResponse> logOut(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Path(Define.Api.Query.ID) int id,
+            @Body RequestBody requestBody);
 
 }

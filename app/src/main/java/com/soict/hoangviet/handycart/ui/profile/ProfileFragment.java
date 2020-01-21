@@ -1,12 +1,17 @@
 package com.soict.hoangviet.handycart.ui.profile;
 
+import android.view.View;
+
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentProfileBinding;
+import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     public static final String LOGIN_RESULT = "login_result";
@@ -23,10 +28,11 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
     public void setLoginResult(boolean loginResult){
         if(loginResult){
+            EventBus.getDefault().postSticky(new AuthorizationEvent());
+            mViewModel.getIsVisibleLiveData().setValue(true);
             ToastUtil.show(getContext(), getString(R.string.login_success_request));
-            binding.rowLogin.setDetail("Đăng xuất");
         }else{
-            binding.rowLogin.setDetail("Đăng nhập");
+            mViewModel.getIsVisibleLiveData().setValue(false);
         }
     }
 
@@ -47,24 +53,18 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
     @Override
     public void initData() {
-        checkLogin();
-    }
-
-    private void checkLogin() {
-        mViewModel.loginFunction();
     }
 
     @Override
     public void initListener() {
         binding.rowLogin.setOnClickListener(view -> {
-            if(mViewModel.isLogin()){
-
-            }else{
-                getViewController().addFragment(LoginFragment.class, null);
-            }
+            getViewController().addFragment(LoginFragment.class, null);
         });
-        mViewModel.getIsLogin().observe(this, login -> {
-            binding.rowLogin.setDetail(login);
+        binding.rowLogout.setOnClickListener(view -> {
+            mViewModel.logOut();
+        });
+        mViewModel.getResponseLogout().observe(this, responseLogout->{
+            handleObjectResponse(responseLogout);
         });
     }
 }

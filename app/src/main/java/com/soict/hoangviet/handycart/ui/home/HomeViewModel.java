@@ -22,7 +22,8 @@ public class HomeViewModel extends BaseViewModel {
     private MutableLiveData<BannerResponse> listBanners = new MutableLiveData<>();
     private MutableLiveData<ListLoadmoreReponse<HomeProductResponse>> listHomeProduct;
     private MutableLiveData<ListLoadmoreReponse<HomeSupplierResponse>> listHomeSupplier;
-    private int pageIndex = 1;
+    private int pageIndexProduct = 1;
+    private int pageIndexSupplier = 1;
 
     @Inject
     public HomeViewModel(Repository repository, CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference) {
@@ -62,7 +63,7 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public void setListHomeProductNoAuth() {
+    public void setListHomeProductNoAuth(boolean isRefreshing) {
         HashMap<String, Object> data = new HashMap<>();
         data.put(Define.Api.Query.CATEGORY, Define.Api.BaseResponse.DEFAULT_INDEX);
         data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
@@ -75,11 +76,11 @@ public class HomeViewModel extends BaseViewModel {
 
                         })
                         .subscribe(response -> {
-                                    pageIndex++;
+                                    pageIndexProduct++;
                                     getListHomeProduct().setValue(new ListLoadmoreReponse<HomeProductResponse>().success(
                                             response.getData(),
-                                            false,
-                                            pageIndex <= response.getTotalPage()
+                                            isRefreshing,
+                                            pageIndexProduct <= response.getTotalPage()
                                     ));
                                 },
                                 throwable -> {
@@ -88,7 +89,7 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public void setListHomeSupplierNoAuth() {
+    public void setListHomeSupplierNoAuth(boolean isRefreshing) {
         HashMap<String, Object> data = new HashMap<>();
         data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
         data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
@@ -100,11 +101,11 @@ public class HomeViewModel extends BaseViewModel {
 
                         })
                         .subscribe(response -> {
-                                    pageIndex++;
+                                    pageIndexSupplier++;
                                     getListHomeSupplier().setValue(new ListLoadmoreReponse<HomeSupplierResponse>().success(
                                             response.getData(),
-                                            false,
-                                            pageIndex <= response.getTotalPage()
+                                            isRefreshing,
+                                            pageIndexSupplier <= response.getTotalPage()
                                     ));
                                 },
                                 throwable -> {
@@ -113,7 +114,7 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public void setListHomeProductWithAuth() {
+    public void setListHomeProductWithAuth(boolean isRefreshing) {
         HashMap<String, Object> data = new HashMap<>();
         data.put(Define.Api.Query.CATEGORY, Define.Api.BaseResponse.DEFAULT_INDEX);
         data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
@@ -126,11 +127,11 @@ public class HomeViewModel extends BaseViewModel {
 
                         })
                         .subscribe(response -> {
-                                    pageIndex++;
+                                    pageIndexProduct++;
                                     getListHomeProduct().setValue(new ListLoadmoreReponse<HomeProductResponse>().success(
                                             response.getData(),
-                                            false,
-                                            pageIndex <= response.getTotalPage()
+                                            isRefreshing,
+                                            pageIndexProduct <= response.getTotalPage()
                                     ));
                                 },
                                 throwable -> {
@@ -139,7 +140,7 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public void setListHomeSupplierWithAuth() {
+    public void setListHomeSupplierWithAuth(boolean isRefreshing) {
         HashMap<String, Object> data = new HashMap<>();
         data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
         data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
@@ -151,11 +152,11 @@ public class HomeViewModel extends BaseViewModel {
 
                         })
                         .subscribe(response -> {
-                                    pageIndex++;
+                                    pageIndexSupplier++;
                                     getListHomeSupplier().setValue(new ListLoadmoreReponse<HomeSupplierResponse>().success(
                                             response.getData(),
-                                            false,
-                                            pageIndex <= response.getTotalPage()
+                                            isRefreshing,
+                                            pageIndexSupplier <= response.getTotalPage()
                                     ));
                                 },
                                 throwable -> {

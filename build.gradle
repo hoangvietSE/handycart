@@ -52,4 +52,7 @@ ext{
     //LoopingViewPager
     looping_view_pager_version = '1.2.0'
 
+    //Event Bus
+    eventbus_version = '3.1.1'
+
 }
