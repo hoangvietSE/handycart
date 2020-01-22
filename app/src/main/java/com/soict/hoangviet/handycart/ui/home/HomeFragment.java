@@ -16,7 +16,6 @@ import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.DialogUtil;
-import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -108,12 +107,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel.getFavoriteProductDelete().observe(this, response -> {
             handleObjectResponse(response);
         });
+        mViewModel.getFavoriteSupplier().observe(this, response -> {
+            handleObjectResponse(response);
+        });
+        mViewModel.getFavoriteSupplierDelete().observe(this, response -> {
+            handleObjectResponse(response);
+        });
         binding.swipeRefresh.setOnRefreshListener(() -> {
             refreshData();
         });
     }
 
-    private void refreshData() {
+    public void refreshData() {
         if (mSharePreference.isLogin()) {
             getListProductWithAuth(true);
             getListSupplierWithAuth(true);
@@ -131,7 +136,31 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     private void initHomeSupplierAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        homeSupplierAdapter = new HomeSupplierAdapter(getContext(), false);
+        homeSupplierAdapter = new HomeSupplierAdapter(getContext(), position -> {
+            if (mSharePreference.isLogin()) {
+                tempPosition = position;
+                HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
+                if (data.getFlagFav() == Define.Favorite.STATUS_UNLIKE) {
+                    mViewModel.addSupplierToFavorite(data);
+                } else {
+                    mViewModel.deleteSupplierFromFavorite(data);
+                }
+            } else {
+                DialogUtil.showConfirmDialog(
+                        getContext(),
+                        R.string.favorite_title,
+                        R.string.favorite_message,
+                        R.string.favorite_need_login,
+                        R.string.favorite_cancel,
+                        (dialogInterface, which) -> {
+                            getViewController().addFragment(LoginFragment.class, null);
+                        },
+                        (dialogInterface, which) -> {
+                            dialogInterface.dismiss();
+                        }
+                );
+            }
+        }, false);
         binding.rcvHomeSupplier.setLayoutManager(layoutManager);
         homeSupplierAdapter.setLoadingMoreListener(() -> {
 
@@ -229,6 +258,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             } else {
                 ((HomeProductResponse) data).setFlagFavorite(Define.Favorite.STATUS_UNLIKE);
                 homeProductAdapter.notifyItemChanged(tempPosition);
+            }
+            return;
+        }
+        if (data instanceof HomeSupplierResponse) {
+            if (((HomeSupplierResponse) data).getFlagFav() == Define.Favorite.STATUS_UNLIKE) {
+                ((HomeSupplierResponse) data).setFlagFav(Define.Favorite.STATUS_LIKE);
+                homeSupplierAdapter.notifyItemChanged(tempPosition);
+            } else {
+                ((HomeSupplierResponse) data).setFlagFav(Define.Favorite.STATUS_UNLIKE);
+                homeSupplierAdapter.notifyItemChanged(tempPosition);
             }
         }
     }

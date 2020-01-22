@@ -2,11 +2,11 @@ package com.soict.hoangviet.handycart.entity.request;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FavoriteRequest {
+public class FavoriteProductRequest {
     @SerializedName("product_id")
     private int productId;
 
-    public FavoriteRequest(int productId) {
+    public FavoriteProductRequest(int productId) {
         this.productId = productId;
     }
 

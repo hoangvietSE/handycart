@@ -9,6 +9,7 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemHomeProductBinding;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
 
 public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHomeProductBinding> {
     private FavoriteListener listener;
@@ -49,9 +50,5 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
                 listener.onClick(getAdapterPosition());
             });
         }
-    }
-
-    public interface FavoriteListener {
-        void onClick(int position);
     }
 }

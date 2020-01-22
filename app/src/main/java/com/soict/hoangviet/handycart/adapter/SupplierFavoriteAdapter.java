@@ -9,6 +9,7 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemSupplierFavoriteBinding;
 import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
 
 public class SupplierFavoriteAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSupplierFavoriteBinding> {
 

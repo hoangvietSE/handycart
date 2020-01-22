@@ -21,6 +21,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -104,4 +105,19 @@ public interface ApiInterface {
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Body RequestBody requestBody
     );
+
+    @POST(ApiConstant.SUPPLIER_FAVORITE)
+    @Headers("Content-Type: application/json")
+    Single<BaseResponse> addSupplierToFavorite(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Body RequestBody requestBody
+    );
+
+    @DELETE(ApiConstant.SUPPLIER_FAVORITE_DELETE)
+    @Headers("Content-Type: application/json")
+    Single<BaseResponse> deleteSupplierFromFavorite(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Path(Define.Api.Query.ID) int id
+    );
+
 }

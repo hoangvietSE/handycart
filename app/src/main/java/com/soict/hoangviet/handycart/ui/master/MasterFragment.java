@@ -10,6 +10,7 @@ import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.databinding.FragmentMasterBinding;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
+import com.soict.hoangviet.handycart.ui.home.HomeFragment;
 import com.soict.hoangviet.handycart.ui.profile.ProfileFragment;
 
 public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
@@ -36,6 +37,13 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
         if (page != null) {
             switch (binding.masterContainer.getCurrentItem()) {
                 case HOME_FRAGMENT:
+                    try {
+                        Boolean loginResult = getArguments().getBoolean(ProfileFragment.LOGIN_RESULT);
+                        if(loginResult)((HomeFragment) page).refreshData();
+                        getArguments().clear();
+                        break;
+                    }catch (Exception e){
+                    }
                     break;
                 case FAVORITE_FRAGMENT:
                     break;

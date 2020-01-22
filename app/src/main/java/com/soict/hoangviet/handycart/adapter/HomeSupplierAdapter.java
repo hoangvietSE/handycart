@@ -9,10 +9,14 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemHomeSupplierBinding;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
 
 public class HomeSupplierAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHomeSupplierBinding> {
-    public HomeSupplierAdapter(Context context, boolean enableSelectedMode) {
+    private FavoriteListener listener;
+
+    public HomeSupplierAdapter(Context context, FavoriteListener listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
+        this.listener = listener;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class HomeSupplierAdapter extends EndlessLoadingRecyclerViewAdapter<ItemH
         return R.layout.item_home_supplier;
     }
 
-    public class HomeSupplierViewHolder extends NormalViewHolder<ItemHomeSupplierBinding,HomeSupplierResponse> {
+    public class HomeSupplierViewHolder extends NormalViewHolder<ItemHomeSupplierBinding, HomeSupplierResponse> {
 
         public HomeSupplierViewHolder(ItemHomeSupplierBinding binding) {
             super(binding);
@@ -40,6 +44,9 @@ public class HomeSupplierAdapter extends EndlessLoadingRecyclerViewAdapter<ItemH
         @Override
         public void bind(HomeSupplierResponse data) {
             binding.setHomeSupplierResponse(data);
+            binding.imvFavorite.setOnClickListener(view->{
+                listener.onClick(getAdapterPosition());
+            });
         }
     }
 }

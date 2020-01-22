@@ -6,7 +6,8 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
-import com.soict.hoangviet.handycart.entity.request.FavoriteRequest;
+import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
+import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
@@ -113,15 +114,28 @@ public class Repository {
     }
 
     //Favorite
-    public Single<BaseResponse> addToFavorite(String accessToken, FavoriteRequest favoriteRequest) {
-        return apiInterface.addToFavorite(accessToken, createRequestBody(favoriteRequest))
+    public Single<BaseResponse> addToFavorite(String accessToken, FavoriteProductRequest favoriteProductRequest) {
+        return apiInterface.addToFavorite(accessToken, createRequestBody(favoriteProductRequest))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<BaseResponse> deleteFromFavorite(String accessToken, int id, FavoriteRequest favoriteRequest) {
-        return apiInterface.deleteFromFavorite(accessToken, createRequestBody(favoriteRequest))
+    public Single<BaseResponse> deleteFromFavorite(String accessToken, int id, FavoriteProductRequest favoriteProductRequest) {
+        return apiInterface.deleteFromFavorite(accessToken, createRequestBody(favoriteProductRequest))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Single<BaseResponse> addSupplierToFavorite(String accessToken, FavoriteSupplierRequest favoriteSupplierRequest) {
+        return apiInterface.addSupplierToFavorite(accessToken, createRequestBody(favoriteSupplierRequest))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<BaseResponse> deleteSupplierFromFavorite(String accessToken, int supplierId) {
+        return apiInterface.deleteSupplierFromFavorite(accessToken, supplierId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

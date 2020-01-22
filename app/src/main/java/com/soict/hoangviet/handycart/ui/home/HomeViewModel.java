@@ -9,7 +9,8 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
-import com.soict.hoangviet.handycart.entity.request.FavoriteRequest;
+import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
+import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
@@ -30,6 +31,8 @@ public class HomeViewModel extends BaseViewModel {
     private MutableLiveData<ListLoadmoreReponse<HomeSupplierResponse>> listHomeSupplier;
     private MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProduct;
     private MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProductDelete;
+    private MutableLiveData<ObjectResponse<HomeSupplierResponse>> favoriteSupplier;
+    private MutableLiveData<ObjectResponse<HomeSupplierResponse>> favoriteSupplierDelete;
     private int pageIndexProduct = 1;
     private int pageIndexSupplier = 1;
 
@@ -60,23 +63,25 @@ public class HomeViewModel extends BaseViewModel {
         return favoriteProduct;
     }
 
-    public void setFavoriteProduct(MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProduct) {
-        this.favoriteProduct = favoriteProduct;
-    }
-
     public MutableLiveData<ObjectResponse<HomeProductResponse>> getFavoriteProductDelete() {
         if (favoriteProductDelete == null) favoriteProductDelete = new MutableLiveData<>();
         return favoriteProductDelete;
     }
 
-    public void setFavoriteProductDelete(MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProductDelete) {
-        this.favoriteProductDelete = favoriteProductDelete;
+    public MutableLiveData<ObjectResponse<HomeSupplierResponse>> getFavoriteSupplier() {
+        if (favoriteSupplier == null) favoriteSupplier = new MutableLiveData<>();
+        return favoriteSupplier;
+    }
+
+    public MutableLiveData<ObjectResponse<HomeSupplierResponse>> getFavoriteSupplierDelete() {
+        if (favoriteSupplierDelete == null) favoriteSupplierDelete = new MutableLiveData<>();
+        return favoriteSupplierDelete;
     }
 
     public void addToFavorite(HomeProductResponse data) {
-        FavoriteRequest favoriteRequest = new FavoriteRequest(data.getId());
+        FavoriteProductRequest favoriteProductRequest = new FavoriteProductRequest(data.getId());
         mCompositeDisposable.add(
-                repository.addToFavorite(mSharePreference.getAccessToken(), favoriteRequest)
+                repository.addToFavorite(mSharePreference.getAccessToken(), favoriteProductRequest)
                         .doOnSubscribe(disposable -> {
 
                         })
@@ -211,9 +216,9 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     public void deleteFromFavorite(HomeProductResponse data) {
-        FavoriteRequest favoriteRequest = new FavoriteRequest(data.getId());
+        FavoriteProductRequest favoriteProductRequest = new FavoriteProductRequest(data.getId());
         mCompositeDisposable.add(
-                repository.deleteFromFavorite(mSharePreference.getAccessToken(), data.getId(), favoriteRequest)
+                repository.deleteFromFavorite(mSharePreference.getAccessToken(), data.getId(), favoriteProductRequest)
                         .doOnSubscribe(disposable -> {
 
                         })
@@ -228,4 +233,41 @@ public class HomeViewModel extends BaseViewModel {
 
         );
     }
+
+    public void addSupplierToFavorite(HomeSupplierResponse data) {
+        FavoriteSupplierRequest favoriteSupplierRequest = new FavoriteSupplierRequest(data.getId());
+        mCompositeDisposable.add(
+                repository.addSupplierToFavorite(mSharePreference.getAccessToken(), favoriteSupplierRequest)
+                        .doOnSubscribe(disposable -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    ToastUtil.show(context, response.getMsg());
+                                    getFavoriteSupplier().setValue(new ObjectResponse<HomeSupplierResponse>().success(data));
+                                },
+                                throwable -> {
+                                    getFavoriteSupplier().setValue(new ObjectResponse<HomeSupplierResponse>().error(throwable));
+                                })
+
+        );
+    }
+
+    public void deleteSupplierFromFavorite(HomeSupplierResponse data) {
+        mCompositeDisposable.add(
+                repository.deleteSupplierFromFavorite(mSharePreference.getAccessToken(), data.getId())
+                        .doOnSubscribe(disposable -> {
+                        })
+                        .subscribe(
+                                response -> {
+                                    ToastUtil.show(context, response.getMsg());
+                                    getFavoriteSupplierDelete().setValue(new ObjectResponse<HomeSupplierResponse>().success(data));
+                                },
+                                throwable -> {
+                                    getFavoriteSupplierDelete().setValue(new ObjectResponse<HomeSupplierResponse>().error(throwable));
+                                })
+
+        );
+    }
+
 }

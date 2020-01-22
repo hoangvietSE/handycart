@@ -37,6 +37,7 @@
 
 
         <ImageView
+            android:id="@+id/imv_favorite"
             android:src="@drawable/ic_favourite"
             android:layout_width="@dimen/margin_24_dp"
             android:layout_height="@dimen/margin_24_dp"
