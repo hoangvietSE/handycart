@@ -1,15 +1,20 @@
 package com.soict.hoangviet.handycart.ui.home;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
+import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.handycart.entity.request.FavoriteRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.utils.Define;
+import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import java.util.HashMap;
 
@@ -18,17 +23,21 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class HomeViewModel extends BaseViewModel {
+    private Context context;
     private Repository repository;
     private MutableLiveData<BannerResponse> listBanners = new MutableLiveData<>();
     private MutableLiveData<ListLoadmoreReponse<HomeProductResponse>> listHomeProduct;
     private MutableLiveData<ListLoadmoreReponse<HomeSupplierResponse>> listHomeSupplier;
+    private MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProduct;
+    private MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProductDelete;
     private int pageIndexProduct = 1;
     private int pageIndexSupplier = 1;
 
     @Inject
-    public HomeViewModel(Repository repository, CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference) {
+    public HomeViewModel(Context context, Repository repository, CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference) {
         super(mCompositeDisposable, mSharePreference);
         this.repository = repository;
+        this.context = context;
     }
 
     public MutableLiveData<BannerResponse> getListBanners() {
@@ -46,6 +55,42 @@ public class HomeViewModel extends BaseViewModel {
         return listHomeSupplier;
     }
 
+    public MutableLiveData<ObjectResponse<HomeProductResponse>> getFavoriteProduct() {
+        if (favoriteProduct == null) favoriteProduct = new MutableLiveData<>();
+        return favoriteProduct;
+    }
+
+    public void setFavoriteProduct(MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProduct) {
+        this.favoriteProduct = favoriteProduct;
+    }
+
+    public MutableLiveData<ObjectResponse<HomeProductResponse>> getFavoriteProductDelete() {
+        if (favoriteProductDelete == null) favoriteProductDelete = new MutableLiveData<>();
+        return favoriteProductDelete;
+    }
+
+    public void setFavoriteProductDelete(MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProductDelete) {
+        this.favoriteProductDelete = favoriteProductDelete;
+    }
+
+    public void addToFavorite(HomeProductResponse data) {
+        FavoriteRequest favoriteRequest = new FavoriteRequest(data.getId());
+        mCompositeDisposable.add(
+                repository.addToFavorite(mSharePreference.getAccessToken(), favoriteRequest)
+                        .doOnSubscribe(disposable -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    ToastUtil.show(context, response.getMsg());
+                                    getFavoriteProduct().setValue(new ObjectResponse<HomeProductResponse>().success(data));
+                                },
+                                throwable -> {
+                                    getFavoriteProduct().setValue(new ObjectResponse<HomeProductResponse>().error(throwable));
+                                })
+
+        );
+    }
 
     public void setListBanners() {
         mCompositeDisposable.add(
@@ -162,6 +207,25 @@ public class HomeViewModel extends BaseViewModel {
                                 throwable -> {
                                     getListHomeProduct().setValue(new ListLoadmoreReponse<HomeProductResponse>().error(throwable));
                                 })
+        );
+    }
+
+    public void deleteFromFavorite(HomeProductResponse data) {
+        FavoriteRequest favoriteRequest = new FavoriteRequest(data.getId());
+        mCompositeDisposable.add(
+                repository.deleteFromFavorite(mSharePreference.getAccessToken(), data.getId(), favoriteRequest)
+                        .doOnSubscribe(disposable -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    ToastUtil.show(context, response.getMsg());
+                                    getFavoriteProductDelete().setValue(new ObjectResponse<HomeProductResponse>().success(data));
+                                },
+                                throwable -> {
+                                    getFavoriteProductDelete().setValue(new ObjectResponse<HomeProductResponse>().error(throwable));
+                                })
+
         );
     }
 }

@@ -12,5 +12,4 @@ public class ApiConstant {
     public static final String LOGOUT = "user_sessions/{" + Define.Api.Query.ID + "}";
     public static final String PRODUCT_FAVORITE = "user_product_favorites";
     public static final String SUPPLIER_FAVORITE = "user_restaurent_favorites";
-
 }

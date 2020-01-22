@@ -10,7 +10,7 @@ import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
-import com.soict.hoangviet.handycart.entity.request.LogoutRequest;
+import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -55,12 +55,12 @@ public class ProfileViewModel extends BaseViewModel {
     }
 
     public void logOut() {
-        LogoutRequest logoutRequest = new LogoutRequest();
+        DeleteRequest deleteRequest = new DeleteRequest();
         mCompositeDisposable.add(
                 repository.logOut(
                         mSharePreference.getAccessToken(),
                         mSharePreference.getUserId(),
-                        logoutRequest
+                        deleteRequest
                 )
                         .doOnSubscribe(disposable -> {
                             getResponseLogout().setValue(new ObjectResponse<>().loading());

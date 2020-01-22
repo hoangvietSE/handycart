@@ -6,8 +6,9 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
+import com.soict.hoangviet.handycart.entity.request.FavoriteRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
-import com.soict.hoangviet.handycart.entity.request.LogoutRequest;
+import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
@@ -101,12 +102,25 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable logOut(String accessToken, int id, LogoutRequest logoutRequest) {
+    public Completable logOut(String accessToken, int id, DeleteRequest deleteRequest) {
         return apiInterface.logOut(
                 accessToken,
                 id,
-                createRequestBody(logoutRequest)
+                createRequestBody(deleteRequest)
         )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    //Favorite
+    public Single<BaseResponse> addToFavorite(String accessToken, FavoriteRequest favoriteRequest) {
+        return apiInterface.addToFavorite(accessToken, createRequestBody(favoriteRequest))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<BaseResponse> deleteFromFavorite(String accessToken, int id, FavoriteRequest favoriteRequest) {
+        return apiInterface.deleteFromFavorite(accessToken, createRequestBody(favoriteRequest))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

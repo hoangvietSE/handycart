@@ -15,4 +15,6 @@ public class BaseResponse {
     public String getMsg() {
         return msg;
     }
+
+
 }

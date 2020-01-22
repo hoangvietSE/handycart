@@ -90,4 +90,18 @@ public interface ApiInterface {
             @Path(Define.Api.Query.ID) int id,
             @Body RequestBody requestBody);
 
+    //Favorite
+    @POST(ApiConstant.PRODUCT_FAVORITE)
+    @Headers("Content-Type: application/json")
+    Single<BaseResponse> addToFavorite(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Body RequestBody requestBody
+    );
+
+    @POST(ApiConstant.PRODUCT_FAVORITE)
+    @Headers("Content-Type: application/json")
+    Single<BaseResponse> deleteFromFavorite(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Body RequestBody requestBody
+    );
 }

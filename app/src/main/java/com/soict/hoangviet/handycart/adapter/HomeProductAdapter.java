@@ -11,9 +11,11 @@ import com.soict.hoangviet.handycart.databinding.ItemHomeProductBinding;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 
 public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHomeProductBinding> {
+    private FavoriteListener listener;
 
-    public HomeProductAdapter(Context context, boolean enableSelectedMode) {
+    public HomeProductAdapter(Context context, FavoriteListener listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
+        this.listener = listener;
     }
 
     @Override
@@ -43,6 +45,13 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
         @Override
         public void bind(HomeProductResponse data) {
             binding.setHomeProductResponse(data);
+            binding.imvFavorite.setOnClickListener(view->{
+                listener.onClick(getAdapterPosition());
+            });
         }
+    }
+
+    public interface FavoriteListener {
+        void onClick(int position);
     }
 }

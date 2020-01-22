@@ -46,4 +46,10 @@
     <string name="profile_login_title">Đăng nhập</string>
     <string name="profile_logout_title">Đăng xuất</string>
 
+    //Favorite
+    <string name="favorite_need_login">Đăng nhập</string>
+    <string name="favorite_cancel">Hủy </string>
+    <string name="favorite_title">Thông báo</string>
+    <string name="favorite_message">Tính năng yêu cầu đăng nhập</string>
+
 </resources>

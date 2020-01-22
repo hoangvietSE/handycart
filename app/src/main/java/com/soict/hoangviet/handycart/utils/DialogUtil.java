@@ -36,6 +36,7 @@ public class DialogUtil {
     ) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(titleRes)
+                .setCancelable(true)
                 .setMessage(messageRes)
                 .setPositiveButton(positiveRes, positiveListener)
                 .setNegativeButton(negativeRes, negativeListener);
