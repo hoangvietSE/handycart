@@ -17,6 +17,7 @@ import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.HashMap;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -84,7 +85,7 @@ public interface ApiInterface {
 
     @POST(ApiConstant.LOGOUT)
     @Headers("Content-Type: application/json")
-    Single<BaseResponse> logOut(
+    Completable logOut(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Path(Define.Api.Query.ID) int id,
             @Body RequestBody requestBody);

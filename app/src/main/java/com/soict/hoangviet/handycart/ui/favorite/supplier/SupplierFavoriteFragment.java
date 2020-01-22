@@ -1,5 +1,7 @@
 package com.soict.hoangviet.handycart.ui.favorite.supplier;
 
+import android.view.View;
+
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
@@ -45,7 +47,7 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
 
         });
         binding.rcvSupplierFavorite.setOnRefreshListener(() -> {
-            mViewModel.setListSupplierFavorite(true);
+            refreshData();
         });
         binding.rcvSupplierFavorite.setGridLayoutManager(2);
         binding.rcvSupplierFavorite.setAdapter(mSupplierFavoriteAdapter);
@@ -93,5 +95,24 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
         binding.setSupplierFavoriteViewModel(mViewModel);
+        if(authorizationEvent.isLogin()){
+            showFavorite();
+            refreshData();
+        }else{
+            hideFavorite();
+        }
+        EventBus.getDefault().removeStickyEvent(authorizationEvent);
+    }
+
+    private void hideFavorite() {
+        binding.rcvSupplierFavorite.setVisibility(View.GONE);
+    }
+
+    private void showFavorite() {
+        binding.rcvSupplierFavorite.setVisibility(View.VISIBLE);
+    }
+
+    private void refreshData() {
+        mViewModel.setListSupplierFavorite(true);
     }
 }

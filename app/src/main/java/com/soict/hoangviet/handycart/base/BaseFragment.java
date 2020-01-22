@@ -13,7 +13,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.soict.hoangviet.handycart.utils.Define;
-import com.soict.hoangviet.handycart.utils.DialogUtil;
+import com.soict.hoangviet.handycart.utils.LoadingUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,45 +94,45 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     protected void handleListResponse(ListResponse<?> response) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-                DialogUtil.getInstance(getContext()).show();
+                LoadingUtil.getInstance(getContext()).show();
                 break;
             case Define.ResponseStatus.SUCCESS:
                 getListResponse(response.getData());
-                DialogUtil.getInstance(getContext()).hidden();
+                LoadingUtil.getInstance(getContext()).hidden();
                 break;
             case Define.ResponseStatus.ERROR:
                 handleNetworkError(response.getError(), true);
-                DialogUtil.getInstance(getContext()).hidden();
+                LoadingUtil.getInstance(getContext()).hidden();
         }
     }
 
     protected void handleLoadMoreResponse(ListResponse<?> response, boolean isRefresh, boolean canLoadmore) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-                DialogUtil.getInstance(getContext()).show();
+                LoadingUtil.getInstance(getContext()).show();
                 break;
             case Define.ResponseStatus.SUCCESS:
                 getListResponse(response.getData(), isRefresh, canLoadmore);
-                DialogUtil.getInstance(getContext()).hidden();
+                LoadingUtil.getInstance(getContext()).hidden();
                 break;
             case Define.ResponseStatus.ERROR:
                 handleNetworkError(response.getError(), true);
-                DialogUtil.getInstance(getContext()).hidden();
+                LoadingUtil.getInstance(getContext()).hidden();
         }
     }
 
     protected <U> void handleObjectResponse(ObjectResponse<U> response) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-                DialogUtil.getInstance(getContext()).show();
+                LoadingUtil.getInstance(getContext()).show();
                 break;
             case Define.ResponseStatus.SUCCESS:
-                DialogUtil.getInstance(getContext()).hidden();
+                LoadingUtil.getInstance(getContext()).hidden();
                 getObjectResponse(response.getData());
                 break;
             case Define.ResponseStatus.ERROR:
                 handleNetworkError(response.getError(), true);
-                DialogUtil.getInstance(getContext()).hidden();
+                LoadingUtil.getInstance(getContext()).hidden();
         }
     }
 

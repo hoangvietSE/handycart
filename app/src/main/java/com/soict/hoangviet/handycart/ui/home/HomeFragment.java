@@ -101,7 +101,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel.getListHomeSupplier().observe(this, response -> {
             handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());
         });
-        binding.swipeRefresh.setOnRefreshListener(()->{
+        binding.swipeRefresh.setOnRefreshListener(() -> {
             refreshData();
         });
     }
@@ -117,7 +117,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     }
 
     private void initCategoryAdapter(ListResponse<CategoryResponse> response) {
-        categoryAdapter = new CategoryAdapter(getContext(),response.getData());
+        categoryAdapter = new CategoryAdapter(getContext(), response.getData());
     }
 
     @Override
@@ -190,5 +190,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
         refreshData();
+        EventBus.getDefault().removeStickyEvent(authorizationEvent);
     }
 }

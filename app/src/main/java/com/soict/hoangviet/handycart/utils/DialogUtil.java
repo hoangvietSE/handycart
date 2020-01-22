@@ -1,93 +1,105 @@
 package com.soict.hoangviet.handycart.utils;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.content.DialogInterface;
 
-import androidx.databinding.DataBindingUtil;
+import androidx.annotation.ArrayRes;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 
-import com.soict.hoangviet.handycart.databinding.DialogLoadingBinding;
-import com.soict.hoangviet.handycart.R;
-
+import java.util.ArrayList;
 
 public class DialogUtil {
-    private static boolean shown = false;
-
-    private AlertDialog dialog = null;
-
-    private DialogLoadingBinding binding;
-
-    private static DialogUtil instance = null;
-
-    private Context context;
-
-    public static DialogUtil getInstance(Context context) {
-        if (instance != null) {
-            return instance;
-        } else {
-            instance = new DialogUtil(context);
-            return instance;
-        }
+    public static void showMessageDialog(
+            Context context,
+            @StringRes int titleRes,
+            @StringRes int messageRes,
+            @StringRes int positiveRes,
+            DialogInterface.OnClickListener listener
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(titleRes)
+                .setMessage(messageRes)
+                .setPositiveButton(positiveRes, listener);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
-    private DialogUtil(Context context) {
-        this.context = context;
-        if (context != null && !DialogUtil.isShown()) {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
-            binding = DataBindingUtil.inflate(layoutInflater, R.layout.dialog_loading, null, false);
-            View dialogView = binding.getRoot();
-            dialogBuilder.setView(dialogView);
-            dialogBuilder.setCancelable(false);
-            dialog = dialogBuilder.create();
-            if (dialog.getWindow() != null) {
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    public static void showConfirmDialog(
+            Context context,
+            @StringRes int titleRes,
+            @StringRes int messageRes,
+            @StringRes int positiveRes,
+            @StringRes int negativeRes,
+            DialogInterface.OnClickListener positiveListener,
+            DialogInterface.OnClickListener negativeListener
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(titleRes)
+                .setMessage(messageRes)
+                .setPositiveButton(positiveRes, positiveListener)
+                .setNegativeButton(negativeRes, negativeListener);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public static void showChooseItemDialog(
+            Context context,
+            @StringRes int titleRes,
+            @ArrayRes int itemRes,
+            DialogInterface.OnClickListener listener
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(titleRes)
+                .setItems(itemRes, listener);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public static void showMultiChoiceItemsDialog(
+            Context context,
+            @StringRes int titleRes,
+            @ArrayRes int itemRes,
+            @StringRes int positiveRes,
+            @StringRes int negativeRes,
+            ChoiceItemListener listener
+    ) {
+        ArrayList mSelectedItems = new ArrayList();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMultiChoiceItems(itemRes, null, (dialogInterface, position, isChecked) -> {
+            if (isChecked) {
+                mSelectedItems.add(position);
+            } else if (mSelectedItems.contains(position)) {
+                mSelectedItems.remove(Integer.valueOf(position));
             }
-            dialog.setCancelable(false);
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.setOnKeyListener((dialog, keyCode, event) -> {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    // we cannot close dialog when we press back button
-                }
-                return false;
-            });
-        }
+        })
+                .setPositiveButton(positiveRes, (dialog, position) -> {
+                    listener.onPositiveClick(mSelectedItems);
+                })
+                .setNegativeButton(negativeRes, (dialog, position) -> {
+                    listener.onNegativeClick();
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
-    public void show() {
-        if (!((Activity) context).isFinishing()) {
-            if (!DialogUtil.isShown() && dialog != null) {
-                forceShown();
-                dialog.show();
-            }
-        }
+    public static void showSingleChoiceItemsDialog(
+            Context context,
+            @StringRes int titleRes,
+            @ArrayRes int itemRes,
+            DialogInterface.OnClickListener listener
+    ) {
+        ArrayList mSelectedItems = new ArrayList();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setSingleChoiceItems(itemRes, 0, listener);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
-    public void hidden() {
-        if (DialogUtil.isShown() && dialog != null && dialog.isShowing()) {
-            initialize();
-            dialog.dismiss();
-        }
+    interface ChoiceItemListener {
+        void onPositiveClick(ArrayList mSelectedItems);
+
+        void onNegativeClick();
     }
 
-    private static boolean isShown() {
-        return shown;
-    }
-
-    private static void forceShown() {
-        shown = true;
-    }
-
-    private static void initialize() {
-        shown = false;
-    }
-
-    public void destroyLoadingDialog() {
-        instance = null;
-    }
 }

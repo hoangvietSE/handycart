@@ -3,6 +3,10 @@ package com.soict.hoangviet.handycart.eventbus;
 public class AuthorizationEvent {
     private boolean isLogin;
 
+    public AuthorizationEvent(boolean isLogin) {
+        this.isLogin = isLogin;
+    }
+
     public boolean isLogin() {
         return isLogin;
     }

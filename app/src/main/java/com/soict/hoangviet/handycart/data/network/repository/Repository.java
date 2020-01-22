@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -100,7 +101,7 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<BaseResponse> logOut(String accessToken, int id, LogoutRequest logoutRequest) {
+    public Completable logOut(String accessToken, int id, LogoutRequest logoutRequest) {
         return apiInterface.logOut(
                 accessToken,
                 id,

@@ -28,7 +28,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
     public void setLoginResult(boolean loginResult){
         if(loginResult){
-            EventBus.getDefault().postSticky(new AuthorizationEvent());
             mViewModel.getIsVisibleLiveData().setValue(true);
             ToastUtil.show(getContext(), getString(R.string.login_success_request));
         }else{

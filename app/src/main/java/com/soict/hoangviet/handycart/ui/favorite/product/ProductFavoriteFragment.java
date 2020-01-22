@@ -1,5 +1,7 @@
 package com.soict.hoangviet.handycart.ui.favorite.product;
 
+import android.view.View;
+
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
@@ -37,6 +39,11 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
     public void initView() {
         initViewModel();
         initAdapter();
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+
     }
 
     private void initAdapter() {
@@ -60,6 +67,10 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
     @Override
     public void initData() {
         mViewModel.setListProductFavorite(false);
+    }
+
+    private void refreshData() {
+        mViewModel.setListProductFavorite(true);
     }
 
     @Override
@@ -94,5 +105,20 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
         binding.setProductFavoriteViewModel(mViewModel);
+        if(authorizationEvent.isLogin()){
+            showFavorite();
+            refreshData();
+        }else{
+            hideFavorite();
+        }
+        EventBus.getDefault().removeStickyEvent(authorizationEvent);
+    }
+
+    private void hideFavorite() {
+        binding.rcvProductFavorite.setVisibility(View.GONE);
+    }
+
+    private void showFavorite() {
+        binding.rcvProductFavorite.setVisibility(View.VISIBLE);
     }
 }
