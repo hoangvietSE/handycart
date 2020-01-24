@@ -5,7 +5,7 @@ public class Define {
     public static final String PREF_FILE_NAME = "oab_pref";
     public static final String REALM_NAME = "oab_database";
 
-    public static final long DEFAULT_TIMEOUT = 60L;
+    public static final long DEFAULT_TIMEOUT = 5L;
     public static final long CLICK_TIME_INTERVAL = 300L;
 
     public static class Api {

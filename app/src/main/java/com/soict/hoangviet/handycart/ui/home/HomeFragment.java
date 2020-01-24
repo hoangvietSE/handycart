@@ -139,11 +139,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         homeSupplierAdapter = new HomeSupplierAdapter(getContext(), position -> {
             if (mSharePreference.isLogin()) {
                 tempPosition = position;
-                HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
-                if (data.getFlagFav() == Define.Favorite.STATUS_UNLIKE) {
-                    mViewModel.addSupplierToFavorite(data);
-                } else {
-                    mViewModel.deleteSupplierFromFavorite(data);
+                try {
+                    HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
+                    if (data.getFlagFav() == Define.Favorite.STATUS_UNLIKE) {
+                        mViewModel.addSupplierToFavorite(data);
+                    } else {
+                        mViewModel.deleteSupplierFromFavorite(data);
+                    }
+                }catch (ArrayIndexOutOfBoundsException e){
                 }
             } else {
                 DialogUtil.showConfirmDialog(
@@ -176,12 +179,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         homeProductAdapter = new HomeProductAdapter(getContext(), position -> {
             if (mSharePreference.isLogin()) {
                 tempPosition = position;
-                HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
-                if (data.getFlagFavorite() == Define.Favorite.STATUS_UNLIKE) {
-                    mViewModel.addToFavorite(data);
-                } else {
-                    mViewModel.deleteFromFavorite(data);
+                try {
+                    HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
+                    if (data.getFlagFavorite() == Define.Favorite.STATUS_UNLIKE) {
+                        mViewModel.addToFavorite(data);
+                    } else {
+                        mViewModel.deleteFromFavorite(data);
+                    }
+                }catch (ArrayIndexOutOfBoundsException e){
                 }
+
             } else {
                 DialogUtil.showConfirmDialog(
                         getContext(),
@@ -245,8 +252,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
-        refreshData();
         EventBus.getDefault().removeStickyEvent(authorizationEvent);
+        refreshData();
     }
 
     @Override

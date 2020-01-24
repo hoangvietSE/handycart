@@ -43,7 +43,6 @@ public class NetworkModule {
                 .addInterceptor(languageInterceptor)
                 .connectTimeout(Define.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(Define.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(Define.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
     }
 
