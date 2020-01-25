@@ -5,6 +5,7 @@ import com.soict.hoangviet.handycart.base.BaseResponse;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
+import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
@@ -34,58 +35,47 @@ public interface ApiInterface {
 
     //Home
     @GET(ApiConstant.BANNER)
-    @Headers("Content-Type: application/json")
     Single<BannerResponse> getListBanners();
 
     @GET(ApiConstant.PRODUCT_CATEGORY)
-    @Headers("Content-Type: application/json")
     Single<ListResponse<HomeProductResponse>> getListHomeProductNoAuth(@QueryMap HashMap<String, Object> data);
 
     @GET(ApiConstant.SUPPLIER)
-    @Headers("Content-Type: application/json")
     Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierNoAuth(@QueryMap HashMap<String, Object> data);
 
     @GET(ApiConstant.PRODUCT_CATEGORY)
-    @Headers("Content-Type: application/json")
     Single<ListResponse<HomeProductResponse>> getListHomeProductWithAuth(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
 
     @GET(ApiConstant.SUPPLIER)
-    @Headers("Content-Type: application/json")
     Single<ListResponse<HomeSupplierResponse>> getListHomeSupplierWithAuth(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
 
     @GET(ApiConstant.CATEGORY)
-    @Headers("Content-Type: application/json")
     Single<ListResponse<CategoryResponse>> getCategory(@Query(Define.Api.Query.LIMIT) int limit);
 
 
     //Search
     @GET(ApiConstant.SEARCH)
-    @Headers("Content-Type: application/json")
     Single<ListResponse<SearchProductResponse>> getListSearchProduct(@QueryMap HashMap<String, Object> data);
 
     @POST(ApiConstant.LOGIN)
-    @Headers("Content-Type: application/json")
-    Single<ObjectResponse<LoginResponse>> login(@Body RequestBody requestBody);
+    Single<ObjectResponse<LoginResponse>> login(@Body LoginRequest requestBody);
 
     //Favorite
     @GET(ApiConstant.PRODUCT_FAVORITE)
-    @Headers("Content-Type: application/json")
     Single<ListLoadmoreReponse<ProductFavoriteResponse>> getListProductFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
 
     @GET(ApiConstant.SUPPLIER_FAVORITE)
-    @Headers("Content-Type: application/json")
     Single<ListLoadmoreReponse<SupplierFavoriteResponse>> getListSupplierFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @QueryMap HashMap<String, Object> data);
 
     @POST(ApiConstant.LOGOUT)
-    @Headers("Content-Type: application/json")
     Completable logOut(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Path(Define.Api.Query.ID) int id,
@@ -93,28 +83,24 @@ public interface ApiInterface {
 
     //Favorite
     @POST(ApiConstant.PRODUCT_FAVORITE)
-    @Headers("Content-Type: application/json")
     Single<BaseResponse> addToFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Body RequestBody requestBody
     );
 
     @POST(ApiConstant.PRODUCT_FAVORITE)
-    @Headers("Content-Type: application/json")
     Single<BaseResponse> deleteFromFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Body RequestBody requestBody
     );
 
     @POST(ApiConstant.SUPPLIER_FAVORITE)
-    @Headers("Content-Type: application/json")
     Single<BaseResponse> addSupplierToFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Body RequestBody requestBody
     );
 
     @DELETE(ApiConstant.SUPPLIER_FAVORITE_DELETE)
-    @Headers("Content-Type: application/json")
     Single<BaseResponse> deleteSupplierFromFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Path(Define.Api.Query.ID) int id

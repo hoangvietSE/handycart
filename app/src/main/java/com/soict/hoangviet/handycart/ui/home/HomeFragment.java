@@ -252,8 +252,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
-        EventBus.getDefault().removeStickyEvent(authorizationEvent);
         refreshData();
+        EventBus.getDefault().removeStickyEvent(authorizationEvent);
     }
 
     @Override

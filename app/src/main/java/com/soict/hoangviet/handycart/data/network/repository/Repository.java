@@ -86,7 +86,7 @@ public class Repository {
     }
 
     public Single<ObjectResponse<LoginResponse>> login(LoginRequest loginRequest) {
-        return apiInterface.login(createRequestBody(loginRequest))
+        return apiInterface.login((loginRequest))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

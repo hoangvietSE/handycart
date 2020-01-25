@@ -42,32 +42,34 @@ public class ProductFavoriteViewModel extends BaseViewModel {
     }
 
     public void setListProductFavorite(boolean isRefreshing) {
-        if (isRefreshing) pageIndex = 1;
-        HashMap<String, Object> data = new HashMap<>();
-        data.put(Define.Api.Query.PAGE, pageIndex);
-        data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
-        mCompositeDisposable.add(
-                repository.getListProductFavorite(mSharePreference.getAccessToken(), data)
-                        .doOnSubscribe(disposable -> {
+        if(mSharePreference.isLogin()){
+            if (isRefreshing) pageIndex = 1;
+            HashMap<String, Object> data = new HashMap<>();
+            data.put(Define.Api.Query.PAGE, pageIndex);
+            data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
+            mCompositeDisposable.add(
+                    repository.getListProductFavorite(mSharePreference.getAccessToken(), data)
+                            .doOnSubscribe(disposable -> {
 //                            getProductFavorite().setValue(new ListLoadmoreReponse<ProductFavoriteResponse>().loading());
-                        })
-                        .doFinally(() -> {
-                        })
-                        .subscribe(
-                                response -> {
-                                    pageIndex++;
-                                    getProductFavorite().setValue(new ListLoadmoreReponse<ProductFavoriteResponse>().success(
-                                            response.getData(),
-                                            isRefreshing,
-                                            pageIndex <= response.getTotalPage()
-                                    ));
-                                },
-                                throwable -> {
-                                    getProductFavorite().setValue(new ListLoadmoreReponse<ProductFavoriteResponse>().error(throwable));
-                                }
-                        )
+                            })
+                            .doFinally(() -> {
+                            })
+                            .subscribe(
+                                    response -> {
+                                        pageIndex++;
+                                        getProductFavorite().setValue(new ListLoadmoreReponse<ProductFavoriteResponse>().success(
+                                                response.getData(),
+                                                isRefreshing,
+                                                pageIndex <= response.getTotalPage()
+                                        ));
+                                    },
+                                    throwable -> {
+                                        getProductFavorite().setValue(new ListLoadmoreReponse<ProductFavoriteResponse>().error(throwable));
+                                    }
+                            )
 
-        );
+            );
+        }
     }
 
 }

@@ -12,6 +12,7 @@ public class LanguageInterceptor implements Interceptor {
         Request original = chain.request();
 
         Request request = original.newBuilder()
+                .header("Content-Type","application/json")
                 .header("lang", "vi")
                 .method(original.method(), original.body())
                 .build();
