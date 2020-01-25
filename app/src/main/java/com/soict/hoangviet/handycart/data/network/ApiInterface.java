@@ -5,6 +5,7 @@ import com.soict.hoangviet.handycart.base.BaseResponse;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
+import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
@@ -79,7 +80,7 @@ public interface ApiInterface {
     Completable logOut(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Path(Define.Api.Query.ID) int id,
-            @Body RequestBody requestBody);
+            @Body DeleteRequest requestBody);
 
     //Favorite
     @POST(ApiConstant.PRODUCT_FAVORITE)

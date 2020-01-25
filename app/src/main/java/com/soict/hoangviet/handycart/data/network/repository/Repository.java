@@ -107,7 +107,7 @@ public class Repository {
         return apiInterface.logOut(
                 accessToken,
                 id,
-                createRequestBody(deleteRequest)
+                (deleteRequest)
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
