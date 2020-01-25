@@ -23,7 +23,7 @@ public class BaseViewModel extends ViewModel {
     protected void onCleared() {
         super.onCleared();
         if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
+            mCompositeDisposable.dispose();
             mCompositeDisposable = null;
         }
     }
