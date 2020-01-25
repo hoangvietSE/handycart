@@ -1,5 +1,7 @@
 package com.soict.hoangviet.handycart.ui.favorite.supplier;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.soict.hoangviet.handycart.base.BaseViewModel;
@@ -27,8 +29,8 @@ public class SupplierFavoriteViewModel extends BaseViewModel {
     }
 
     @Inject
-    public SupplierFavoriteViewModel(CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference, Repository repository) {
-        super(mCompositeDisposable, mSharePreference);
+    public SupplierFavoriteViewModel(Context context, ISharePreference mSharePreference, Repository repository) {
+        super(context, mSharePreference);
         this.repository = repository;
     }
 

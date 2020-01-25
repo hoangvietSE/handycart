@@ -24,7 +24,6 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class LoginViewModel extends BaseViewModel {
-    private Context context;
     private Repository repository;
     private MutableLiveData<String> validateLoginEmail;
     private MutableLiveData<String> validateLoginPassword;
@@ -33,8 +32,8 @@ public class LoginViewModel extends BaseViewModel {
     private MutableLiveData<ObjectResponse<LoginResponse>> login;
 
     @Inject
-    public LoginViewModel(Context context, Repository repository, CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference) {
-        super(mCompositeDisposable, mSharePreference);
+    public LoginViewModel(Context context, Repository repository, ISharePreference mSharePreference) {
+        super(context, mSharePreference);
         this.context = context;
         this.repository = repository;
     }

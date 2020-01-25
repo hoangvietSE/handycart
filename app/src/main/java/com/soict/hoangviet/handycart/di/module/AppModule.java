@@ -27,9 +27,9 @@ public class AppModule {
         return new SharePreference(context);
     }
 
-    @Provides
-    @Singleton
-    public CompositeDisposable provideCompositeDisposable() {
-        return new CompositeDisposable();
-    }
+//    @Provides
+//    @Singleton
+//    public CompositeDisposable provideCompositeDisposable() {
+//        return new CompositeDisposable();
+//    }
 }

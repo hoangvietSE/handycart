@@ -1,5 +1,6 @@
 package com.soict.hoangviet.handycart.ui.profile;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -26,8 +27,8 @@ public class ProfileViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isVisibleLiveData;
 
     @Inject
-    public ProfileViewModel(CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference, Repository repository) {
-        super(mCompositeDisposable, mSharePreference);
+    public ProfileViewModel(Context context, ISharePreference mSharePreference, Repository repository) {
+        super(context, mSharePreference);
         this.repository = repository;
         checkLogin();
     }

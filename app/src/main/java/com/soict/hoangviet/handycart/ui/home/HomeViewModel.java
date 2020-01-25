@@ -24,7 +24,6 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class HomeViewModel extends BaseViewModel {
-    private Context context;
     private Repository repository;
     private MutableLiveData<BannerResponse> listBanners = new MutableLiveData<>();
     private MutableLiveData<ListLoadmoreReponse<HomeProductResponse>> listHomeProduct;
@@ -37,8 +36,8 @@ public class HomeViewModel extends BaseViewModel {
     private int pageIndexSupplier = 1;
 
     @Inject
-    public HomeViewModel(Context context, Repository repository, CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference) {
-        super(mCompositeDisposable, mSharePreference);
+    public HomeViewModel(Context context, Repository repository, ISharePreference mSharePreference) {
+        super(context, mSharePreference);
         this.repository = repository;
         this.context = context;
     }

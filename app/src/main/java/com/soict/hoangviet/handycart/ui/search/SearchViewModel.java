@@ -1,5 +1,6 @@
 package com.soict.hoangviet.handycart.ui.search;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
@@ -23,8 +24,8 @@ public class SearchViewModel extends BaseViewModel {
     private int pageIndex = 1;
 
     @Inject
-    public SearchViewModel(CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference, Repository repository) {
-        super(mCompositeDisposable, mSharePreference);
+    public SearchViewModel(Context context, ISharePreference mSharePreference, Repository repository) {
+        super(context, mSharePreference);
         this.repository = repository;
     }
 

@@ -1,6 +1,8 @@
 package com.soict.hoangviet.handycart.ui.splash;
 
 
+import android.content.Context;
+
 import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 
@@ -11,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public class SplashViewModel extends BaseViewModel {
 
     @Inject
-    SplashViewModel(CompositeDisposable mCompositeDisposable, ISharePreference mSharePreference) {
-        super(mCompositeDisposable, mSharePreference);
+    SplashViewModel(Context context, ISharePreference mSharePreference) {
+        super(context, mSharePreference);
     }
 }
