@@ -6,6 +6,8 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
+import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
+import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
@@ -86,19 +88,19 @@ public interface ApiInterface {
     @POST(ApiConstant.PRODUCT_FAVORITE)
     Single<BaseResponse> addToFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
-            @Body RequestBody requestBody
+            @Body FavoriteProductRequest favoriteProductRequest
     );
 
     @POST(ApiConstant.PRODUCT_FAVORITE)
     Single<BaseResponse> deleteFromFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
-            @Body RequestBody requestBody
+            @Body FavoriteProductRequest favoriteProductRequest
     );
 
     @POST(ApiConstant.SUPPLIER_FAVORITE)
     Single<BaseResponse> addSupplierToFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
-            @Body RequestBody requestBody
+            @Body FavoriteSupplierRequest favoriteSupplierRequest
     );
 
     @DELETE(ApiConstant.SUPPLIER_FAVORITE_DELETE)

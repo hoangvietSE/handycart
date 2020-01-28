@@ -115,19 +115,19 @@ public class Repository {
 
     //Favorite
     public Single<BaseResponse> addToFavorite(String accessToken, FavoriteProductRequest favoriteProductRequest) {
-        return apiInterface.addToFavorite(accessToken, createRequestBody(favoriteProductRequest))
+        return apiInterface.addToFavorite(accessToken, favoriteProductRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Single<BaseResponse> deleteFromFavorite(String accessToken, int id, FavoriteProductRequest favoriteProductRequest) {
-        return apiInterface.deleteFromFavorite(accessToken, createRequestBody(favoriteProductRequest))
+        return apiInterface.deleteFromFavorite(accessToken, favoriteProductRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Single<BaseResponse> addSupplierToFavorite(String accessToken, FavoriteSupplierRequest favoriteSupplierRequest) {
-        return apiInterface.addSupplierToFavorite(accessToken, createRequestBody(favoriteSupplierRequest))
+        return apiInterface.addSupplierToFavorite(accessToken, favoriteSupplierRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
