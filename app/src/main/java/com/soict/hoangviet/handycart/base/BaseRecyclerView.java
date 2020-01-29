@@ -52,6 +52,7 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
         swipeRefresh = view.findViewById(R.id.swipeRefresh);
         rlNoResult = view.findViewById(R.id.layout_no_result);
         tvNoResult = view.findViewById(R.id.tv_no_result);
+        initColorRefreshing();
         float padding = a.getDimension(R.styleable.BaseRecyclerView_brv_padding, 0);
         String textNoResult = a.getString(R.styleable.BaseRecyclerView_brv_text_no_result);
         tvNoResult.setText(textNoResult);
@@ -83,7 +84,6 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
 
     private void init(Context context) {
         this.context = context;
-        initColorRefreshing();
     }
 
     private void initColorRefreshing() {
