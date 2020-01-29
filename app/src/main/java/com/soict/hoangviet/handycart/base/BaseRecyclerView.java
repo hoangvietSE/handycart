@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,6 +83,11 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
 
     private void init(Context context) {
         this.context = context;
+        initColorRefreshing();
+    }
+
+    private void initColorRefreshing() {
+        swipeRefresh.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.colorPrimary));
     }
 
     public void setListLayoutManager(int orientation) {

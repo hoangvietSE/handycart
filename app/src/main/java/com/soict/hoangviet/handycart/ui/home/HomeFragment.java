@@ -13,6 +13,8 @@ import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
+import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.DialogUtil;
@@ -255,6 +257,23 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         refreshData();
         EventBus.getDefault().removeStickyEvent(authorizationEvent);
     }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onFavoriteSupplierChangeEvent(FavoriteSupplierEvent favoriteSupplierEvent) {
+        if (favoriteSupplierEvent.isHomeScreen()) {
+            refreshData();
+        }
+        EventBus.getDefault().removeStickyEvent(favoriteSupplierEvent);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onFavoriteproductChangeEvent(FavoriteProductEvent favoriteProductEvent) {
+        if (favoriteProductEvent.isHomeScreen()) {
+            refreshData();
+        }
+        EventBus.getDefault().removeStickyEvent(favoriteProductEvent);
+    }
+
 
     @Override
     protected <U> void getObjectResponse(U data) {

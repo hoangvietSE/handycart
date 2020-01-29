@@ -6,10 +6,17 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.soict.hoangviet.handycart.base.BaseViewModel;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
+import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
+import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
+import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.utils.Define;
+import com.soict.hoangviet.handycart.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 
@@ -22,16 +29,17 @@ public class ProductFavoriteViewModel extends BaseViewModel {
     private Repository repository;
     private int pageIndex;
     private MutableLiveData<ListLoadmoreReponse<ProductFavoriteResponse>> productFavorite;
+    private MutableLiveData<ObjectResponse<Integer>> productFavoriteDelete;
 
     public MutableLiveData<ListLoadmoreReponse<ProductFavoriteResponse>> getProductFavorite() {
         if (productFavorite == null) productFavorite = new MutableLiveData<>();
         return productFavorite;
     }
 
-    public void setProductFavorite(MutableLiveData<ListLoadmoreReponse<ProductFavoriteResponse>> productFavorite) {
-        this.productFavorite = productFavorite;
+    public MutableLiveData<ObjectResponse<Integer>> getProductFavoriteDelete() {
+        if (productFavoriteDelete == null) productFavoriteDelete = new MutableLiveData<>();
+        return productFavoriteDelete;
     }
-
 
     @Inject
     public ProductFavoriteViewModel(Context context, ISharePreference mSharePreference, Repository repository) {
@@ -74,4 +82,23 @@ public class ProductFavoriteViewModel extends BaseViewModel {
         }
     }
 
+    public void deleteProductFromFavorite(int position, int id) {
+        FavoriteProductRequest favoriteProductRequest = new FavoriteProductRequest(id);
+        mCompositeDisposable.add(
+                repository.deleteFromFavorite(mSharePreference.getAccessToken(), id, favoriteProductRequest)
+                        .doOnSubscribe(disposable -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    ToastUtil.show(context, response.getMsg());
+                                    getProductFavoriteDelete().setValue(new ObjectResponse<Integer>().success(Integer.valueOf(position)));
+                                    EventBus.getDefault().postSticky(new FavoriteProductEvent(true));
+                                },
+                                throwable -> {
+                                    getProductFavoriteDelete().setValue(new ObjectResponse<Integer>().error(throwable));
+                                })
+
+        );
+    }
 }

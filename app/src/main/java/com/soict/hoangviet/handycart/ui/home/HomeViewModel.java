@@ -14,8 +14,12 @@ import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
+import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 
@@ -88,6 +92,7 @@ public class HomeViewModel extends BaseViewModel {
                                 response -> {
                                     ToastUtil.show(context, response.getMsg());
                                     getFavoriteProduct().setValue(new ObjectResponse<HomeProductResponse>().success(data));
+                                    EventBus.getDefault().postSticky(new FavoriteProductEvent(false));
                                 },
                                 throwable -> {
                                     getFavoriteProduct().setValue(new ObjectResponse<HomeProductResponse>().error(throwable));
@@ -225,6 +230,7 @@ public class HomeViewModel extends BaseViewModel {
                                 response -> {
                                     ToastUtil.show(context, response.getMsg());
                                     getFavoriteProductDelete().setValue(new ObjectResponse<HomeProductResponse>().success(data));
+                                    EventBus.getDefault().postSticky(new FavoriteProductEvent(false));
                                 },
                                 throwable -> {
                                     getFavoriteProductDelete().setValue(new ObjectResponse<HomeProductResponse>().error(throwable));
@@ -244,6 +250,7 @@ public class HomeViewModel extends BaseViewModel {
                                 response -> {
                                     ToastUtil.show(context, response.getMsg());
                                     getFavoriteSupplier().setValue(new ObjectResponse<HomeSupplierResponse>().success(data));
+                                    EventBus.getDefault().postSticky(new FavoriteSupplierEvent(false));
                                 },
                                 throwable -> {
                                     getFavoriteSupplier().setValue(new ObjectResponse<HomeSupplierResponse>().error(throwable));
@@ -261,6 +268,7 @@ public class HomeViewModel extends BaseViewModel {
                                 response -> {
                                     ToastUtil.show(context, response.getMsg());
                                     getFavoriteSupplierDelete().setValue(new ObjectResponse<HomeSupplierResponse>().success(data));
+                                    EventBus.getDefault().postSticky(new FavoriteSupplierEvent(false));
                                 },
                                 throwable -> {
                                     getFavoriteSupplierDelete().setValue(new ObjectResponse<HomeSupplierResponse>().error(throwable));

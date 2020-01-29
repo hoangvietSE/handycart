@@ -8,7 +8,12 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.SupplierFavoriteAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentSupplierFavoriteBinding;
+import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
+import com.soict.hoangviet.handycart.ui.home.HomeViewModel;
+import com.soict.hoangviet.handycart.utils.Define;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +47,13 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
     }
 
     private void initAdapter() {
-        mSupplierFavoriteAdapter = new SupplierFavoriteAdapter(getContext(), false);
+        mSupplierFavoriteAdapter = new SupplierFavoriteAdapter(getContext(), position -> {
+            try {
+                SupplierFavoriteResponse data = mSupplierFavoriteAdapter.getItem(position, SupplierFavoriteResponse.class);
+                mViewModel.deleteSupplierFromFavorite(position, data.getId());
+            } catch (ArrayIndexOutOfBoundsException e) {
+            }
+        }, false);
         binding.rcvSupplierFavorite.setOnLoadingMoreListener(() -> {
 
         });
@@ -68,6 +79,9 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
         mViewModel.getSupplierFavorite().observe(this, response -> {
             handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());
         });
+        mViewModel.getSupplierFavoriteDelete().observe(this, response -> {
+            handleObjectResponse(response);
+        });
     }
 
     @Override
@@ -77,6 +91,13 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
             binding.rcvSupplierFavorite.refresh(data);
         } else {
             binding.rcvSupplierFavorite.addItem(data);
+        }
+    }
+
+    @Override
+    protected <U> void getObjectResponse(U data) {
+        if(data instanceof Integer){
+            mSupplierFavoriteAdapter.removeModel(((Integer) data).intValue());
         }
     }
 
@@ -95,13 +116,21 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryChangeEvent(AuthorizationEvent authorizationEvent) {
         binding.setSupplierFavoriteViewModel(mViewModel);
-        if(authorizationEvent.isLogin()){
+        if (authorizationEvent.isLogin()) {
             showFavorite();
             refreshData();
-        }else{
+        } else {
             hideFavorite();
         }
         EventBus.getDefault().removeStickyEvent(authorizationEvent);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onCategoryChangeEvent(FavoriteSupplierEvent favoriteSupplierEvent) {
+        if (!favoriteSupplierEvent.isHomeScreen()) {
+            refreshData();
+        }
+        EventBus.getDefault().removeStickyEvent(favoriteSupplierEvent);
     }
 
     private void hideFavorite() {
