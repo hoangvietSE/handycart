@@ -21,6 +21,14 @@ public class SharePreference implements ISharePreference {
         return null;
     }
 
+    private SharedPreferences getDeviceSharePreference() {
+        if (context != null) {
+            return context.getSharedPreferences(Define.PREF_DEVICE, Context.MODE_PRIVATE);
+        }
+        return null;
+    }
+
+
     private <T> String toJsonFromObject(T object) {
         String rawString = new Gson().toJson(object);
         return rawString;
@@ -48,12 +56,12 @@ public class SharePreference implements ISharePreference {
 
     @Override
     public void setDeviceTokenId(String deviceTokenId) {
-        setString(Define.Api.Key.DEVICE_TOKEN_ID, deviceTokenId);
+        getDeviceSharePreference().edit().putString(Define.Api.Key.DEVICE_TOKEN_ID, deviceTokenId).apply();
     }
 
     @Override
     public String getDeviceTokenId() {
-        return getString(Define.Api.Key.DEVICE_TOKEN_ID);
+        return getDeviceSharePreference().getString(Define.Api.Key.DEVICE_TOKEN_ID, "");
     }
 
     @Override

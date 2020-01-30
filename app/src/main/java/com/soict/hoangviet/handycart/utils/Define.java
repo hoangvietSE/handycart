@@ -3,6 +3,7 @@ package com.soict.hoangviet.handycart.utils;
 public class Define {
 
     public static final String PREF_FILE_NAME = "oab_pref";
+    public static final String PREF_DEVICE = "device_pref";
     public static final String REALM_NAME = "oab_database";
 
     public static final long DEFAULT_TIMEOUT = 5L;
