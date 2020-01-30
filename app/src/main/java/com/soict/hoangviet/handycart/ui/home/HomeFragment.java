@@ -10,6 +10,7 @@ import com.soict.hoangviet.handycart.adapter.HomeSupplierAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
+import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
@@ -60,10 +61,20 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         if (mSharePreference.isLogin()) {
             getListProductWithAuth(false);
             getListSupplierWithAuth(false);
+            getCartAmountWithAuth();
         } else {
             getListProductNoAuth(false);
             getListSupplierNoAuth(false);
+            getCartAmountNoAuth();
         }
+    }
+
+    private void getCartAmountNoAuth() {
+        mViewModel.getCartAmountNoAuth();
+    }
+
+    private void getCartAmountWithAuth() {
+        mViewModel.getCartAmountWithAuth();
     }
 
     private void getListSupplierWithAuth(boolean isRefreshing) {
@@ -115,6 +126,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel.getFavoriteSupplierDelete().observe(this, response -> {
             handleObjectResponse(response);
         });
+        mViewModel.getCartAmount().observe(this, response -> {
+            handleObjectResponse(response);
+        });
         binding.swipeRefresh.setOnRefreshListener(() -> {
             refreshData();
         });
@@ -148,7 +162,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
                     } else {
                         mViewModel.deleteSupplierFromFavorite(data);
                     }
-                }catch (ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                 }
             } else {
                 DialogUtil.showConfirmDialog(
@@ -188,7 +202,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
                     } else {
                         mViewModel.deleteFromFavorite(data);
                     }
-                }catch (ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                 }
 
             } else {
@@ -295,6 +309,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
                 ((HomeSupplierResponse) data).setFlagFav(Define.Favorite.STATUS_UNLIKE);
                 homeSupplierAdapter.notifyItemChanged(tempPosition);
             }
+            return;
+        }
+        if (data instanceof CartAmountResponse) {
+//            binding.carts.tvBadgeCart.setNumber(((CartAmountResponse) data).getAmount());
+            binding.carts.tvBadgeCart.setNumber(2);
         }
     }
 }

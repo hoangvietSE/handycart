@@ -12,6 +12,7 @@ import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
+import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
@@ -36,6 +37,7 @@ public class HomeViewModel extends BaseViewModel {
     private MutableLiveData<ObjectResponse<HomeProductResponse>> favoriteProductDelete;
     private MutableLiveData<ObjectResponse<HomeSupplierResponse>> favoriteSupplier;
     private MutableLiveData<ObjectResponse<HomeSupplierResponse>> favoriteSupplierDelete;
+    private MutableLiveData<ObjectResponse<CartAmountResponse>> cartAmount;
     private int pageIndexProduct = 1;
     private int pageIndexSupplier = 1;
 
@@ -79,6 +81,11 @@ public class HomeViewModel extends BaseViewModel {
     public MutableLiveData<ObjectResponse<HomeSupplierResponse>> getFavoriteSupplierDelete() {
         if (favoriteSupplierDelete == null) favoriteSupplierDelete = new MutableLiveData<>();
         return favoriteSupplierDelete;
+    }
+
+    public MutableLiveData<ObjectResponse<CartAmountResponse>> getCartAmount() {
+        if (cartAmount == null) cartAmount = new MutableLiveData<>();
+        return cartAmount;
     }
 
     public void addToFavorite(HomeProductResponse data) {
@@ -274,6 +281,46 @@ public class HomeViewModel extends BaseViewModel {
                                     getFavoriteSupplierDelete().setValue(new ObjectResponse<HomeSupplierResponse>().error(throwable));
                                 })
 
+        );
+    }
+
+    public void getCartAmountNoAuth() {
+        mCompositeDisposable.add(
+                repository.getCartAmountNoAuth(mSharePreference.getDeviceTokenId())
+                        .doOnSubscribe(disposable -> {
+
+                        })
+                        .doFinally(() -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    getCartAmount().setValue(new ObjectResponse<CartAmountResponse>().success(response.getData()));
+                                },
+                                throwable -> {
+                                    getCartAmount().setValue(new ObjectResponse<CartAmountResponse>().error(throwable));
+                                }
+                        )
+        );
+    }
+
+    public void getCartAmountWithAuth() {
+        mCompositeDisposable.add(
+                repository.getCartAmountWithAuth(mSharePreference.getAccessToken(), mSharePreference.getDeviceTokenId())
+                        .doOnSubscribe(disposable -> {
+
+                        })
+                        .doFinally(() -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    getCartAmount().setValue(new ObjectResponse<CartAmountResponse>().success(response.getData()));
+                                },
+                                throwable -> {
+                                    getCartAmount().setValue(new ObjectResponse<CartAmountResponse>().error(throwable));
+                                }
+                        )
         );
     }
 

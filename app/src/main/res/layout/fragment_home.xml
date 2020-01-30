@@ -14,165 +14,180 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.core.widget.NestedScrollView
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <ImageView
-                    android:id="@+id/imv_banner_small"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    android:src="@{banner.imageUrl}"
-                    app:layout_constraintDimensionRatio="8:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/banner_small" />
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="0dp"
-                    android:src="@drawable/ic_right"
-                    app:layout_constraintBottom_toBottomOf="@id/imv_banner_small"
-                    app:layout_constraintEnd_toEndOf="@id/imv_banner_small"
-                    app:layout_constraintTop_toTopOf="@id/imv_banner_small" />
-
-                <com.asksira.loopingviewpager.LoopingViewPager
-                    android:id="@+id/viewpager_looping"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:clipToPadding="false"
-                    app:autoScroll="true"
-                    app:isInfinite="true"
-                    app:itemAspectRatio="1.33"
-                    app:layout_constraintDimensionRatio="2:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imv_banner_small"
-                    app:scrollInterval="5000"
-                    app:viewpagerAspectRatio="1.78" />
-
-                <LinearLayout
-                    android:id="@+id/ll_hot_today"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="@dimen/content_padding_8_dp"
-                    android:paddingTop="@dimen/content_padding_16_dp"
-                    android:paddingBottom="@dimen/content_padding_8_dp"
-                    app:layout_constraintTop_toBottomOf="@id/viewpager_looping">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="Hot Today!"
-                        android:textColor="@color/md_black_1000"
-                        android:textSize="@dimen/textsize_16_sp" />
+                    android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_right" />
-                </LinearLayout>
-
-                <HorizontalScrollView
-                    android:id="@+id/hsv_home_product"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll_hot_today">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcv_home_product"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <include
-                            layout="@layout/layout_see_more"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/margin_16_dp"
-                            android:layout_toEndOf="@id/rcv_home_product" />
-                    </RelativeLayout>
-
-
-                </HorizontalScrollView>
-
-
-                <LinearLayout
-                    android:id="@+id/ll_supplier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="@dimen/content_padding_8_dp"
-                    android:paddingTop="@dimen/content_padding_16_dp"
-                    android:paddingBottom="@dimen/content_padding_8_dp"
-                    app:layout_constraintTop_toBottomOf="@id/hsv_home_product">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="Nhà hàng!"
-                        android:textColor="@color/md_black_1000"
-                        android:textSize="@dimen/textsize_16_sp" />
+                        android:id="@+id/imv_banner_small"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@{banner.imageUrl}"
+                        app:layout_constraintDimensionRatio="8:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/banner_small" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_right" />
-                </LinearLayout>
+                        android:layout_width="32dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_right"
+                        app:layout_constraintBottom_toBottomOf="@id/imv_banner_small"
+                        app:layout_constraintEnd_toEndOf="@id/imv_banner_small"
+                        app:layout_constraintTop_toTopOf="@id/imv_banner_small" />
 
-                <HorizontalScrollView
-                    android:id="@+id/hsv_supplier"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll_supplier">
+                    <com.asksira.loopingviewpager.LoopingViewPager
+                        android:id="@+id/viewpager_looping"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:clipToPadding="false"
+                        app:autoScroll="true"
+                        app:isInfinite="true"
+                        app:itemAspectRatio="1.33"
+                        app:layout_constraintDimensionRatio="2:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imv_banner_small"
+                        app:scrollInterval="5000"
+                        app:viewpagerAspectRatio="1.78" />
 
-                    <RelativeLayout
+                    <LinearLayout
+                        android:id="@+id/ll_hot_today"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/content_padding_8_dp"
+                        android:paddingTop="@dimen/content_padding_16_dp"
+                        android:paddingBottom="@dimen/content_padding_8_dp"
+                        app:layout_constraintTop_toBottomOf="@id/viewpager_looping">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcv_home_supplier"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <include
-                            layout="@layout/layout_see_more"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/margin_16_dp"
-                            android:layout_toEndOf="@id/rcv_home_supplier" />
-                    </RelativeLayout>
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="Hot Today!"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="@dimen/textsize_16_sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_right" />
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:id="@+id/hsv_home_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_hot_today">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcv_home_product"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <include
+                                layout="@layout/layout_see_more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/margin_16_dp"
+                                android:layout_toEndOf="@id/rcv_home_product" />
+                        </RelativeLayout>
 
 
-                </HorizontalScrollView>
+                    </HorizontalScrollView>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_marginTop="@dimen/margin_10_dp"
-                    android:background="@color/color_home_line"
-                    app:layout_constraintTop_toBottomOf="@id/hsv_supplier" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+
+                    <LinearLayout
+                        android:id="@+id/ll_supplier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/content_padding_8_dp"
+                        android:paddingTop="@dimen/content_padding_16_dp"
+                        android:paddingBottom="@dimen/content_padding_8_dp"
+                        app:layout_constraintTop_toBottomOf="@id/hsv_home_product">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="Nhà hàng!"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="@dimen/textsize_16_sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_right" />
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:id="@+id/hsv_supplier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ll_supplier">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcv_home_supplier"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <include
+                                layout="@layout/layout_see_more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/margin_16_dp"
+                                android:layout_toEndOf="@id/rcv_home_supplier" />
+                        </RelativeLayout>
+
+
+                    </HorizontalScrollView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="@dimen/margin_10_dp"
+                        android:background="@color/color_home_line"
+                        app:layout_constraintTop_toBottomOf="@id/hsv_supplier" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <include
+                android:id="@+id/carts"
+                layout="@layout/layout_button_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/margin_16_dp" />
+        </RelativeLayout>
     </com.soict.hoangviet.handycart.custom.BaseSwipeRefresh>
 
 </layout>

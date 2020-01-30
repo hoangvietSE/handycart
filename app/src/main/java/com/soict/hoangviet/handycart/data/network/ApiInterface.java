@@ -10,6 +10,7 @@ import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
+import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
@@ -23,12 +24,10 @@ import java.util.HashMap;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
-import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -107,6 +106,17 @@ public interface ApiInterface {
     Single<BaseResponse> deleteSupplierFromFavorite(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Path(Define.Api.Query.ID) int id
+    );
+
+    @GET(ApiConstant.CART_AMOUNT)
+    Single<ObjectResponse<CartAmountResponse>> getCartAmountNoAuth(
+            @Query(Define.Api.Query.DEVICE_ID)String deviceId
+    );
+
+    @GET(ApiConstant.CART_AMOUNT)
+    Single<ObjectResponse<CartAmountResponse>> getCartAmountWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Query(Define.Api.Query.DEVICE_ID)String deviceId
     );
 
 }

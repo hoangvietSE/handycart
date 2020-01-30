@@ -56,6 +56,7 @@ public class Define {
 
         public static class Query{
             public static final String ID = "id";
+            public static final String DEVICE_ID = "device_id";
             public static final String CATEGORY = "category_id";
             public static final String PAGE = "page";
             public static final String LIMIT = "limit";

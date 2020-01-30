@@ -11,6 +11,7 @@ import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
+import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
@@ -134,6 +135,18 @@ public class Repository {
 
     public Single<BaseResponse> deleteSupplierFromFavorite(String accessToken, int supplierId) {
         return apiInterface.deleteSupplierFromFavorite(accessToken, supplierId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartAmountResponse>> getCartAmountNoAuth(String deviceId) {
+        return apiInterface.getCartAmountNoAuth(deviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartAmountResponse>> getCartAmountWithAuth(String accessToken, String deviceId) {
+        return apiInterface.getCartAmountWithAuth(accessToken, deviceId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -13,4 +13,5 @@ public class ApiConstant {
     public static final String PRODUCT_FAVORITE = "user_product_favorites";
     public static final String SUPPLIER_FAVORITE = "user_restaurent_favorites";
     public static final String SUPPLIER_FAVORITE_DELETE = "user_restaurent_favorites/{" + Define.Api.Query.ID + "}";
+    public static final String CART_AMOUNT = "cart/amount";
 }

@@ -10,7 +10,7 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.FrameLayout
 import android.widget.TextView
-import beetech.handycart.R
+import com.soict.hoangviet.handycart.R
 import kotlinx.android.synthetic.main.notification_badge.view.*
 
 class NotificationBadge(
