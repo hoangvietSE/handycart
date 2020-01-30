@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class NumberUtil {
-
+    private NumberUtil(){}
     private static NumberFormat numberFormat = new DecimalFormat("###,###,###");
 
     public static String handlePercentage(int percentage) {

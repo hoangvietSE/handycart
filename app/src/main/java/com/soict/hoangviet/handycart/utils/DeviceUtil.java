@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.soict.hoangviet.handycart.BuildConfig;
 
 public class DeviceUtil {
-
+    private DeviceUtil(){}
     /**
      * Check internet connected
      *

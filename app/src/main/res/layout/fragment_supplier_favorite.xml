@@ -3,6 +3,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="supplierFavoriteViewModel"
             type="com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel" />
@@ -15,11 +16,12 @@
         <com.soict.hoangviet.handycart.base.BaseRecyclerView
             android:id="@+id/rcv_supplier_favorite"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            bind:brv_padding_top="@dimen/content_padding_10_dp" />
 
         <include
-            bind:isVisible="@{supplierFavoriteViewModel.login}"
-            layout="@layout/layout_need_login" />
+            layout="@layout/layout_need_login"
+            bind:isVisible="@{supplierFavoriteViewModel.login}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

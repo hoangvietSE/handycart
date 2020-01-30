@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 public class CommonExtensionUtil {
+    private CommonExtensionUtil(){}
     private static final String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private static final String EMAIL_TWO_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+\\.[a-z]+";
     private static final String PHONE_PATTERN = "[0-9]{9,10}";

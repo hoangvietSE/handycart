@@ -30,6 +30,7 @@
                 android:id="@+id/imv_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
                 app:error="@{@drawable/ic_add_cart}"
                 app:imageUrl="@{homeSupplierResponse.avatar}"
                 tools:src="@drawable/ic_add_cart" />

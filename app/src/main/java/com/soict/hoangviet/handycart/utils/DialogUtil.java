@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import java.util.ArrayList;
 
 public class DialogUtil {
+    private DialogUtil(){}
     public static void showMessageDialog(
             Context context,
             @StringRes int titleRes,

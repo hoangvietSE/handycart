@@ -12,6 +12,7 @@ import com.soict.hoangviet.handycart.adapter.HomeProductAdapter;
 import com.soict.hoangviet.handycart.adapter.HomeSupplierAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.custom.CircleAnimationUtil;
+import com.soict.hoangviet.handycart.custom.HomeItemDecoration;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
@@ -44,6 +45,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     private HomeProductAdapter homeProductAdapter;
     private HomeSupplierAdapter homeSupplierAdapter;
     private int tempPosition;
+    private HomeItemDecoration mHomeItemDecoration;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +66,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     public void initView() {
         initViewModel();
         getListBanner();
+        initHomeDecoration();
         if (mSharePreference.isLogin()) {
             getListProductWithAuth(false);
             getListSupplierWithAuth(false);
@@ -73,6 +76,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             getListSupplierNoAuth(false);
             getCartAmountNoAuth();
         }
+    }
+
+    private void initHomeDecoration() {
+        mHomeItemDecoration = new HomeItemDecoration(getResources().getDimension(R.dimen.content_padding_8_dp));
     }
 
     private void getCartAmountNoAuth() {
@@ -199,6 +206,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
         });
         binding.rcvHomeSupplier.setAdapter(homeSupplierAdapter);
+        binding.rcvHomeSupplier.addItemDecoration(mHomeItemDecoration);
     }
 
     private void makeFlyAnimation(ImageView imageView, int position, int quantity) {
@@ -277,6 +285,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
         });
         binding.rcvHomeProduct.setAdapter(homeProductAdapter);
+        binding.rcvHomeProduct.addItemDecoration(mHomeItemDecoration);
     }
 
 
@@ -363,7 +372,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             binding.carts.tvBadgeCart.setNumber(((CartAmountResponse) data).getAmount());
             return;
         }
-        if(data instanceof CartResponse){
+        if (data instanceof CartResponse) {
             binding.carts.tvBadgeCart.setNumber(((CartResponse) data).getTotalProduct());
             return;
         }

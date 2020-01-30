@@ -16,6 +16,7 @@ import com.soict.hoangviet.handycart.R;
 
 
 public class LoadingUtil {
+    private LoadingUtil(){}
     private static boolean shown = false;
 
     private AlertDialog dialog = null;

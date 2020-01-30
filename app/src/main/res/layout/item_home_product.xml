@@ -32,7 +32,19 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.soict.hoangviet.handycart.custom.SquareImageView
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_radius_10dp"
                 android:id="@+id/imv_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:error="@{@drawable/ic_add_cart}"
+                app:imageUrl="@{homeProductResponse.thumbnail}"
+                tools:src="@drawable/ic_add_cart" />
+
+            <com.soict.hoangviet.handycart.custom.SquareImageView
+                android:scaleType="centerCrop"
+                android:background="@drawable/bg_radius_10dp"
+                android:id="@+id/imv_product_copy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:error="@{@drawable/ic_add_cart}"

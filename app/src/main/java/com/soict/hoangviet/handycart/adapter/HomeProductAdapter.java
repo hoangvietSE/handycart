@@ -2,9 +2,7 @@ package com.soict.hoangviet.handycart.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemHomeProductBinding;
@@ -50,7 +48,7 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
                 listener.onFavoriteClick(getAdapterPosition());
             });
             binding.btnAddToCart.setOnClickListener(view -> {
-                listener.onCartClick(binding.imvProduct, getAdapterPosition(), binding.itemQuantity.getQuantity());
+                listener.onCartClick(binding.imvProductCopy, getAdapterPosition(), binding.itemQuantity.getQuantity());
             });
         }
     }
