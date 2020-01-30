@@ -9,10 +9,12 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.repository.Repository;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
+import com.soict.hoangviet.handycart.entity.request.CartRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
@@ -38,6 +40,7 @@ public class HomeViewModel extends BaseViewModel {
     private MutableLiveData<ObjectResponse<HomeSupplierResponse>> favoriteSupplier;
     private MutableLiveData<ObjectResponse<HomeSupplierResponse>> favoriteSupplierDelete;
     private MutableLiveData<ObjectResponse<CartAmountResponse>> cartAmount;
+    private MutableLiveData<ObjectResponse<CartResponse>> cartTransaction;
     private int pageIndexProduct = 1;
     private int pageIndexSupplier = 1;
 
@@ -86,6 +89,11 @@ public class HomeViewModel extends BaseViewModel {
     public MutableLiveData<ObjectResponse<CartAmountResponse>> getCartAmount() {
         if (cartAmount == null) cartAmount = new MutableLiveData<>();
         return cartAmount;
+    }
+
+    public MutableLiveData<ObjectResponse<CartResponse>> getCartTransaction() {
+        if (cartTransaction == null) cartTransaction = new MutableLiveData<>();
+        return cartTransaction;
     }
 
     public void addToFavorite(HomeProductResponse data) {
@@ -323,5 +331,48 @@ public class HomeViewModel extends BaseViewModel {
                         )
         );
     }
+
+    public void addToCartNoAuth(int productId, int productQuantity) {
+        CartRequest cartRequest = new CartRequest(mSharePreference.getDeviceTokenId(), productId, productQuantity);
+        mCompositeDisposable.add(
+                repository.addToCartNoAuth(cartRequest)
+                        .doOnSubscribe(disposable -> {
+                            getCartTransaction().setValue(new ObjectResponse<CartResponse>().loading());
+                        })
+                        .doFinally(() -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    getCartTransaction().setValue(new ObjectResponse<CartResponse>().success(response.getData()));
+                                },
+                                throwable -> {
+                                    getCartTransaction().setValue(new ObjectResponse<CartResponse>().error(throwable));
+                                }
+                        )
+        );
+    }
+
+    public void addToCartWithAuth(int productId, int productQuantity) {
+        CartRequest cartRequest = new CartRequest(mSharePreference.getDeviceTokenId(), productId, productQuantity);
+        mCompositeDisposable.add(
+                repository.addToCartWithAuth(mSharePreference.getAccessToken(), cartRequest)
+                        .doOnSubscribe(disposable -> {
+                            getCartTransaction().setValue(new ObjectResponse<CartResponse>().loading());
+                        })
+                        .doFinally(() -> {
+
+                        })
+                        .subscribe(
+                                response -> {
+                                    getCartTransaction().setValue(new ObjectResponse<CartResponse>().success(response.getData()));
+                                },
+                                throwable -> {
+                                    getCartTransaction().setValue(new ObjectResponse<CartResponse>().error(throwable));
+                                }
+                        )
+        );
+    }
+
 
 }

@@ -5,12 +5,14 @@ import com.soict.hoangviet.handycart.base.BaseResponse;
 import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
+import com.soict.hoangviet.handycart.entity.request.CartRequest;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
@@ -118,5 +120,17 @@ public interface ApiInterface {
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Query(Define.Api.Query.DEVICE_ID)String deviceId
     );
+
+    @POST(ApiConstant.CART)
+    Single<ObjectResponse<CartResponse>> addToCartNoAuth(
+            @Body CartRequest cartRequest
+            );
+
+    @POST(ApiConstant.CART)
+    Single<ObjectResponse<CartResponse>> addToCartWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Body CartRequest cartRequest
+    );
+
 
 }

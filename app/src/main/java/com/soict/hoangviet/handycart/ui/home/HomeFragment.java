@@ -1,5 +1,8 @@
 package com.soict.hoangviet.handycart.ui.home;
 
+import android.animation.Animator;
+import android.widget.ImageView;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -8,14 +11,17 @@ import com.soict.hoangviet.handycart.adapter.BannerInfiniteAdapter;
 import com.soict.hoangviet.handycart.adapter.HomeProductAdapter;
 import com.soict.hoangviet.handycart.adapter.HomeSupplierAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
+import com.soict.hoangviet.handycart.custom.CircleAnimationUtil;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentHomeBinding;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.DialogUtil;
@@ -129,6 +135,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         mViewModel.getCartAmount().observe(this, response -> {
             handleObjectResponse(response);
         });
+        mViewModel.getCartTransaction().observe(this, response -> {
+            handleObjectResponse(response);
+        });
         binding.swipeRefresh.setOnRefreshListener(() -> {
             refreshData();
         });
@@ -138,9 +147,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         if (mSharePreference.isLogin()) {
             getListProductWithAuth(true);
             getListSupplierWithAuth(true);
+            getCartAmountWithAuth();
         } else {
             getListProductNoAuth(true);
             getListSupplierNoAuth(true);
+            getCartAmountNoAuth();
         }
     }
 
@@ -190,35 +201,72 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         binding.rcvHomeSupplier.setAdapter(homeSupplierAdapter);
     }
 
+    private void makeFlyAnimation(ImageView imageView, int position, int quantity) {
+        new CircleAnimationUtil().attachActivity(getActivity()).setTargetView(imageView).setMoveDuration(1000).setDestView(binding.carts.imvCart).setAnimationListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
+                if (mSharePreference.isLogin()) {
+                    mViewModel.addToCartWithAuth(data.getId(), quantity);
+                } else {
+                    mViewModel.addToCartNoAuth(data.getId(), quantity);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        }).startAnimation();
+    }
+
     private void initHomeProductAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        homeProductAdapter = new HomeProductAdapter(getContext(), position -> {
-            if (mSharePreference.isLogin()) {
-                tempPosition = position;
-                try {
-                    HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
-                    if (data.getFlagFavorite() == Define.Favorite.STATUS_UNLIKE) {
-                        mViewModel.addToFavorite(data);
-                    } else {
-                        mViewModel.deleteFromFavorite(data);
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
+        homeProductAdapter = new HomeProductAdapter(getContext(), new FavoriteProductListener() {
+            @Override
+            public void onCartClick(ImageView imageView, int position, int quantity) {
+                makeFlyAnimation(imageView, position, quantity);
+            }
 
-            } else {
-                DialogUtil.showConfirmDialog(
-                        getContext(),
-                        R.string.favorite_title,
-                        R.string.favorite_message,
-                        R.string.favorite_need_login,
-                        R.string.favorite_cancel,
-                        (dialogInterface, which) -> {
-                            getViewController().addFragment(LoginFragment.class, null);
-                        },
-                        (dialogInterface, which) -> {
-                            dialogInterface.dismiss();
+            @Override
+            public void onFavoriteClick(int position) {
+                if (mSharePreference.isLogin()) {
+                    tempPosition = position;
+                    try {
+                        HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
+                        if (data.getFlagFavorite() == Define.Favorite.STATUS_UNLIKE) {
+                            mViewModel.addToFavorite(data);
+                        } else {
+                            mViewModel.deleteFromFavorite(data);
                         }
-                );
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                    }
+
+                } else {
+                    DialogUtil.showConfirmDialog(
+                            getContext(),
+                            R.string.favorite_title,
+                            R.string.favorite_message,
+                            R.string.favorite_need_login,
+                            R.string.favorite_cancel,
+                            (dialogInterface, which) -> {
+                                getViewController().addFragment(LoginFragment.class, null);
+                            },
+                            (dialogInterface, which) -> {
+                                dialogInterface.dismiss();
+                            }
+                    );
+                }
             }
         }, false);
         binding.rcvHomeProduct.setLayoutManager(layoutManager);
@@ -312,8 +360,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             return;
         }
         if (data instanceof CartAmountResponse) {
-//            binding.carts.tvBadgeCart.setNumber(((CartAmountResponse) data).getAmount());
-            binding.carts.tvBadgeCart.setNumber(2);
+            binding.carts.tvBadgeCart.setNumber(((CartAmountResponse) data).getAmount());
+            return;
+        }
+        if(data instanceof CartResponse){
+            binding.carts.tvBadgeCart.setNumber(((CartResponse) data).getTotalProduct());
+            return;
         }
     }
 }

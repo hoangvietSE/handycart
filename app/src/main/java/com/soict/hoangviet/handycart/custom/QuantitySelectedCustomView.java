@@ -113,7 +113,15 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
         tvQuantity.setText(String.valueOf(defaultItems));
     }
 
-    public void setMaxItems(int maxItems){
+    public void setMaxItems(int maxItems) {
 
+    }
+
+    public int getQuantity() {
+        try {
+            return Integer.valueOf(tvQuantity.getText().toString());
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

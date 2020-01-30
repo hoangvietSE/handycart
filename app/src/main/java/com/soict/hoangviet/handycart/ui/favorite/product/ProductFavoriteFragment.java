@@ -1,6 +1,7 @@
 package com.soict.hoangviet.handycart.ui.favorite.product;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -9,10 +10,9 @@ import com.soict.hoangviet.handycart.adapter.ProductFavoriteAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentProductFavoriteBinding;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
-import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
-import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,11 +51,19 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
     }
 
     private void initAdapter() {
-        mProductFavoriteAdapter = new ProductFavoriteAdapter(getContext(), position -> {
-            try {
-                ProductFavoriteResponse data = mProductFavoriteAdapter.getItem(position, ProductFavoriteResponse.class);
-                mViewModel.deleteProductFromFavorite(position, data.getId());
-            } catch (ArrayIndexOutOfBoundsException e) {
+        mProductFavoriteAdapter = new ProductFavoriteAdapter(getContext(), new FavoriteProductListener() {
+            @Override
+            public void onCartClick(ImageView imageView, int position, int quantity) {
+
+            }
+
+            @Override
+            public void onFavoriteClick(int position) {
+                try {
+                    ProductFavoriteResponse data = mProductFavoriteAdapter.getItem(position, ProductFavoriteResponse.class);
+                    mViewModel.deleteProductFromFavorite(position, data.getId());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
             }
         }, false);
         binding.rcvProductFavorite.setOnLoadingMoreListener(() -> {

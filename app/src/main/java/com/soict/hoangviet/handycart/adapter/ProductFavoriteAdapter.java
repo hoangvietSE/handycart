@@ -2,19 +2,18 @@ package com.soict.hoangviet.handycart.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemProductFavoriteBinding;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
-import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
 
 public class ProductFavoriteAdapter extends EndlessLoadingRecyclerViewAdapter<ItemProductFavoriteBinding> {
-    private FavoriteListener listener;
+    private FavoriteProductListener listener;
 
-    public ProductFavoriteAdapter(Context context, FavoriteListener listener, boolean enableSelectedMode) {
+    public ProductFavoriteAdapter(Context context, FavoriteProductListener listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
         this.listener = listener;
     }
@@ -43,7 +42,7 @@ public class ProductFavoriteAdapter extends EndlessLoadingRecyclerViewAdapter<It
         public void bind(ProductFavoriteResponse data) {
             binding.setHomeProductResponse(data);
             binding.imvFavorite.setOnClickListener(view -> {
-                listener.onClick(getAdapterPosition());
+                listener.onFavoriteClick(getAdapterPosition());
             });
         }
     }

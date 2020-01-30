@@ -6,12 +6,14 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
+import com.soict.hoangviet.handycart.entity.request.CartRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
@@ -150,5 +152,18 @@ public class Repository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Single<ObjectResponse<CartResponse>> addToCartNoAuth(CartRequest cartRequest) {
+        return apiInterface.addToCartNoAuth(cartRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartResponse>> addToCartWithAuth(String accessToken, CartRequest cartRequest) {
+        return apiInterface.addToCartWithAuth(accessToken, cartRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 
 }

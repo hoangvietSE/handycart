@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/margin_4_dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/imv_add_to_cart"
+                    app:layout_constraintEnd_toStartOf="@id/btn_add_to_cart"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintHorizontal_weight="2.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +136,9 @@
                     app:qs_max_items="5" />
 
                 <ImageView
-                    android:id="@+id/imv_add_to_cart"
+                    android:alpha="@{(homeProductResponse.flagStock==0||homeProductResponse.flagExpiry==0) ? 0.5f : 1f}"
+                    android:clickable="@{(homeProductResponse.flagStock!=0)&amp;&amp;(homeProductResponse.flagExpiry!=0)}"
+                    android:id="@+id/btn_add_to_cart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_add_to_cart"
@@ -145,7 +147,6 @@
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@id/item_quantity"
                     app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 

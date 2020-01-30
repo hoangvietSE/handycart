@@ -9,12 +9,13 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemSupplierFavoriteBinding;
 import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
-import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteSupplierListener;
 
 public class SupplierFavoriteAdapter extends EndlessLoadingRecyclerViewAdapter<ItemSupplierFavoriteBinding> {
-    private FavoriteListener listener;
+    private FavoriteSupplierListener listener;
 
-    public SupplierFavoriteAdapter(Context context, FavoriteListener listener, boolean enableSelectedMode) {
+    public SupplierFavoriteAdapter(Context context, FavoriteSupplierListener listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
         this.listener = listener;
     }
@@ -44,7 +45,7 @@ public class SupplierFavoriteAdapter extends EndlessLoadingRecyclerViewAdapter<I
         public void bind(SupplierFavoriteResponse data) {
             binding.setHomeSupplierResponse(data);
             binding.imvFavorite.setOnClickListener(view -> {
-                listener.onClick(getAdapterPosition());
+                listener.onFavoriteClick(getAdapterPosition());
             });
         }
     }

@@ -9,12 +9,12 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemHomeProductBinding;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
-import com.soict.hoangviet.handycart.ui.favorite.FavoriteListener;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
 
 public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHomeProductBinding> {
-    private FavoriteListener listener;
+    private FavoriteProductListener listener;
 
-    public HomeProductAdapter(Context context, FavoriteListener listener, boolean enableSelectedMode) {
+    public HomeProductAdapter(Context context, FavoriteProductListener listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
         this.listener = listener;
     }
@@ -46,8 +46,11 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
         @Override
         public void bind(HomeProductResponse data) {
             binding.setHomeProductResponse(data);
-            binding.imvFavorite.setOnClickListener(view->{
-                listener.onClick(getAdapterPosition());
+            binding.imvFavorite.setOnClickListener(view -> {
+                listener.onFavoriteClick(getAdapterPosition());
+            });
+            binding.btnAddToCart.setOnClickListener(view -> {
+                listener.onCartClick(binding.imvProduct, getAdapterPosition(), binding.itemQuantity.getQuantity());
             });
         }
     }
