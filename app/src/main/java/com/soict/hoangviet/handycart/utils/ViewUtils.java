@@ -1,13 +1,6 @@
 package com.soict.hoangviet.handycart.utils;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-
-import androidx.core.content.ContextCompat;
-
-import com.soict.hoangviet.handycart.R;
 
 public class ViewUtils {
     private ViewUtils() { }

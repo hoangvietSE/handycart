@@ -23,6 +23,7 @@ import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
+import com.soict.hoangviet.handycart.ui.guide.GuideFragment;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.DialogUtil;
@@ -31,6 +32,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,6 +48,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     private HomeSupplierAdapter homeSupplierAdapter;
     private int tempPosition;
     private HomeItemDecoration mHomeItemDecoration;
+    public static final String EXTRA_URL = "extra_url";
 
     @Override
     protected int getLayoutId() {
@@ -147,6 +150,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         });
         binding.swipeRefresh.setOnRefreshListener(() -> {
             refreshData();
+        });
+        binding.imvBannerSmall.setOnClickListener(view -> {
+            HashMap<String, String> data = new HashMap<>();
+            data.put(EXTRA_URL, mViewModel.getListBanners().getValue().getUrlDiscount().get(0).getThumbnail());
+            getViewController().addFragment(GuideFragment.class, data);
         });
     }
 

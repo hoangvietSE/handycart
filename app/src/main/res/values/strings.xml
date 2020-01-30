@@ -53,4 +53,7 @@
     <string name="favorite_title">Thông báo</string>
     <string name="favorite_message">Tính năng yêu cầu đăng nhập</string>
 
+    <!--    Guide-->
+    <string name="guide_toolbar_title">Hướng dẫn</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.soict.hoangviet.handycart.ui.login;
 
+import android.os.Handler;
+
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
@@ -61,8 +63,6 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
 
     @Override
     protected <U> void getObjectResponse(U data) {
-        HashMap<String, Object> dataResult = new HashMap<>();
-        dataResult.put(ProfileFragment.LOGIN_RESULT,true);
-        getViewController().backFromAddFragment(dataResult);
+        getViewController().backFromAddFragment(null);
     }
 }

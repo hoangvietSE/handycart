@@ -37,13 +37,6 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
         if (page != null) {
             switch (binding.masterContainer.getCurrentItem()) {
                 case HOME_FRAGMENT:
-                    try {
-                        Boolean loginResult = getArguments().getBoolean(ProfileFragment.LOGIN_RESULT);
-                        if(loginResult)((HomeFragment) page).refreshData();
-                        getArguments().clear();
-                        break;
-                    }catch (Exception e){
-                    }
                     break;
                 case FAVORITE_FRAGMENT:
                     break;
@@ -52,13 +45,6 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
                 case NOTIFICATION_FRAGMENT:
                     break;
                 case PROFILE_FRAGMENT:
-                    try {
-                        Boolean loginResult = getArguments().getBoolean(ProfileFragment.LOGIN_RESULT);
-                        ((ProfileFragment) page).setLoginResult(loginResult);
-                        getArguments().clear();
-                        break;
-                    }catch (Exception e){
-                    }
             }
         }
     }

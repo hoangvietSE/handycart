@@ -3,6 +3,7 @@ package com.soict.hoangviet.handycart.di.module;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteFragment;
 import com.soict.hoangviet.handycart.ui.favorite.product.ProductFavoriteFragment;
 import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteFragment;
+import com.soict.hoangviet.handycart.ui.guide.GuideFragment;
 import com.soict.hoangviet.handycart.ui.home.HomeFragment;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
@@ -47,4 +48,7 @@ public abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract SupplierFavoriteFragment bindSupplierFavoriteFragment();
+
+    @ContributesAndroidInjector
+    abstract GuideFragment bindGuideFragment();
 }
