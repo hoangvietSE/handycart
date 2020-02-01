@@ -16,10 +16,16 @@ public class DetailProductViewModel extends BaseViewModel {
 
     private Repository repository;
     private MutableLiveData<ObjectResponse<DetailProductResponse>> detailProduct;
+    private MutableLiveData<Integer> quantity;
 
     public MutableLiveData<ObjectResponse<DetailProductResponse>> getDetailProduct() {
         if (detailProduct == null) detailProduct = new MutableLiveData<>();
         return detailProduct;
+    }
+
+    public MutableLiveData<Integer> getQuantity() {
+        if (quantity == null) quantity = new MutableLiveData<>();
+        return quantity;
     }
 
     @Inject

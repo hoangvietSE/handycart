@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.DetailProductAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
+import com.soict.hoangviet.handycart.custom.BottomSheetFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentDetailProductBinding;
 import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
 import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductFragment;
@@ -30,6 +30,7 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
     private DetailProductAdapter mDetailProductAdapter;
     private DetailProductViewModel mViewModel;
     private BottomSheetBehavior bottomSheetBehavior;
+    private BottomSheetFragment mBottomSheetFragment;
 
     @Override
     protected int getLayoutId() {
@@ -127,11 +128,7 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
             handleObjectResponse(response);
         });
         binding.btnBuyProduct.setOnClickListener(view -> {
-            if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            } else {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
+            mBottomSheetFragment.show(getChildFragmentManager(), mBottomSheetFragment.getTag());
         });
     }
 
@@ -154,6 +151,12 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
         if (data instanceof DetailProductResponse) {
             binding.setDetailProductResponse((DetailProductResponse) data);
             initDetailProductAdapter((DetailProductResponse) data);
+            initBottomSheetDialogFragment((DetailProductResponse) data);
         }
+    }
+
+    private void initBottomSheetDialogFragment(DetailProductResponse data) {
+        mBottomSheetFragment = BottomSheetFragment.newInstance(mViewModel, data);
+        mBottomSheetFragment.setCancelable(true);
     }
 }

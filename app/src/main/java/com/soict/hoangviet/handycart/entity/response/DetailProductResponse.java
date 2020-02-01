@@ -2,6 +2,8 @@ package com.soict.hoangviet.handycart.entity.response;
 
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +13,7 @@ import com.google.gson.annotations.SerializedName;
 import com.soict.hoangviet.handycart.utils.CommonExtensionUtil;
 import com.soict.hoangviet.handycart.utils.NumberUtil;
 
-public class DetailProductResponse {
+public class DetailProductResponse implements Parcelable {
 
     @SerializedName("thumbnail")
     private String thumbnail;
@@ -262,4 +264,70 @@ public class DetailProductResponse {
         view.setText(NumberUtil.handlePrice(regularPrice));
         view.setPaintFlags(view.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.thumbnail);
+        dest.writeString(this.expiryDate);
+        dest.writeInt(this.weight);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.description);
+        dest.writeString(this.content);
+        dest.writeInt(this.regularPrice);
+        dest.writeString(this.manufaction);
+        dest.writeInt(this.sellerPrice);
+        dest.writeInt(this.sale);
+        dest.writeString(this.updatedAt);
+        dest.writeParcelable(this.supplier, flags);
+        dest.writeString(this.name);
+        dest.writeInt(this.id);
+        dest.writeLong(this.sku);
+        dest.writeInt(this.stock);
+        dest.writeInt(this.flagExpiry);
+        dest.writeInt(this.flagStock);
+        dest.writeInt(this.status);
+    }
+
+    public DetailProductResponse() {
+    }
+
+    protected DetailProductResponse(Parcel in) {
+        this.thumbnail = in.readString();
+        this.expiryDate = in.readString();
+        this.weight = in.readInt();
+        this.createdAt = in.readString();
+        this.description = in.readString();
+        this.content = in.readString();
+        this.regularPrice = in.readInt();
+        this.manufaction = in.readString();
+        this.sellerPrice = in.readInt();
+        this.sale = in.readInt();
+        this.updatedAt = in.readString();
+        this.supplier = in.readParcelable(Supplier.class.getClassLoader());
+        this.name = in.readString();
+        this.id = in.readInt();
+        this.sku = in.readLong();
+        this.stock = in.readInt();
+        this.flagExpiry = in.readInt();
+        this.flagStock = in.readInt();
+        this.status = in.readInt();
+    }
+
+    public static final Creator<DetailProductResponse> CREATOR = new Creator<DetailProductResponse>() {
+        @Override
+        public DetailProductResponse createFromParcel(Parcel source) {
+            return new DetailProductResponse(source);
+        }
+
+        @Override
+        public DetailProductResponse[] newArray(int size) {
+            return new DetailProductResponse[size];
+        }
+    };
 }

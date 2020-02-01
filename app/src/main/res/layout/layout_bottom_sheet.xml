@@ -2,6 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+
+        <variable
+            name="detailProductResponse"
+            type="com.soict.hoangviet.handycart.entity.response.DetailProductResponse" />
+
+        <variable
+            name="detailProductViewModel"
+            type="com.soict.hoangviet.handycart.ui.detailproduct.DetailProductViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_sheet_layout"
         android:layout_width="match_parent"
@@ -34,6 +48,7 @@
             android:fontFamily="@font/lato_bold"
             android:maxLines="2"
             android:paddingEnd="@dimen/content_padding_16_dp"
+            android:text="@{detailProductResponse.name}"
             android:textColor="@color/color_brown"
             android:textSize="@dimen/textsize_16_sp"
             app:layout_constraintBottom_toBottomOf="@id/imv_icon"
@@ -48,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_32_dp"
             android:fontFamily="@font/lato_bold"
+            android:text="@{NumberUtil.handlePrice(detailProductResponse.sellerPrice)}"
             android:textColor="@color/md_black_1000"
             android:textSize="@dimen/textsize_18_sp"
             app:layout_constraintBottom_toTopOf="@id/item_quantity"

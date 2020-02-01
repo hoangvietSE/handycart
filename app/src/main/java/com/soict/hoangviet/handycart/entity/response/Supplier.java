@@ -1,8 +1,11 @@
 package com.soict.hoangviet.handycart.entity.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Supplier {
+public class Supplier implements Parcelable {
 
     @SerializedName("policy_service")
     private Object policyService;
@@ -190,4 +193,60 @@ public class Supplier {
                         ",status = '" + status + '\'' +
                         "}";
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.role);
+        dest.writeString(this.address);
+        dest.writeString(this.banner);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.description);
+        dest.writeString(this.avatar);
+        dest.writeString(this.updatedAt);
+        dest.writeString(this.moreInformation);
+        dest.writeInt(this.phone);
+        dest.writeString(this.name);
+        dest.writeInt(this.id);
+        dest.writeString(this.email);
+        dest.writeInt(this.status);
+    }
+
+    public Supplier() {
+    }
+
+    protected Supplier(Parcel in) {
+        this.policyService = in.readParcelable(Object.class.getClassLoader());
+        this.role = in.readInt();
+        this.address = in.readString();
+        this.banner = in.readString();
+        this.createdAt = in.readString();
+        this.description = in.readString();
+        this.avatar = in.readString();
+        this.content = in.readParcelable(Object.class.getClassLoader());
+        this.updatedAt = in.readString();
+        this.moreInformation = in.readString();
+        this.phone = in.readInt();
+        this.name = in.readString();
+        this.id = in.readInt();
+        this.email = in.readString();
+        this.status = in.readInt();
+    }
+
+    public static final Creator<Supplier> CREATOR = new Creator<Supplier>() {
+        @Override
+        public Supplier createFromParcel(Parcel source) {
+            return new Supplier(source);
+        }
+
+        @Override
+        public Supplier[] newArray(int size) {
+            return new Supplier[size];
+        }
+    };
 }

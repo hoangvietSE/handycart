@@ -20,6 +20,7 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
     private ImageView btnRemove;
     private ImageView btnAdd;
     private TextView tvQuantity;
+    private OnItemChangeListener listener;
 
     public QuantitySelectedCustomView(Context context) {
         super(context);
@@ -90,10 +91,12 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
 
     private void addItem() {
         tvQuantity.setText(String.valueOf(Integer.valueOf(tvQuantity.getText().toString()) + 1));
+        listener.onChange(getQuantity());
     }
 
     private void removeItem() {
         tvQuantity.setText(String.valueOf(Integer.valueOf(tvQuantity.getText().toString()) - 1));
+        listener.onChange(getQuantity());
     }
 
     @Override
@@ -126,14 +129,25 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
     }
 
     public void setMaxItems(int maxItems) {
-
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         try {
             return Integer.valueOf(tvQuantity.getText().toString());
         } catch (Exception e) {
             return 0;
         }
+    }
+
+    public OnItemChangeListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnItemChangeListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemChangeListener{
+        void onChange(int item);
     }
 }

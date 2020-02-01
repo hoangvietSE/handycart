@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
+import com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView;
 import com.soict.hoangviet.handycart.databinding.ItemHomeProductBinding;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
@@ -44,6 +45,8 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
         @Override
         public void bind(HomeProductResponse data) {
             binding.setHomeProductResponse(data);
+            binding.itemQuantity.setListener(item -> {
+            });
             binding.imvFavorite.setOnClickListener(view -> {
                 listener.onFavoriteClick(getAdapterPosition());
             });

@@ -163,9 +163,7 @@
                 android:clipToPadding="false"
                 android:paddingStart="@dimen/content_padding_10_dp"
                 android:paddingEnd="@dimen/content_padding_10_dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            </androidx.viewpager.widget.ViewPager>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <include
                 android:id="@+id/sheets"
