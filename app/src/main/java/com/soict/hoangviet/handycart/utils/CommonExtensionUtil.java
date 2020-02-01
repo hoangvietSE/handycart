@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 public class CommonExtensionUtil {
-    private CommonExtensionUtil(){}
+    private CommonExtensionUtil() {
+    }
+
     private static final String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private static final String EMAIL_TWO_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+\\.[a-z]+";
     private static final String PHONE_PATTERN = "[0-9]{9,10}";
@@ -35,15 +37,23 @@ public class CommonExtensionUtil {
 
     }
 
-    public static void loadImageDrawable(Context context, ImageView imageView, Drawable drawable) {
-        GlideApp.with(context)
+    public static void loadImageDrawable(ImageView imageView, Drawable drawable) {
+        GlideApp.with(imageView.getContext())
                 .load(drawable)
                 .into(imageView);
     }
 
-    public static void loadImageDrawable(Context context, ImageView imageView, String url) {
-        GlideApp.with(context)
+    public static void loadImageDrawable(ImageView imageView, String url) {
+        GlideApp.with(imageView.getContext())
                 .load(url)
+                .into(imageView);
+    }
+
+    public static void loadImageDrawable(ImageView imageView, String url, Drawable drawable) {
+        GlideApp.with(imageView.getContext())
+                .load(url)
+                .error(drawable)
+                .placeholder(drawable)
                 .into(imageView);
     }
 }

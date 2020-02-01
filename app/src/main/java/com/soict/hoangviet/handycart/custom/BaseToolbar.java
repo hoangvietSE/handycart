@@ -21,12 +21,13 @@ public class BaseToolbar extends CustomViewConstraintLayout {
     private static final int ICON_RIGHT_NONE = 0;
     private static final int ICON_RIGHT_SEARCH = 1;
     private static final int ICON_RIGHT_SAVE = 2;
-    private static final int ICON_RIGHT_SALE_OFF = 3;
+    private static final int ICON_RIGHT_SHARE = 3;
     private static final int ICON_RIGHT_MENU = 4;
 
     private ConstraintLayout toolbar;
     private TextView tvTitle;
     private ImageView leftButton;
+    private ImageView rightButton;
     private ImageView imvLogoApp;
     private AppCompatTextView tvMenu;
     private OnToolbarClickListener listener;
@@ -58,6 +59,7 @@ public class BaseToolbar extends CustomViewConstraintLayout {
         toolbar = view.findViewById(R.id.toolbar);
         tvTitle = view.findViewById(R.id.tv_title);
         leftButton = view.findViewById(R.id.imv_left);
+        rightButton = view.findViewById(R.id.imv_right);
         imvLogoApp = view.findViewById(R.id.imv_logo_app);
         tvMenu = view.findViewById(R.id.tv_menu);
     }
@@ -93,7 +95,9 @@ public class BaseToolbar extends CustomViewConstraintLayout {
                 break;
             case ICON_RIGHT_SAVE:
                 break;
-            case ICON_RIGHT_SALE_OFF:
+            case ICON_RIGHT_SHARE:
+                tvMenu.setVisibility(GONE);
+                rightButton.setImageResource(R.drawable.ic_share);
                 break;
             case ICON_RIGHT_MENU:
                 tvMenu.setVisibility(VISIBLE);
@@ -135,6 +139,16 @@ public class BaseToolbar extends CustomViewConstraintLayout {
         toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), color));
     }
 
+    public void setToolbarTitleColor(@ColorRes int color) {
+        tvTitle.setTextColor(ContextCompat.getColor(getContext(), color));
+    }
+
+    public void setLeftButtonColor(@ColorRes int color) {
+        leftButton.setColorFilter(ContextCompat.getColor(getContext(), color), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+    }
+
+
     public void setColorMenuPrimary() {
         tvMenu.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         tvMenu.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_menu_pink, 0, 0, 0);
@@ -150,11 +164,11 @@ public class BaseToolbar extends CustomViewConstraintLayout {
         if (title != null) tvTitle.setText(title);
     }
 
-    public void setOnToolbarClickListener(OnToolbarClickListener listener){
+    public void setOnToolbarClickListener(OnToolbarClickListener listener) {
         this.listener = listener;
     }
 
-    public interface OnToolbarClickListener{
+    public interface OnToolbarClickListener {
         void onClick(int id);
     }
 

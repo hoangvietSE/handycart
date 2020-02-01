@@ -15,6 +15,7 @@ import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
@@ -161,6 +162,12 @@ public class Repository {
 
     public Single<ObjectResponse<CartResponse>> addToCartWithAuth(String accessToken, CartRequest cartRequest) {
         return apiInterface.addToCartWithAuth(accessToken, cartRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<DetailProductResponse>> getDetailProduct(int productId) {
+        return apiInterface.getDetailProduct(productId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

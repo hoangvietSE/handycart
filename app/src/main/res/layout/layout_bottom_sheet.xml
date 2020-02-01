@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_sheet"
+        android:paddingTop="@dimen/content_padding_16_dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <ImageView
+            android:id="@+id/imv_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="@dimen/margin_16_dp"
+            android:layout_marginBottom="@dimen/margin_40_dp"
+            android:background="@drawable/bg_icon_bottom_sheet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_price"
+            app:layout_constraintEnd_toStartOf="@id/tv_name_product"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16_dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/lato_bold"
+            android:maxLines="2"
+            android:paddingEnd="@dimen/content_padding_16_dp"
+            android:textColor="@color/color_brown"
+            android:textSize="@dimen/textsize_16_sp"
+            app:layout_constraintBottom_toBottomOf="@id/imv_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imv_icon"
+            app:layout_constraintTop_toTopOf="@id/imv_icon"
+            tools:text="Kem banh WakWak" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_32_dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/md_black_1000"
+            android:textSize="@dimen/textsize_18_sp"
+            app:layout_constraintBottom_toTopOf="@id/item_quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="29.750 VND" />
+
+        <com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView
+            android:id="@+id/item_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16_dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_buy_product"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.4"
+            app:qs_padding_bottom="@dimen/content_padding_10_dp"
+            app:qs_padding_top="@dimen/content_padding_10_dp" />
+
+        <TextView
+            android:id="@+id/btn_buy_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center"
+            android:paddingTop="@dimen/content_padding_16_dp"
+            android:paddingBottom="@dimen/content_padding_16_dp"
+            android:text="@string/detail_product_button_title"
+            android:textAllCaps="true"
+            android:textColor="@color/md_white_1000"
+            android:textSize="@dimen/textsize_18_sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

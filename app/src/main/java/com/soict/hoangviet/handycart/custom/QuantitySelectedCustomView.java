@@ -8,12 +8,15 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.soict.hoangviet.handycart.R;
 
 public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
     private static final int MIN_ITEMS = 1;
     private int maxItems;
     private int defaultItems;
+    private ConstraintLayout cslQuantity;
     private ImageView btnRemove;
     private ImageView btnAdd;
     private TextView tvQuantity;
@@ -37,11 +40,12 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
 
     @Override
     int[] getStyableRes() {
-        return R.styleable.QuantitySelected;
+        return R.styleable.QuantitySelectedCustomView;
     }
 
     @Override
     void initView() {
+        cslQuantity = view.findViewById(R.id.csl_quantity);
         btnRemove = view.findViewById(R.id.btn_remove);
         btnAdd = view.findViewById(R.id.btn_add);
         tvQuantity = view.findViewById(R.id.tv_quantity);
@@ -99,14 +103,22 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
 
     @Override
     void initDataFromStyable(TypedArray mTypedArray) {
-        maxItems = mTypedArray.getInt(R.styleable.QuantitySelected_qs_max_items, 5);
-        defaultItems = mTypedArray.getInt(R.styleable.QuantitySelected_qs_default_items, 1);
+        maxItems = mTypedArray.getInt(R.styleable.QuantitySelectedCustomView_qs_max_items, 5);
+        defaultItems = mTypedArray.getInt(R.styleable.QuantitySelectedCustomView_qs_default_items, 1);
+        setPaddingCustom(0,
+                (int) mTypedArray.getDimension(R.styleable.QuantitySelectedCustomView_qs_padding_top, 0),
+                0,
+                (int) mTypedArray.getDimension(R.styleable.QuantitySelectedCustomView_qs_padding_bottom, 0));
         if (defaultItems < maxItems && defaultItems > 0) {
             setDefaultItems(defaultItems);
         } else {
             defaultItems = 1;
             setDefaultItems(1);
         }
+    }
+
+    private void setPaddingCustom(int left, int top, int right, int bottom) {
+        cslQuantity.setPadding(left, top, right, bottom);
     }
 
     private void setDefaultItems(int defaultItems) {

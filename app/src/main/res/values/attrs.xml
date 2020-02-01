@@ -20,7 +20,7 @@
             <enum name="none" value="0" />
             <enum name="search" value="1" />
             <enum name="save" value="2" />
-            <enum name="sale_off" value="3" />
+            <enum name="share" value="3" />
             <enum name="menu" value="4" />
         </attr>
         <attr name="title" format="string" />
@@ -56,7 +56,9 @@
         <attr name="nbEllipsizeText" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="QuantitySelected">
+    <declare-styleable name="QuantitySelectedCustomView">
+        <attr name="qs_padding_top" format="dimension"/>
+        <attr name="qs_padding_bottom" format="dimension"/>
         <attr name="qs_max_items" format="integer" />
         <attr name="qs_default_items" format="integer" />
     </declare-styleable>

@@ -5,12 +5,9 @@ import android.content.Context;
 
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.data.sharepreference.SharePreference;
-
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.disposables.CompositeDisposable;
 
 @Module
 public class AppModule {

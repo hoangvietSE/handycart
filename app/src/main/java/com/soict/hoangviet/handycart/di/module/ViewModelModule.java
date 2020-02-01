@@ -4,9 +4,14 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.soict.hoangviet.handycart.di.ViewModelFactory;
+import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductViewModel;
+import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductViewModel;
+import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductFragment;
+import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductViewModel;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.favorite.product.ProductFavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel;
+import com.soict.hoangviet.handycart.ui.guide.GuideViewModel;
 import com.soict.hoangviet.handycart.ui.home.HomeViewModel;
 import com.soict.hoangviet.handycart.ui.login.LoginViewModel;
 import com.soict.hoangviet.handycart.ui.main.MainViewModel;
@@ -79,6 +84,21 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SupplierFavoriteViewModel.class)
     abstract ViewModel bindSupplierFavoriteViewModel(SupplierFavoriteViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailProductViewModel.class)
+    abstract ViewModel bindDetailProductViewModel(DetailProductViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DescriptionProductViewModel.class)
+    abstract ViewModel bindDescriptionProductViewModel(DescriptionProductViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GuideProductViewModel.class)
+    abstract ViewModel bindGuideProductViewModel(GuideProductViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

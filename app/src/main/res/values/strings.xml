@@ -56,4 +56,10 @@
     <!--    Guide-->
     <string name="guide_toolbar_title">Hướng dẫn</string>
 
+    <!--    Detail product-->
+    <string name="detail_product_button_title">Mua hàng</string>
+    <string name="detail_product_title">Chi tiết sản phẩm</string>
+    <string name="detail_product_description_title">Mô tả</string>
+    <string name="detail_product_guide_title">Hướng dẫn</string>
+
 </resources>

@@ -22,6 +22,7 @@ import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
+import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
 import com.soict.hoangviet.handycart.ui.guide.GuideFragment;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
@@ -252,6 +253,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             @Override
             public void onCartClick(ImageView imageView, int position, int quantity) {
                 makeFlyAnimation(imageView, position, quantity);
+            }
+
+            @Override
+            public void onDetailClick(int position) {
+                HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
+                HashMap<String, Integer> hashMap = new HashMap<>();
+                hashMap.put(DetailProductFragment.EXTRA_PRODUCT_ID, data.getId());
+                getViewController().addFragment(DetailProductFragment.class, hashMap);
             }
 
             @Override

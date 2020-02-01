@@ -14,6 +14,7 @@ import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
@@ -130,6 +131,11 @@ public interface ApiInterface {
     Single<ObjectResponse<CartResponse>> addToCartWithAuth(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
             @Body CartRequest cartRequest
+    );
+
+    @GET(ApiConstant.PRODUCT)
+    Single<ObjectResponse<DetailProductResponse>> getDetailProduct(
+            @Path(Define.Api.Query.ID) int productId
     );
 
 

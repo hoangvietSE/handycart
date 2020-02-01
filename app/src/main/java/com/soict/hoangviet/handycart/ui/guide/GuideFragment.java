@@ -46,7 +46,7 @@ public class GuideFragment extends BaseFragment<FragmentGuideBinding> {
 //                }
 //            });
 //            binding.webViewGuide.loadUrl(url);
-            CommonExtensionUtil.loadImageDrawable(getContext(), binding.imvGuide, url);
+            CommonExtensionUtil.loadImageDrawable(binding.imvGuide, url);
         }
     }
 

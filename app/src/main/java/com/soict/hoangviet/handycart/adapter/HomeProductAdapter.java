@@ -50,6 +50,9 @@ public class HomeProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemHo
             binding.btnAddToCart.setOnClickListener(view -> {
                 listener.onCartClick(binding.imvProductCopy, getAdapterPosition(), binding.itemQuantity.getQuantity());
             });
+            binding.imvProduct.setOnClickListener(view -> {
+                listener.onDetailClick(getAdapterPosition());
+            });
         }
     }
 }

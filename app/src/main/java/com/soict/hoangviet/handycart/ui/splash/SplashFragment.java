@@ -36,7 +36,7 @@ public class SplashFragment extends BaseFragment<SplashFragmentBinding> {
     @Override
     public void initView() {
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel.class);
-        CommonExtensionUtil.loadImageDrawable(getContext(), binding.imvSplash, getContext().getDrawable(R.drawable.splash));
+        CommonExtensionUtil.loadImageDrawable(binding.imvSplash, getContext().getDrawable(R.drawable.splash));
     }
 
     @Override

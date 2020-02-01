@@ -58,6 +58,11 @@ public class ProductFavoriteFragment extends BaseFragment<FragmentProductFavorit
             }
 
             @Override
+            public void onDetailClick(int position) {
+
+            }
+
+            @Override
             public void onFavoriteClick(int position) {
                 try {
                     ProductFavoriteResponse data = mProductFavoriteAdapter.getItem(position, ProductFavoriteResponse.class);
