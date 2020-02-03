@@ -16,21 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.soict.hoangviet.handycart.custom.BaseToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/md_white_1000"
-            app:icon_left="back"
-            app:icon_right="share"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/detail_product_title" />
-
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_buy_product"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintBottom_toTopOf="@id/btn_buy_product">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
@@ -40,6 +29,7 @@
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -119,6 +109,17 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <com.soict.hoangviet.handycart.custom.BaseToolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/md_white_1000"
+                        app:icon_left="back"
+                        app:icon_right="share"
+                        app:layout_collapseMode="pin"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:title="@string/detail_product_title" />
+
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -157,13 +158,13 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.viewpager.widget.ViewPager
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 android:id="@+id/detail_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingStart="@dimen/content_padding_10_dp"
-                android:paddingEnd="@dimen/content_padding_10_dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                android:paddingEnd="@dimen/content_padding_10_dp" />
 
             <include
                 android:id="@+id/sheets"

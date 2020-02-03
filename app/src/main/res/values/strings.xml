@@ -62,4 +62,12 @@
     <string name="detail_product_description_title">Mô tả</string>
     <string name="detail_product_guide_title">Hướng dẫn</string>
 
+    <!--    Cart-->
+    <string name="cart_toolbar_title">Giỏ hàng</string>
+    <string name="cart_sum_money">Tổng tiền</string>
+    <string name="cart_buy_more">Mua thêm</string>
+    <string name="cart_buy_condition">Đơn của bạn phải trên 150,000 VND</string>
+    <string name="cart_market">Market</string>
+    <string name="cart_delete">Xóa</string>
+
 </resources>

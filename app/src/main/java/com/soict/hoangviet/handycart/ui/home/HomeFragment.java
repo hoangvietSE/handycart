@@ -22,6 +22,7 @@ import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
+import com.soict.hoangviet.handycart.ui.cart.CartFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
 import com.soict.hoangviet.handycart.ui.guide.GuideFragment;
@@ -156,6 +157,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             HashMap<String, String> data = new HashMap<>();
             data.put(EXTRA_URL, mViewModel.getListBanners().getValue().getUrlDiscount().get(0).getThumbnail());
             getViewController().addFragment(GuideFragment.class, data);
+        });
+        binding.carts.cslCart.setOnClickListener(view -> {
+            getViewController().addFragment(CartFragment.class, null);
         });
     }
 

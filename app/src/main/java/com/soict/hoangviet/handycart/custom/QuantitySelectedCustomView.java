@@ -9,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.BindingAdapter;
 
 import com.soict.hoangviet.handycart.R;
+
+import kotlin.jvm.JvmStatic;
 
 public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
     private static final int MIN_ITEMS = 1;
@@ -128,6 +131,10 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
         tvQuantity.setText(String.valueOf(defaultItems));
     }
 
+    public int getDefaultItems() {
+        return defaultItems;
+    }
+
     public void setMaxItems(int maxItems) {
     }
 
@@ -149,5 +156,10 @@ public class QuantitySelectedCustomView extends CustomViewConstraintLayout {
 
     public interface OnItemChangeListener{
         void onChange(int item);
+    }
+
+    @BindingAdapter({"items"})
+    public static void setItems(QuantitySelectedCustomView view, int item){
+        view.tvQuantity.setText(String.valueOf(item));
     }
 }

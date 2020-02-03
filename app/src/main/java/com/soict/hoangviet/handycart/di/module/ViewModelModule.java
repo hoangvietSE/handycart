@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.soict.hoangviet.handycart.di.ViewModelFactory;
+import com.soict.hoangviet.handycart.ui.cart.CartViewModel;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductViewModel;
 import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductViewModel;
 import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductFragment;
@@ -99,6 +100,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GuideProductViewModel.class)
     abstract ViewModel bindGuideProductViewModel(GuideProductViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CartViewModel.class)
+    abstract ViewModel bindCartViewModel(CartViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

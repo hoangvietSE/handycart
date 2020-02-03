@@ -1,5 +1,6 @@
 package com.soict.hoangviet.handycart.di.module;
 
+import com.soict.hoangviet.handycart.ui.cart.CartFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductFragment;
@@ -60,6 +61,9 @@ public abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract DescriptionProductFragment bindDescriptionProductFragment();
+
+    @ContributesAndroidInjector
+    abstract CartFragment bindCartFragment();
 
     @ContributesAndroidInjector
     abstract GuideProductFragment bindGuideProductFragment();

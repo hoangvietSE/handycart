@@ -13,6 +13,7 @@ import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
 import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
@@ -168,6 +169,18 @@ public class Repository {
 
     public Single<ObjectResponse<DetailProductResponse>> getDetailProduct(int productId) {
         return apiInterface.getDetailProduct(productId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartDetailResponse>> getCartDetailWithAuth(String accessToken, String deviceId) {
+        return apiInterface.getCartDetailWithAuth(accessToken, deviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartDetailResponse>> getCartDetailNoAuth(String deviceId) {
+        return apiInterface.getCartDetailNoAuth(deviceId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

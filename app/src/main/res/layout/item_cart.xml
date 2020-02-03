@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+
+        <variable
+            name="productListItem"
+            type="com.soict.hoangviet.handycart.entity.response.ProductListItem" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View style="@style/LineHorizontalMedium" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_white_1000"
+            android:paddingBottom="@dimen/content_padding_10_dp">
+
+            <CheckBox
+                android:id="@+id/cb_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/cart_market"
+                android:textColor="@color/md_black_1000"
+                app:layout_constraintBottom_toBottomOf="@id/cb_cart"
+                app:layout_constraintStart_toEndOf="@id/cb_cart"
+                app:layout_constraintTop_toTopOf="@id/cb_cart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_8_dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/cart_delete"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/textsize_16_sp"
+                app:layout_constraintBottom_toBottomOf="@id/cb_cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cb_cart" />
+
+            <ImageView
+                app:imageUrl="@{productListItem.thumbnail}"
+                app:error="@{@drawable/img_image_default}"
+                android:id="@+id/imv_cart"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="@dimen/margin_8_dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_cart"
+                tools:src="@drawable/ic_add_cart" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/imv_cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imv_cart"
+                app:layout_constraintTop_toTopOf="@id/imv_cart">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lato_bold"
+                    android:maxLines="2"
+                    android:paddingEnd="@dimen/content_padding_10_dp"
+                    android:text="@{productListItem.name}"
+                    android:textColor="@color/color_brown"
+                    tools:text="Kem " />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="@{NumberUtil.handlePercentage(productListItem.sale)}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:textColor="@color/discount_color"
+                        android:textSize="@dimen/textsize_16_sp"
+                        tools:text="15%" />
+
+                    <TextView
+                        android:text="@{NumberUtil.handlePrice(productListItem.regularPrice)}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_10_dp"
+                        android:fontFamily="@font/lato_bold"
+                        tools:text="35.000 VND" />
+                </LinearLayout>
+
+                <TextView
+                    android:text="@{NumberUtil.handlePrice(productListItem.sellerPrice)}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="@dimen/textsize_16_sp"
+                    tools:text="29.750 VND" />
+
+                <com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView
+                    android:id="@+id/qsc_cart"
+                    app:items="@{productListItem.quantity}"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8_dp"
+                    app:qs_padding_bottom="@dimen/content_padding_4_dp"
+                    app:qs_padding_top="@dimen/content_padding_4_dp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</layout>

@@ -12,6 +12,7 @@ import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
 import com.soict.hoangviet.handycart.entity.response.BannerResponse;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
 import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
@@ -138,5 +139,15 @@ public interface ApiInterface {
             @Path(Define.Api.Query.ID) int productId
     );
 
+    @GET(ApiConstant.CART)
+    Single<ObjectResponse<CartDetailResponse>> getCartDetailWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Query(Define.Api.Query.DEVICE_ID) String deviceId
+    );
+
+    @GET(ApiConstant.CART)
+    Single<ObjectResponse<CartDetailResponse>> getCartDetailNoAuth(
+            @Query(Define.Api.Query.DEVICE_ID) String deviceId
+    );
 
 }

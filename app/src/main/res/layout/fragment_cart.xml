@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+
+        <variable
+            name="cartDetailResponse"
+            type="com.soict.hoangviet.handycart.entity.response.CartDetailResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.soict.hoangviet.handycart.custom.BaseToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:icon_left="back"
+            app:icon_right="none"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/cart_toolbar_title" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/color_grey"
+            app:layout_constraintBottom_toTopOf="@id/rl_money"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:paddingBottom="@dimen/content_padding_32_dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/layout_buy_more"
+                    layout="@layout/layout_buy_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/product_recycler_view" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16_dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/layout_buy_more">
+
+                    <View style="@style/LineHorizontalColorPrimary" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/md_white_1000"
+                        android:padding="@dimen/content_padding_10_dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="@string/cart_sum_money"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="@dimen/textsize_16_sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="@{NumberUtil.handlePrice(cartDetailResponse.totalPrice)}"
+                            android:textColor="@color/md_black_1000"
+                            android:textSize="@dimen/textsize_16_sp"
+                            tools:text="136.000 VND" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin_4_dp"
+                        android:text="@string/cart_buy_condition" />
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/rl_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/content_padding_10_dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <com.soict.hoangviet.handycart.custom.NotificationBadge
+                    android:id="@+id/tv_badge_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_4_dp"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:nbAnimationEnabled="true"
+                    app:nbBackground="@drawable/bg_badge"
+                    app:nbMaxTextLength="2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@{NumberUtil.handlePrice(cartDetailResponse.totalPrice)}"
+                    android:textAllCaps="true"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="@dimen/textsize_20_sp"
+                    tools:text="40.500 VND" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -90,6 +90,7 @@ public class BaseToolbar extends CustomViewConstraintLayout {
         switch (iconRight) {
             case ICON_RIGHT_NONE:
                 tvMenu.setVisibility(GONE);
+                rightButton.setVisibility(GONE);
                 break;
             case ICON_RIGHT_SEARCH:
                 break;
@@ -97,6 +98,7 @@ public class BaseToolbar extends CustomViewConstraintLayout {
                 break;
             case ICON_RIGHT_SHARE:
                 tvMenu.setVisibility(GONE);
+                rightButton.setVisibility(VISIBLE);
                 rightButton.setImageResource(R.drawable.ic_share);
                 break;
             case ICON_RIGHT_MENU:
