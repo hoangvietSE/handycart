@@ -12,6 +12,7 @@ import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteSupplierListener;
 import com.soict.hoangviet.handycart.ui.home.HomeViewModel;
 import com.soict.hoangviet.handycart.utils.Define;
 
@@ -32,7 +33,6 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
 
     @Override
     public void backFromAddFragment() {
-
     }
 
     @Override
@@ -47,11 +47,19 @@ public class SupplierFavoriteFragment extends BaseFragment<FragmentSupplierFavor
     }
 
     private void initAdapter() {
-        mSupplierFavoriteAdapter = new SupplierFavoriteAdapter(getContext(), position -> {
-            try {
-                SupplierFavoriteResponse data = mSupplierFavoriteAdapter.getItem(position, SupplierFavoriteResponse.class);
-                mViewModel.deleteSupplierFromFavorite(position, data.getId());
-            } catch (ArrayIndexOutOfBoundsException e) {
+        mSupplierFavoriteAdapter = new SupplierFavoriteAdapter(getContext(), new FavoriteSupplierListener() {
+            @Override
+            public void onFavoriteClick(int position) {
+                try {
+                    SupplierFavoriteResponse data = mSupplierFavoriteAdapter.getItem(position, SupplierFavoriteResponse.class);
+                    mViewModel.deleteSupplierFromFavorite(position, data.getId());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+
+            @Override
+            public void onDetailClick(int position) {
+
             }
         }, false);
         binding.rcvSupplierFavorite.setOnLoadingMoreListener(() -> {

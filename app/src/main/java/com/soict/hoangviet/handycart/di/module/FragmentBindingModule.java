@@ -4,6 +4,9 @@ import com.soict.hoangviet.handycart.ui.cart.CartFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductFragment;
+import com.soict.hoangviet.handycart.ui.detailsupplier.DetailSupplierFragment;
+import com.soict.hoangviet.handycart.ui.detailsupplier.menu.MenuFragment;
+import com.soict.hoangviet.handycart.ui.detailsupplier.service.ServiceFragment;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteFragment;
 import com.soict.hoangviet.handycart.ui.favorite.product.ProductFavoriteFragment;
 import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteFragment;
@@ -64,6 +67,15 @@ public abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract CartFragment bindCartFragment();
+
+    @ContributesAndroidInjector
+    abstract DetailSupplierFragment bindDetailSupplierFragment();
+
+    @ContributesAndroidInjector
+    abstract MenuFragment bindMenuFragment();
+
+    @ContributesAndroidInjector
+    abstract ServiceFragment bindServiceFragment();
 
     @ContributesAndroidInjector
     abstract GuideProductFragment bindGuideProductFragment();

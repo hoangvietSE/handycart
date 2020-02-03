@@ -24,7 +24,9 @@ import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
 import com.soict.hoangviet.handycart.ui.cart.CartFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
+import com.soict.hoangviet.handycart.ui.detailsupplier.DetailSupplierFragment;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
+import com.soict.hoangviet.handycart.ui.favorite.FavoriteSupplierListener;
 import com.soict.hoangviet.handycart.ui.guide.GuideFragment;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.utils.Define;
@@ -183,32 +185,43 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
     private void initHomeSupplierAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        homeSupplierAdapter = new HomeSupplierAdapter(getContext(), position -> {
-            if (mSharePreference.isLogin()) {
-                tempPosition = position;
-                try {
-                    HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
-                    if (data.getFlagFav() == Define.Favorite.STATUS_UNLIKE) {
-                        mViewModel.addSupplierToFavorite(data);
-                    } else {
-                        mViewModel.deleteSupplierFromFavorite(data);
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
-            } else {
-                DialogUtil.showConfirmDialog(
-                        getContext(),
-                        R.string.favorite_title,
-                        R.string.favorite_message,
-                        R.string.favorite_need_login,
-                        R.string.favorite_cancel,
-                        (dialogInterface, which) -> {
-                            getViewController().addFragment(LoginFragment.class, null);
-                        },
-                        (dialogInterface, which) -> {
-                            dialogInterface.dismiss();
+        homeSupplierAdapter = new HomeSupplierAdapter(getContext(), new FavoriteSupplierListener() {
+            @Override
+            public void onFavoriteClick(int position) {
+                if (mSharePreference.isLogin()) {
+                    tempPosition = position;
+                    try {
+                        HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
+                        if (data.getFlagFav() == Define.Favorite.STATUS_UNLIKE) {
+                            mViewModel.addSupplierToFavorite(data);
+                        } else {
+                            mViewModel.deleteSupplierFromFavorite(data);
                         }
-                );
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                    }
+                } else {
+                    DialogUtil.showConfirmDialog(
+                            getContext(),
+                            R.string.favorite_title,
+                            R.string.favorite_message,
+                            R.string.favorite_need_login,
+                            R.string.favorite_cancel,
+                            (dialogInterface, which) -> {
+                                getViewController().addFragment(LoginFragment.class, null);
+                            },
+                            (dialogInterface, which) -> {
+                                dialogInterface.dismiss();
+                            }
+                    );
+                }
+            }
+
+            @Override
+            public void onDetailClick(int position) {
+                HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
+                HashMap<String, Integer> hashMap = new HashMap<>();
+                hashMap.put(DetailSupplierFragment.EXTRA_SUPPLIER_ID, data.getId());
+                getViewController().addFragment(DetailSupplierFragment.class, hashMap);
             }
         }, false);
         binding.rcvHomeSupplier.setLayoutManager(layoutManager);

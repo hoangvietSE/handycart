@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.soict.hoangviet.handycart.custom.SquareImageView
-                android:id="@+id/imv_product"
+                android:id="@+id/imv_supplier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"

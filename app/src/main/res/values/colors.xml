@@ -18,4 +18,5 @@
 
     <color name="color_grey">#e6e6e6</color>
     <color name="color_home_line">#ccbcc9</color>
+    <color name="color_stroke_supplier">#c7b299</color>
 </resources>

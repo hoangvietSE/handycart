@@ -9,6 +9,9 @@ import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductViewModel;
 import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductViewModel;
 import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductViewModel;
+import com.soict.hoangviet.handycart.ui.detailsupplier.DetailSupplierViewModel;
+import com.soict.hoangviet.handycart.ui.detailsupplier.menu.MenuViewModel;
+import com.soict.hoangviet.handycart.ui.detailsupplier.service.ServiceViewModel;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.favorite.product.ProductFavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel;
@@ -105,6 +108,21 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CartViewModel.class)
     abstract ViewModel bindCartViewModel(CartViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailSupplierViewModel.class)
+    abstract ViewModel bindDetailSupplierViewModel(DetailSupplierViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MenuViewModel.class)
+    abstract ViewModel bindMenuViewModel(MenuViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ServiceViewModel.class)
+    abstract ViewModel bindServiceViewModel(ServiceViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

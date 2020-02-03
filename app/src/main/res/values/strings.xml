@@ -70,4 +70,15 @@
     <string name="cart_market">Market</string>
     <string name="cart_delete">Xóa</string>
 
+    <!--    Detail supplier-->
+    <string name="detail_supplier_menu_title">Menu</string>
+    <string name="detail_supplier_like_title">Thích</string>
+    <string name="detail_supplier_share_title">Chia sẻ</string>
+    <string name="detail_supplier_service_title">Dịch vụ</string>
+    <string name="detail_supplier_like_quantity_title">Lượt yêu thích:</string>
+    <string name="detail_supplier_des_one">Thưởng thức món ăn Hàn Quốc với giá cả hợp lý\n*Thời gian nấu dự kiến: 20-30 phút\n*Thời gian đặt hàng: 10:00-19:00\n*Thời gian giao hàng: 10:00-21:00</string>
+    <string name="detail_supplier_des_two">*Thời gian nấu dự kiến: 20-30 phút</string>
+    <string name="detail_supplier_des_three">*Thời gian đặt hàng: 10:00-19:00</string>
+    <string name="detail_supplier_des_four">*Thời gian giao hàng: 10:00-21:00</string>
+
 </resources>

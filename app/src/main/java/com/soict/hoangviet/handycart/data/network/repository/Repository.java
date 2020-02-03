@@ -17,8 +17,10 @@ import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
 import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
+import com.soict.hoangviet.handycart.entity.response.DetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.response.ItemMenuDetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
@@ -181,6 +183,18 @@ public class Repository {
 
     public Single<ObjectResponse<CartDetailResponse>> getCartDetailNoAuth(String deviceId) {
         return apiInterface.getCartDetailNoAuth(deviceId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<DetailSupplierResponse>> getDetailSupplier(String accessToken, int supplierId) {
+        return apiInterface.getDetailSupplier(accessToken, supplierId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListResponse<ItemMenuDetailSupplierResponse>> getMenuProduct(int supplierId, int pageIndex) {
+        return apiInterface.getMenuProduct(supplierId, pageIndex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -16,8 +16,10 @@ import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
 import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
+import com.soict.hoangviet.handycart.entity.response.DetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
+import com.soict.hoangviet.handycart.entity.response.ItemMenuDetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
@@ -148,6 +150,18 @@ public interface ApiInterface {
     @GET(ApiConstant.CART)
     Single<ObjectResponse<CartDetailResponse>> getCartDetailNoAuth(
             @Query(Define.Api.Query.DEVICE_ID) String deviceId
+    );
+
+    @GET(ApiConstant.DETAIL_SUPPLIER)
+    Single<ObjectResponse<DetailSupplierResponse>> getDetailSupplier(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Path(Define.Api.Query.ID) int id
+    );
+
+    @GET(ApiConstant.MENU_PRODUCT)
+    Single<ListResponse<ItemMenuDetailSupplierResponse>> getMenuProduct(
+            @Path(Define.Api.Query.ID) int id,
+            @Query(Define.Api.Query.PAGE) int page
     );
 
 }

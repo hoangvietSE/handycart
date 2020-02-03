@@ -45,8 +45,11 @@ public class HomeSupplierAdapter extends EndlessLoadingRecyclerViewAdapter<ItemH
         @Override
         public void bind(HomeSupplierResponse data) {
             binding.setHomeSupplierResponse(data);
-            binding.imvFavorite.setOnClickListener(view->{
+            binding.imvFavorite.setOnClickListener(view -> {
                 listener.onFavoriteClick(getAdapterPosition());
+            });
+            binding.imvSupplier.setOnClickListener(view -> {
+                listener.onDetailClick(getAdapterPosition());
             });
         }
     }
