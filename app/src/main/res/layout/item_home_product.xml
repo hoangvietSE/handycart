@@ -37,9 +37,9 @@
                 android:id="@+id/imv_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:error="@{@drawable/ic_add_cart}"
+                app:default="@{@drawable/img_image_default}"
                 app:imageUrl="@{homeProductResponse.thumbnail}"
-                tools:src="@drawable/ic_add_cart" />
+                tools:src="@drawable/img_image_default" />
 
             <com.soict.hoangviet.handycart.custom.SquareImageView
                 android:scaleType="centerCrop"
@@ -47,9 +47,9 @@
                 android:id="@+id/imv_product_copy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:error="@{@drawable/ic_add_cart}"
+                app:default="@{@drawable/img_image_default}"
                 app:imageUrl="@{homeProductResponse.thumbnail}"
-                tools:src="@drawable/ic_add_cart" />
+                tools:src="@drawable/img_image_default" />
         </androidx.cardview.widget.CardView>
 
         <ImageView

@@ -13,6 +13,7 @@ import com.soict.hoangviet.handycart.custom.HomeItemDecoration;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentListProductBinding;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
+import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.favorite.FavoriteProductListener;
@@ -115,6 +116,15 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
         mHomeViewModel.getCartAmount().observe(this, response -> {
             handleObjectResponse(response);
         });
+        mHomeViewModel.getFavoriteProduct().observe(this, response -> {
+            handleObjectResponse(response);
+        });
+        mHomeViewModel.getFavoriteProductDelete().observe(this, response -> {
+            handleObjectResponse(response);
+        });
+        mHomeViewModel.getCartTransaction().observe(this, response -> {
+            handleObjectResponse(response);
+        });
         binding.toolbar.setOnToolbarClickListener(viewId -> {
             switch (viewId) {
                 case R.id.imv_left:
@@ -213,15 +223,19 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
         if (data instanceof HomeProductResponse) {
             if (((HomeProductResponse) data).getFlagFavorite() == Define.Favorite.STATUS_UNLIKE) {
                 ((HomeProductResponse) data).setFlagFavorite(Define.Favorite.STATUS_LIKE);
-                mListProductAdapter.notifyItemChanged(tempPosition);
+                binding.rcvListProduct.updateModel(tempPosition, data, false);
             } else {
                 ((HomeProductResponse) data).setFlagFavorite(Define.Favorite.STATUS_UNLIKE);
-                mListProductAdapter.notifyItemChanged(tempPosition);
+                binding.rcvListProduct.updateModel(tempPosition, data, false);
             }
             return;
         }
         if (data instanceof CartAmountResponse) {
             binding.carts.tvBadgeCart.setNumber(((CartAmountResponse) data).getAmount());
+            return;
+        }
+        if (data instanceof CartResponse) {
+            binding.carts.tvBadgeCart.setNumber(((CartResponse) data).getTotalProduct());
             return;
         }
     }

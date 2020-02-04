@@ -146,6 +146,10 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
         rcv.addItemDecoration(itemDecoration);
     }
 
+    public void updateModel(int position, Object model, boolean isScroll){
+        mAdapter.updateModel(position, model, isScroll);
+    }
+
     @Override
     public void onLoadMore() {
         mAdapter.showLoadingItem(true);

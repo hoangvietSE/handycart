@@ -339,7 +339,7 @@ public class HomeViewModel extends BaseViewModel {
         mCompositeDisposable.add(
                 repository.addToCartNoAuth(cartRequest)
                         .doOnSubscribe(disposable -> {
-                            getCartTransaction().setValue(new ObjectResponse<CartResponse>().loading());
+//                            getCartTransaction().setValue(new ObjectResponse<CartResponse>().loading());
                         })
                         .doFinally(() -> {
 
@@ -360,7 +360,7 @@ public class HomeViewModel extends BaseViewModel {
         mCompositeDisposable.add(
                 repository.addToCartWithAuth(mSharePreference.getAccessToken(), cartRequest)
                         .doOnSubscribe(disposable -> {
-                            getCartTransaction().setValue(new ObjectResponse<CartResponse>().loading());
+//                            getCartTransaction().setValue(new ObjectResponse<CartResponse>().loading());
                         })
                         .doFinally(() -> {
 
