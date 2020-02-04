@@ -23,26 +23,4 @@ public class MasterViewModel extends BaseViewModel {
         super(context, mSharePreference);
         this.repository = repository;
     }
-
-    private MutableLiveData<ListResponse<CategoryResponse>> listCategory;
-
-    public MutableLiveData<ListResponse<CategoryResponse>> getListCategory() {
-        if (listCategory == null) listCategory = new MutableLiveData<>();
-        return listCategory;
-    }
-
-    public void setListCategory() {
-        mCompositeDisposable.add(
-                repository.getCategory(Define.Api.BaseResponse.DEFAULT_LIMIT)
-                        .doOnSubscribe(disposable -> {
-                        })
-                        .doFinally(() -> {
-                        })
-                        .subscribe(response -> {
-                                    getListCategory().setValue(response);
-                                },
-                                throwable -> {
-                                })
-        );
-    }
 }

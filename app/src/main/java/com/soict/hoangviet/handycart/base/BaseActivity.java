@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.soict.hoangviet.handycart.data.network.NetworkCheckerInterceptor;
 import com.soict.hoangviet.handycart.data.network.model.ApiObjectResponse;
@@ -20,12 +21,12 @@ import com.soict.hoangviet.handycart.utils.Define;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.Objects;
+import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import retrofit2.HttpException;
@@ -33,6 +34,9 @@ import retrofit2.HttpException;
 public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppCompatActivity {
 
     protected T binding;
+
+    @Inject
+    protected ViewModelProvider.Factory viewModelFactory;
 
     protected ViewController mViewController;
 
@@ -45,12 +49,12 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppC
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         mViewController = new ViewController(getSupportFragmentManager(), getFragmentContainerId());
 
         initView();
         initData();
+        initListener();
     }
 
     @Override
@@ -82,6 +86,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppC
 
     /**
      * Used for hide softKeyboard when touch outside
+     *
      * @param ev
      * @return
      */
@@ -191,7 +196,9 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends DaggerAppC
         return false;
     }
 
-    public abstract void initView();
+    protected abstract void initView();
 
-    public abstract void initData();
+    protected abstract void initData();
+
+    protected abstract void initListener();
 }

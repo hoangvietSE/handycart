@@ -22,7 +22,6 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     private MasterViewModel mViewModel;
     private MasterAdapter masterAdapter;
-    private CategoryAdapter categoryAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -78,14 +77,6 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
             setToolbar(position);
         });
         binding.bottomBar.onTabClick(0);
-        mViewModel.getListCategory().observe(this, response -> {
-            initCategoryAdapter(response);
-        });
-    }
-
-    private void initCategoryAdapter(ListResponse<CategoryResponse> response) {
-        categoryAdapter = new CategoryAdapter(getContext(), response.getData());
-        binding.navigation.elvCategory.setAdapter(categoryAdapter);
     }
 
     private void setToolbar(int position) {
@@ -108,10 +99,5 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     @Override
     public void initData() {
-        getListCategory();
-    }
-
-    private void getListCategory() {
-        mViewModel.setListCategory();
     }
 }

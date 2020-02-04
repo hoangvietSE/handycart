@@ -30,7 +30,7 @@ public class NetworkCheckerInterceptor implements Interceptor {
     public class NoConnectivityException extends IOException {
         @Override
         public String getMessage() {
-            return "I'm Died!";
+            return "Chết con mẹ rồi!";
         }
     }
 }
