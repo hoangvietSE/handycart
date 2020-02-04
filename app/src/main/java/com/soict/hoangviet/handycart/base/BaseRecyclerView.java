@@ -142,6 +142,10 @@ public class BaseRecyclerView<T> extends RelativeLayout implements EndlessLoadin
         rcv.setAdapter(adapter);
     }
 
+    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration){
+        rcv.addItemDecoration(itemDecoration);
+    }
+
     @Override
     public void onLoadMore() {
         mAdapter.showLoadingItem(true);

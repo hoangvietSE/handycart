@@ -46,6 +46,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/card_image"
@@ -57,14 +58,14 @@
                     android:id="@+id/tv_name_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:padding="@dimen/content_padding_8_dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:paddingStart="@dimen/content_padding_8_dp"
                     android:text="@{itemMenuDetailSupplierResponse.name}"
-                    android:textColor="@color/md_black_1000"
+                    android:textColor="@color/color_brown"
                     android:textSize="@dimen/textsize_16_sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Tteocbokki Nước canh" />
+                    tools:text="Tteocbokki Nước canh hoangtienvietdaijgo" />
 
                 <TextView
                     android:id="@+id/tv_price_product"
@@ -88,7 +89,7 @@
                     app:layout_constraintEnd_toStartOf="@id/btn_add_to_cart"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_price_product"
-                    app:layout_constraintWidth_percent="0.4"
+                    app:layout_constraintWidth_percent="0.6"
                     app:qs_default_items="1" />
 
                 <ImageView

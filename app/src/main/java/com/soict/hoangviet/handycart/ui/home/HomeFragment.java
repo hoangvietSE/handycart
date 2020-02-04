@@ -98,7 +98,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     }
 
     private void getListSupplierWithAuth(boolean isRefreshing) {
-        mViewModel.setListHomeProductWithAuth(isRefreshing);
+        mViewModel.setListHomeProductWithAuth(isRefreshing, Define.Api.BaseResponse.DEFAULT_INDEX);
     }
 
     private void getListProductWithAuth(boolean isRefreshing) {
@@ -110,7 +110,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     }
 
     private void getListProductNoAuth(boolean isRefreshing) {
-        mViewModel.setListHomeProductNoAuth(isRefreshing);
+        mViewModel.setListHomeProductNoAuth(isRefreshing, Define.Api.BaseResponse.DEFAULT_INDEX);
     }
 
     private void initViewModel() {
@@ -128,8 +128,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             bannerInfiniteAdapter = new BannerInfiniteAdapter(getContext(), bannerResponse.getData(), true);
             binding.viewpagerLooping.setAdapter(bannerInfiniteAdapter);
         });
-        mViewModel.getListHomeProduct().observe(this, reponse -> {
-            handleLoadMoreResponse(reponse, reponse.isRefresh(), reponse.isCanLoadmore());
+        mViewModel.getListHomeProduct().observe(this, response -> {
+            handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());
         });
         mViewModel.getListHomeSupplier().observe(this, response -> {
             handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());

@@ -23,7 +23,7 @@ public class MenuProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemMe
 
     @Override
     protected void bindNormalViewHolder(NormalViewHolder holder, int position) {
-
+        holder.bind(getItem(position, ItemMenuDetailSupplierResponse.class));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class MenuProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemMe
         return R.layout.item_menu_supplier;
     }
 
-    public class MenuViewHolder extends NormalViewHolder<ItemMenuSupplierBinding, ItemMenuDetailSupplierResponse>{
+    public class MenuViewHolder extends NormalViewHolder<ItemMenuSupplierBinding, ItemMenuDetailSupplierResponse> {
 
         public MenuViewHolder(ItemMenuSupplierBinding binding) {
             super(binding);
@@ -39,7 +39,7 @@ public class MenuProductAdapter extends EndlessLoadingRecyclerViewAdapter<ItemMe
 
         @Override
         public void bind(ItemMenuDetailSupplierResponse data) {
-
+            binding.setItemMenuDetailSupplierResponse(data);
         }
     }
 }

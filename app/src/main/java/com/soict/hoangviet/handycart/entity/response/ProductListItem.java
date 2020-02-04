@@ -1,7 +1,9 @@
 package com.soict.hoangviet.handycart.entity.response;
 
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -214,6 +216,4 @@ public class ProductListItem {
     public static void loadImage(ImageView view, String url, Drawable error) {
         CommonExtensionUtil.loadImageDrawable(view, url, error);
     }
-
-
 }

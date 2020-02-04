@@ -249,26 +249,26 @@
                         android:paddingEnd="@dimen/content_padding_10_dp">
 
                         <TextView
-                            android:id="@+id/btn_description"
+                            android:id="@+id/btn_menu"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="@dimen/content_padding_10_dp"
                             android:text="@string/detail_supplier_menu_title"
-                            app:layout_constraintEnd_toStartOf="@id/btn_guide"
+                            app:layout_constraintEnd_toStartOf="@id/btn_service"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:background="@drawable/bg_tab_selected_detail_product" />
 
                         <TextView
-                            android:id="@+id/btn_guide"
+                            android:id="@+id/btn_service"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="@dimen/content_padding_10_dp"
                             android:text="@string/detail_supplier_service_title"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/btn_description"
+                            app:layout_constraintStart_toEndOf="@id/btn_menu"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:background="@drawable/bg_tab_unselected_detail_product" />
 

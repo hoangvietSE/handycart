@@ -81,4 +81,6 @@
     <string name="detail_supplier_des_three">*Thời gian đặt hàng: 10:00-19:00</string>
     <string name="detail_supplier_des_four">*Thời gian giao hàng: 10:00-21:00</string>
 
+    <!--    List product-->
+    <string name="list_product_toolbar_title">Danh sách sản phẩm</string>
 </resources>

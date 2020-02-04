@@ -132,10 +132,11 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public void setListHomeProductNoAuth(boolean isRefreshing) {
+    public void setListHomeProductNoAuth(boolean isRefreshing, int categoryId) {
+        if (isRefreshing) pageIndexProduct = 1;
         HashMap<String, Object> data = new HashMap<>();
-        data.put(Define.Api.Query.CATEGORY, Define.Api.BaseResponse.DEFAULT_INDEX);
-        data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.CATEGORY, categoryId);
+        data.put(Define.Api.Query.PAGE, pageIndexProduct);
         data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
         mCompositeDisposable.add(
                 repository.getListHomeProductNoAuth(data)
@@ -183,10 +184,11 @@ public class HomeViewModel extends BaseViewModel {
         );
     }
 
-    public void setListHomeProductWithAuth(boolean isRefreshing) {
+    public void setListHomeProductWithAuth(boolean isRefreshing, int categoryId) {
+        if (isRefreshing) pageIndexProduct = 1;
         HashMap<String, Object> data = new HashMap<>();
-        data.put(Define.Api.Query.CATEGORY, Define.Api.BaseResponse.DEFAULT_INDEX);
-        data.put(Define.Api.Query.PAGE, Define.Api.BaseResponse.DEFAULT_INDEX);
+        data.put(Define.Api.Query.CATEGORY, categoryId);
+        data.put(Define.Api.Query.PAGE, pageIndexProduct);
         data.put(Define.Api.Query.LIMIT, Define.Api.BaseResponse.DEFAULT_LIMIT);
         mCompositeDisposable.add(
                 repository.getListHomeProductWithAuth(mSharePreference.getAccessToken(), data)

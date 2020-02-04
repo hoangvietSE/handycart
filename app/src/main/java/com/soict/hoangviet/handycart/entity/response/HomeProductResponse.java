@@ -1,7 +1,9 @@
 package com.soict.hoangviet.handycart.entity.response;
 
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -261,6 +263,12 @@ public class HomeProductResponse {
                 .placeholder(error)
                 .error(error)
                 .into(view);
+    }
+
+    @BindingAdapter({"strikeThrough"})
+    public static void loadImage(TextView view, String regularPrice) {
+        view.setText(regularPrice);
+        view.setPaintFlags(view.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     @BindingAdapter({"imageUrl"})

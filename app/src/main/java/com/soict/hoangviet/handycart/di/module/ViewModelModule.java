@@ -17,6 +17,7 @@ import com.soict.hoangviet.handycart.ui.favorite.product.ProductFavoriteViewMode
 import com.soict.hoangviet.handycart.ui.favorite.supplier.SupplierFavoriteViewModel;
 import com.soict.hoangviet.handycart.ui.guide.GuideViewModel;
 import com.soict.hoangviet.handycart.ui.home.HomeViewModel;
+import com.soict.hoangviet.handycart.ui.listproduct.ListProductViewModel;
 import com.soict.hoangviet.handycart.ui.login.LoginViewModel;
 import com.soict.hoangviet.handycart.ui.main.MainViewModel;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
@@ -123,6 +124,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ServiceViewModel.class)
     abstract ViewModel bindServiceViewModel(ServiceViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ListProductViewModel.class)
+    abstract ViewModel bindListProductViewModel(ListProductViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

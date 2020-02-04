@@ -1,7 +1,10 @@
 package com.soict.hoangviet.handycart.ui.detailsupplier;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
@@ -12,18 +15,24 @@ import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentDetailSupplierBinding;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
 import com.soict.hoangviet.handycart.entity.response.DetailSupplierResponse;
+import com.soict.hoangviet.handycart.ui.cart.CartFragment;
 import com.soict.hoangviet.handycart.ui.detailsupplier.menu.MenuFragment;
 import com.soict.hoangviet.handycart.ui.detailsupplier.service.ServiceFragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierBinding> {
     @Inject
     public ISharePreference mSharePreference;
+    private static final int TAB_MENU = 0;
+    private static final int TAB_SERVICE = 1;
     private DetailSupplierViewModel mViewModel;
     private DetailSupplierAdapter detailSupplierAdapter;
+    private Typeface fontRegular;
+    private Typeface fontBold;
+    private ArrayList<TextView> textViewArrayList = new ArrayList<>();
     public static final String EXTRA_SUPPLIER_ID = "extra_supplier_id";
 
     @Override
@@ -43,6 +52,14 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
 
     @Override
     public void initView() {
+        initListTextView();
+    }
+
+    private void initListTextView() {
+        textViewArrayList.add(binding.btnMenu);
+        textViewArrayList.add(binding.btnService);
+        fontRegular = Typeface.createFromAsset(getContext().getAssets(), "fonts/lato_regular.ttf");
+        fontBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/lato_bold.ttf");
     }
 
     @Override
@@ -76,17 +93,54 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
         mViewModel.getCartAmount().observe(this, response -> {
             handleObjectResponse(response);
         });
+        binding.toolbar.setOnToolbarClickListener(viewId -> {
+            switch (viewId) {
+                case R.id.imv_left:
+                    getViewController().backFromAddFragment(null);
+                    break;
+            }
+        });
+        binding.btnMenu.setOnClickListener(view -> {
+            binding.detailViewPager.setCurrentItem(TAB_MENU);
+            onTabChoose(TAB_MENU);
+        });
+        binding.btnService.setOnClickListener(view -> {
+            binding.detailViewPager.setCurrentItem(TAB_SERVICE);
+            onTabChoose(TAB_SERVICE);
+        });
+        binding.carts.cslCart.setOnClickListener(view -> {
+            getViewController().addFragment(CartFragment.class, null);
+        });
+    }
+
+    private void onTabChoose(int tabDescription) {
+        for (int index = 0; index < textViewArrayList.size(); index++) {
+            if (tabDescription == index) {
+                textViewArrayList.get(index).setTypeface(fontBold);
+                textViewArrayList.get(index).setBackgroundResource(R.drawable.bg_tab_selected_detail_product);
+                textViewArrayList.get(index).setTextColor(ContextCompat.getColor(getContext(), R.color.md_black_1000));
+            } else {
+                textViewArrayList.get(index).setTypeface(fontRegular);
+                textViewArrayList.get(index).setBackgroundResource(R.drawable.bg_tab_unselected_detail_product);
+                textViewArrayList.get(index).setTextColor(ContextCompat.getColor(getContext(), R.color.color_brown));
+            }
+        }
     }
 
     @Override
     protected <U> void getObjectResponse(U data) {
         if (data instanceof DetailSupplierResponse) {
             binding.setDetailSupplierResponse((DetailSupplierResponse) data);
+            setToolbar(data);
             initSupplierAdapter(data);
         }
         if (data instanceof CartAmountResponse) {
             binding.carts.tvBadgeCart.setNumber(((CartAmountResponse) data).getAmount());
         }
+    }
+
+    private <U> void setToolbar(U data) {
+        binding.toolbar.setToolbarTitle(((DetailSupplierResponse) data).getName());
     }
 
     private <U> void initSupplierAdapter(U data) {
@@ -107,7 +161,9 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
 
             @Override
             public void onPageSelected(int position) {
+                onTabChoose(position);
             }
         });
+        onTabChoose(TAB_MENU);
     }
 }

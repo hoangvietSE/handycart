@@ -11,7 +11,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="homeProductResponse"
+            name="listProductResponse"
             type="com.soict.hoangviet.handycart.entity.response.HomeProductResponse" />
     </data>
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:error="@{@drawable/ic_add_cart}"
-                app:imageUrl="@{homeProductResponse.thumbnail}"
+                app:imageUrl="@{listProductResponse.thumbnail}"
                 tools:src="@drawable/ic_add_cart" />
 
             <com.soict.hoangviet.handycart.custom.SquareImageView
@@ -48,13 +48,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:error="@{@drawable/ic_add_cart}"
-                app:imageUrl="@{homeProductResponse.thumbnail}"
+                app:imageUrl="@{listProductResponse.thumbnail}"
                 tools:src="@drawable/ic_add_cart" />
         </androidx.cardview.widget.CardView>
 
         <ImageView
             android:id="@+id/imv_favorite"
-            app:imageUrl="@{homeProductResponse.flagFavorite}"
+            app:imageUrl="@{listProductResponse.flagFavorite}"
             android:layout_width="@dimen/margin_24_dp"
             android:layout_height="@dimen/margin_24_dp"
             android:layout_margin="@dimen/margin_8_dp"
@@ -66,7 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:isVisible="@{homeProductResponse.flagStock==0}" />
+            bind:isVisible="@{listProductResponse.flagStock==0}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/lato_bold"
                 android:lines="2"
-                android:text="@{homeProductResponse.name}"
+                android:text="@{listProductResponse.name}"
                 android:textColor="@color/color_brown"
                 android:textSize="@dimen/textsize_12_sp"
                 android:textStyle="bold"
@@ -99,7 +99,7 @@
                     android:id="@+id/tv_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{NumberUtil.handlePercentage(homeProductResponse.discount)}"
+                    android:text="@{NumberUtil.handlePercentage(listProductResponse.discount)}"
                     android:textColor="@color/discount_color"
                     android:textSize="@dimen/textsize_16_sp"
                     android:textStyle="bold"
@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_8_dp"
                     android:fontFamily="@font/lato_bold"
-                    app:strikeThrough="@{NumberUtil.handlePrice(homeProductResponse.regularPrice)}"
+                    app:strikeThrough="@{NumberUtil.handlePrice(listProductResponse.regularPrice)}"
                     android:textColor="@color/color_sale"
                     android:textSize="@dimen/textsize_12_sp"
                     android:textStyle="bold"
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold"
-                android:text="@{NumberUtil.handlePrice(homeProductResponse.sellerPrice)}"
+                android:text="@{NumberUtil.handlePrice(listProductResponse.sellerPrice)}"
                 android:textColor="@color/md_black_1000"
                 android:textSize="@dimen/textsize_16_sp"
                 android:textStyle="bold"
@@ -148,8 +148,8 @@
                     app:qs_max_items="5" />
 
                 <ImageView
-                    android:alpha="@{(homeProductResponse.flagStock==0||homeProductResponse.flagExpiry==0) ? 0.5f : 1f}"
-                    android:clickable="@{(homeProductResponse.flagStock!=0)&amp;&amp;(homeProductResponse.flagExpiry!=0)}"
+                    android:alpha="@{(listProductResponse.flagStock==0||listProductResponse.flagExpiry==0) ? 0.5f : 1f}"
+                    android:clickable="@{(listProductResponse.flagStock!=0)&amp;&amp;(listProductResponse.flagExpiry!=0)}"
                     android:id="@+id/btn_add_to_cart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

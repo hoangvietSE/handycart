@@ -9,6 +9,7 @@ import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentCartBinding;
 import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
+import com.soict.hoangviet.handycart.ui.listproduct.ListProductFragment;
 
 import javax.inject.Inject;
 
@@ -78,6 +79,9 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
     public void initListener() {
         mViewModel.getCartDetail().observe(this, response -> {
             handleObjectResponse(response);
+        });
+        binding.layoutBuyMore.cslBuyMore.setOnClickListener(view -> {
+            getViewController().addFragment(ListProductFragment.class, null);
         });
     }
 
