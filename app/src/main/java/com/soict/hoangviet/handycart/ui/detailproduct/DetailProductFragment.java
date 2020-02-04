@@ -2,6 +2,7 @@ package com.soict.hoangviet.handycart.ui.detailproduct;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -73,11 +74,18 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
     @Override
     public void initData() {
         initViewModel();
+        new Handler().postDelayed(() -> {
+            getDetailProduct();
+        }, 300);
+    }
+
+    private void getDetailProduct() {
+        mViewModel.setDetailProduct(getProductId());
     }
 
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailProductViewModel.class);
-        mViewModel.setDetailProduct(getProductId());
+
     }
 
     private int getProductId() {

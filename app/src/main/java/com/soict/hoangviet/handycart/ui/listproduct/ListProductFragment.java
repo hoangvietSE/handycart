@@ -1,6 +1,7 @@
 package com.soict.hoangviet.handycart.ui.listproduct;
 
 import android.animation.Animator;
+import android.os.Handler;
 import android.widget.ImageView;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -69,8 +70,10 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
 
     @Override
     public void initData() {
-        initListProductAdapter();
-        getData(false);
+        new Handler().postDelayed(()->{
+            initListProductAdapter();
+            getData(false);
+        },300);
     }
 
     private void getData(boolean isRefresh) {
@@ -79,7 +82,6 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
             getCartAmountWithAuth();
         } else {
             getCartAmountNoAuth();
-            getListProductNoAuth(isRefresh);
         }
     }
 

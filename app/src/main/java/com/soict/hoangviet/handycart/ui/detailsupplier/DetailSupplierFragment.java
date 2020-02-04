@@ -2,6 +2,7 @@ package com.soict.hoangviet.handycart.ui.detailsupplier;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -66,7 +67,9 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
     public void initData() {
         initViewModel();
         getDataIntent();
-        getSupplierDetail();
+        new Handler().postDelayed(() -> {
+            getSupplierDetail();
+        }, 300);
     }
 
     private void initViewModel() {

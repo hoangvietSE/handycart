@@ -38,7 +38,7 @@ public class DetailProductViewModel extends BaseViewModel {
         mCompositeDisposable.add(
                 repository.getDetailProduct(productId)
                         .doOnSubscribe(disposable -> {
-                            getDetailProduct().setValue(new ObjectResponse<DetailProductResponse>().loading());
+//                            getDetailProduct().setValue(new ObjectResponse<DetailProductResponse>().loading());
                         })
                         .subscribe(response -> {
                             getDetailProduct().setValue(new ObjectResponse<DetailProductResponse>().success(response.getData()));

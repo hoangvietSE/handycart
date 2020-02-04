@@ -1,5 +1,7 @@
 package com.soict.hoangviet.handycart.ui.cart;
 
+import android.os.Handler;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -60,7 +62,9 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
 
     @Override
     public void initData() {
-        getCartDetail();
+        new Handler().postDelayed(() -> {
+            getCartDetail();
+        },300);
     }
 
     private void getCartDetail() {
