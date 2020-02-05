@@ -11,6 +11,7 @@ import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentCartBinding;
 import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
+import com.soict.hoangviet.handycart.entity.response.ProductListItem;
 import com.soict.hoangviet.handycart.ui.listproduct.ListProductFragment;
 
 import javax.inject.Inject;
@@ -23,7 +24,9 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
     private CartDetailAdapter cartDetailAdapter;
 
     @Override
-    protected int getLayoutId() { return R.layout.fragment_cart; }
+    protected int getLayoutId() {
+        return R.layout.fragment_cart;
+    }
 
     @Override
     public void backFromAddFragment() {
@@ -45,7 +48,30 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
     }
 
     private void initCartDetailAdapter() {
-        cartDetailAdapter = new CartDetailAdapter(getContext(), false);
+        cartDetailAdapter = new CartDetailAdapter(getContext(), new CartTransactionListener() {
+            @Override
+            public void onDelete(int position) {
+                ProductListItem data = cartDetailAdapter.getItem(position, ProductListItem.class);
+                mViewModel.getIsUpdateCart().setValue(true);
+                if (mSharePreference.isLogin()) {
+                    mViewModel.deleteItemCartWithAuth(data);
+                } else {
+                    mViewModel.deleteItemCartNoAuth(data);
+                }
+            }
+
+            @Override
+            public void onChangeQuantity(int quantity, int position) {
+                ProductListItem data = cartDetailAdapter.getItem(position, ProductListItem.class);
+                mViewModel.getIsUpdateCart().setValue(true);
+                if (mSharePreference.isLogin()) {
+                    mViewModel.updateCartDetailWithAuth(data, quantity);
+                } else {
+                    mViewModel.updateCartDetailNoAuth(data, quantity);
+                }
+
+            }
+        }, false);
         binding.productRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.productRecyclerView.setAdapter(cartDetailAdapter);
     }
@@ -64,7 +90,7 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
     public void initData() {
         new Handler().postDelayed(() -> {
             getCartDetail();
-        },300);
+        }, 300);
     }
 
     private void getCartDetail() {
@@ -94,7 +120,10 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
         if (data instanceof CartDetailResponse) {
             binding.setCartDetailResponse((CartDetailResponse) data);
             binding.tvBadgeCart.setNumber(((CartDetailResponse) data).getTotalQuantity(), true);
-            cartDetailAdapter.addModels(((CartDetailResponse) data).getProductList(), false);
+            if (!mViewModel.getIsUpdateCart().getValue()) {
+                cartDetailAdapter.clear();
+                cartDetailAdapter.addModels(((CartDetailResponse) data).getProductList(), false);
+            }
         }
     }
 }

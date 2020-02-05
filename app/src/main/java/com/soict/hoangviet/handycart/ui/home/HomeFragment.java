@@ -20,6 +20,7 @@ import com.soict.hoangviet.handycart.entity.response.CartResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+import com.soict.hoangviet.handycart.eventbus.CartAmountEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteProductEvent;
 import com.soict.hoangviet.handycart.eventbus.FavoriteSupplierEvent;
 import com.soict.hoangviet.handycart.ui.cart.CartFragment;
@@ -176,6 +177,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             getCartAmountNoAuth();
         }
     }
+
+    private void refreshCartAmount(){
+        if (mSharePreference.isLogin()) {
+            getCartAmountWithAuth();
+        } else {
+            getCartAmountNoAuth();
+        }
+    }
+
 
     @Override
     public void initData() {
@@ -377,6 +387,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             refreshData();
         }
         EventBus.getDefault().removeStickyEvent(favoriteProductEvent);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onCartAmountEvent(CartAmountEvent cartAmountEvent) {
+        refreshCartAmount();
+        EventBus.getDefault().removeStickyEvent(cartAmountEvent);
     }
 
 

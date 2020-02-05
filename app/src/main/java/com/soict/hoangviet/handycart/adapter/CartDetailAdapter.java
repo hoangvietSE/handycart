@@ -9,11 +9,14 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.EndlessLoadingRecyclerViewAdapter;
 import com.soict.hoangviet.handycart.databinding.ItemCartBinding;
 import com.soict.hoangviet.handycart.entity.response.ProductListItem;
+import com.soict.hoangviet.handycart.ui.cart.CartTransactionListener;
 
 public class CartDetailAdapter extends EndlessLoadingRecyclerViewAdapter<ItemCartBinding> {
+    private CartTransactionListener listener;
 
-    public CartDetailAdapter(Context context, boolean enableSelectedMode) {
+    public CartDetailAdapter(Context context, CartTransactionListener listener, boolean enableSelectedMode) {
         super(context, enableSelectedMode);
+        this.listener = listener;
     }
 
     @Override
@@ -41,7 +44,10 @@ public class CartDetailAdapter extends EndlessLoadingRecyclerViewAdapter<ItemCar
         public void bind(ProductListItem data) {
             binding.setProductListItem(data);
             binding.qscCart.setListener(item -> {
-
+                listener.onChangeQuantity(Integer.valueOf(binding.qscCart.getQuantity()), getAdapterPosition());
+            });
+            binding.tvDelete.setOnClickListener(view -> {
+                listener.onDelete(getAdapterPosition());
             });
         }
     }

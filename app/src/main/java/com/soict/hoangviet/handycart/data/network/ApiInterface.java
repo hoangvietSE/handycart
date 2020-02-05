@@ -6,6 +6,8 @@ import com.soict.hoangviet.handycart.base.ListLoadmoreReponse;
 import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.entity.request.CartRequest;
+import com.soict.hoangviet.handycart.entity.request.CartTransactionDeleteRequest;
+import com.soict.hoangviet.handycart.entity.request.CartTransactionRequest;
 import com.soict.hoangviet.handycart.entity.request.DeleteRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
@@ -28,13 +30,16 @@ import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.HashMap;
 
+import dagger.Module;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -116,19 +121,19 @@ public interface ApiInterface {
 
     @GET(ApiConstant.CART_AMOUNT)
     Single<ObjectResponse<CartAmountResponse>> getCartAmountNoAuth(
-            @Query(Define.Api.Query.DEVICE_ID)String deviceId
+            @Query(Define.Api.Query.DEVICE_ID) String deviceId
     );
 
     @GET(ApiConstant.CART_AMOUNT)
     Single<ObjectResponse<CartAmountResponse>> getCartAmountWithAuth(
             @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
-            @Query(Define.Api.Query.DEVICE_ID)String deviceId
+            @Query(Define.Api.Query.DEVICE_ID) String deviceId
     );
 
     @POST(ApiConstant.CART)
     Single<ObjectResponse<CartResponse>> addToCartNoAuth(
             @Body CartRequest cartRequest
-            );
+    );
 
     @POST(ApiConstant.CART)
     Single<ObjectResponse<CartResponse>> addToCartWithAuth(
@@ -162,6 +167,28 @@ public interface ApiInterface {
     Single<ListResponse<ItemMenuDetailSupplierResponse>> getMenuProduct(
             @Path(Define.Api.Query.ID) int id,
             @Query(Define.Api.Query.PAGE) int page
+    );
+
+    @PUT(ApiConstant.CART)
+    Single<ObjectResponse<CartDetailResponse>> updateCartDetailWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Body CartTransactionRequest request
+    );
+
+    @PUT(ApiConstant.CART)
+    Single<ObjectResponse<CartDetailResponse>> updateCartDetailNoAuth(
+            @Body CartTransactionRequest request
+    );
+
+    @HTTP(method = "DELETE", path = ApiConstant.CART, hasBody = true)
+    Single<ObjectResponse<CartDetailResponse>> deleteItemCartWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Body CartTransactionDeleteRequest request
+    );
+
+    @HTTP(method = "DELETE", path = ApiConstant.CART, hasBody = true)
+    Single<ObjectResponse<CartDetailResponse>> deleteItemCartNoAuth(
+            @Body CartTransactionDeleteRequest request
     );
 
 }

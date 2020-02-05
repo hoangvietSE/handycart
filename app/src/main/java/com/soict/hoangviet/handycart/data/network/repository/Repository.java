@@ -7,6 +7,8 @@ import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.base.ObjectResponse;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.entity.request.CartRequest;
+import com.soict.hoangviet.handycart.entity.request.CartTransactionDeleteRequest;
+import com.soict.hoangviet.handycart.entity.request.CartTransactionRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteProductRequest;
 import com.soict.hoangviet.handycart.entity.request.FavoriteSupplierRequest;
 import com.soict.hoangviet.handycart.entity.request.LoginRequest;
@@ -199,5 +201,28 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<ObjectResponse<CartDetailResponse>> updateCartDetailWithAuth(String accessToken, CartTransactionRequest request) {
+        return apiInterface.updateCartDetailWithAuth(accessToken, request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartDetailResponse>> updateCartDetailNoAuth(CartTransactionRequest request) {
+        return apiInterface.updateCartDetailNoAuth(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartDetailResponse>> deleteItemCartWithAuth(String accessToken, CartTransactionDeleteRequest request) {
+        return apiInterface.deleteItemCartWithAuth(accessToken, request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ObjectResponse<CartDetailResponse>> deleteItemCartNoAuth(CartTransactionDeleteRequest request) {
+        return apiInterface.deleteItemCartNoAuth(request)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 }

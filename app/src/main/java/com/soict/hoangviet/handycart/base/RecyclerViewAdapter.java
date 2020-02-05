@@ -106,7 +106,8 @@ public abstract class RecyclerViewAdapter<T extends ViewDataBinding> extends Rec
     public void clear() {
         int itemCount = getItemCount();
         listWrapperModels.clear();
-        notifyItemRangeRemoved(0, itemCount);
+        notifyDataSetChanged();
+//        notifyItemRangeRemoved(0, itemCount);
     }
 
     public <T> void refresh(List<T> models) {
