@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:icon_left="back"
-            app:icon_right="none"
+            app:icon_right="menu"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/list_product_toolbar_title" />
 

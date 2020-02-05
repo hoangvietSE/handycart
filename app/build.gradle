@@ -108,6 +108,7 @@ dependencies {
 
     //Firebase
     implementation "com.google.firebase:firebase-messaging:$firebase_messaging_version"
+    implementation "com.google.firebase:firebase-dynamic-links:$firebase_dynamic_link"
 
     //LoopingViewPager
     implementation "com.asksira.android:loopingviewpager:$looping_view_pager_version"

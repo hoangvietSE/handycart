@@ -31,9 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                app:error="@{@drawable/ic_add_cart}"
+                app:error="@{@drawable/img_image_default}"
                 app:imageUrl="@{homeSupplierResponse.avatar}"
-                tools:src="@drawable/ic_add_cart" />
+                tools:src="@drawable/img_image_default" />
         </androidx.cardview.widget.CardView>
 
 

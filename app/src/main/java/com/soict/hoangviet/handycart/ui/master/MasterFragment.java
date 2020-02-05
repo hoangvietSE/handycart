@@ -4,14 +4,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
-import com.soict.hoangviet.handycart.adapter.CategoryAdapter;
 import com.soict.hoangviet.handycart.adapter.MasterAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
-import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.databinding.FragmentMasterBinding;
-import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
-import com.soict.hoangviet.handycart.ui.home.HomeFragment;
-import com.soict.hoangviet.handycart.ui.profile.ProfileFragment;
 
 public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int HOME_FRAGMENT = 0;
@@ -46,17 +41,25 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
                 case PROFILE_FRAGMENT:
             }
         }
+        enableDrawer(true);
     }
 
     @Override
     public boolean backPressed() {
-        return true;
+        if (isOpenDrawer()) {
+            closeDrawer();
+            return false;
+        } else {
+            getViewController().backFromAddFragment(null);
+            return true;
+        }
     }
 
     @Override
     public void initView() {
         initViewModel();
         initViewPager();
+        enableDrawer(true);
     }
 
     private void initViewModel() {
@@ -77,6 +80,13 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
             setToolbar(position);
         });
         binding.bottomBar.onTabClick(0);
+        binding.toolbar.setOnToolbarClickListener(viewId -> {
+            switch (viewId) {
+                case R.id.tv_menu:
+                    openDrawer();
+                    break;
+            }
+        });
     }
 
     private void setToolbar(int position) {

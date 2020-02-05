@@ -48,6 +48,7 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
 
     @Override
     public boolean backPressed() {
+        getViewController().backFromAddFragment(null);
         return false;
     }
 

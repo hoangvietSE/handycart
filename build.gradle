@@ -50,6 +50,7 @@ ext{
 
     //Firebase
     firebase_messaging_version = '20.1.0'
+    firebase_dynamic_link = '19.0.0'
 
     //LoopingViewPager
     looping_view_pager_version = '1.2.0'

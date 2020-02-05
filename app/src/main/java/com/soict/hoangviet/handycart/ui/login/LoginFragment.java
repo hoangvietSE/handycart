@@ -1,16 +1,11 @@
 package com.soict.hoangviet.handycart.ui.login;
 
-import android.os.Handler;
-
 import androidx.lifecycle.ViewModelProviders;
 
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentLoginBinding;
-import com.soict.hoangviet.handycart.ui.profile.ProfileFragment;
 import com.soict.hoangviet.handycart.utils.ToastUtil;
-
-import java.util.HashMap;
 
 public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
     private LoginViewModel loginViewModel;
@@ -27,7 +22,8 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
 
     @Override
     public boolean backPressed() {
-        return true;
+        getViewController().backFromAddFragment(null);
+        return false;
     }
 
     @Override

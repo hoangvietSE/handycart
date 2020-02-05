@@ -69,6 +69,9 @@ public class BaseToolbar extends CustomViewConstraintLayout {
         leftButton.setOnClickListener(view -> {
             listener.onClick(view.getId());
         });
+        tvMenu.setOnClickListener(view -> {
+            listener.onClick(view.getId());
+        });
     }
 
     @Override
@@ -102,6 +105,7 @@ public class BaseToolbar extends CustomViewConstraintLayout {
                 rightButton.setImageResource(R.drawable.ic_share);
                 break;
             case ICON_RIGHT_MENU:
+                rightButton.setVisibility(GONE);
                 tvMenu.setVisibility(VISIBLE);
                 break;
         }

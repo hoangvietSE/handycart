@@ -12,6 +12,7 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.databinding.ItemChildCategoryBinding;
 import com.soict.hoangviet.handycart.databinding.ItemParentCategoryBinding;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
+import com.soict.hoangviet.handycart.entity.response.SubCategoriesItem;
 
 import java.util.List;
 

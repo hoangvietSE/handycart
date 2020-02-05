@@ -45,11 +45,16 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
 
     @Override
     public void backFromAddFragment() {
-
+        enableDrawer(true);
     }
 
     @Override
     public boolean backPressed() {
+        if (isOpenDrawer()) {
+            closeDrawer();
+        } else {
+            getViewController().backFromAddFragment(null);
+        }
         return false;
     }
 
@@ -57,6 +62,7 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
     public void initView() {
         initViewModel();
         initHomeDecoration();
+        enableDrawer(true);
     }
 
     private void initHomeDecoration() {
@@ -70,10 +76,10 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
 
     @Override
     public void initData() {
-        new Handler().postDelayed(()->{
+        new Handler().postDelayed(() -> {
             initListProductAdapter();
             getData(false);
-        },300);
+        }, 300);
     }
 
     private void getData(boolean isRefresh) {
@@ -103,7 +109,11 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
     }
 
     private void getListProductWithAuth(boolean isRefreshing) {
-        mHomeViewModel.setListHomeProductWithAuth(isRefreshing, -1);
+        if (getArguments() != null) {
+            mHomeViewModel.setListHomeProductWithAuth(isRefreshing, getArguments().getInt(EXTRA_CATEGORY_ID));
+        } else {
+            mHomeViewModel.setListHomeProductWithAuth(isRefreshing, -1);
+        }
     }
 
     private void getListProductNoAuth(boolean isRefreshing) {
@@ -131,6 +141,9 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
             switch (viewId) {
                 case R.id.imv_left:
                     getViewController().backFromAddFragment(null);
+                    break;
+                case R.id.tv_menu:
+                    openDrawer();
                     break;
             }
         });

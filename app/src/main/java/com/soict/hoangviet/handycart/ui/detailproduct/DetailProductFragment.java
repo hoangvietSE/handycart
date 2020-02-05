@@ -45,6 +45,7 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
 
     @Override
     public boolean backPressed() {
+        getViewController().backFromAddFragment(null);
         return false;
     }
 

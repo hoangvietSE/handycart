@@ -12,9 +12,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.soict.hoangviet.handycart.ui.main.MainActivity;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.LoadingUtil;
-import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +52,31 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
         initView();
         initData();
         initListener();
+    }
+
+    protected void enableDrawer(boolean enable) {
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).enableNavigationDrawer(enable);
+        }
+    }
+
+    protected void openDrawer() {
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).openDrawer();
+        }
+    }
+
+    protected boolean isOpenDrawer(){
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            return ((MainActivity) getActivity()).isOpenDrawer();
+        }
+        return false;
+    }
+
+    protected void closeDrawer() {
+        if (getActivity() != null && getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).closeDrawer();
+        }
     }
 
     protected abstract int getLayoutId();

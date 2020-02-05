@@ -23,17 +23,16 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
     private CartDetailAdapter cartDetailAdapter;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_cart;
-    }
+    protected int getLayoutId() { return R.layout.fragment_cart; }
 
     @Override
     public void backFromAddFragment() {
-
+        enableDrawer(false);
     }
 
     @Override
     public boolean backPressed() {
+        getViewController().backFromAddFragment(null);
         return false;
     }
 
@@ -42,6 +41,7 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
         setToolbar();
         initViewModel();
         initCartDetailAdapter();
+        enableDrawer(false);
     }
 
     private void initCartDetailAdapter() {

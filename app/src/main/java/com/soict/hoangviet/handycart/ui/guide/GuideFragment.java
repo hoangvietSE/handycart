@@ -19,6 +19,7 @@ public class GuideFragment extends BaseFragment<FragmentGuideBinding> {
 
     @Override
     public boolean backPressed() {
+        getViewController().backFromAddFragment(null);
         return false;
     }
 
