@@ -1,6 +1,8 @@
 package com.soict.hoangviet.handycart.ui.detailsupplier;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.DetailSupplierAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
+import com.soict.hoangviet.handycart.custom.firebase.DynamicLinkFirebase;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.databinding.FragmentDetailSupplierBinding;
 import com.soict.hoangviet.handycart.entity.response.CartAmountResponse;
@@ -19,6 +22,7 @@ import com.soict.hoangviet.handycart.entity.response.DetailSupplierResponse;
 import com.soict.hoangviet.handycart.ui.cart.CartFragment;
 import com.soict.hoangviet.handycart.ui.detailsupplier.menu.MenuFragment;
 import com.soict.hoangviet.handycart.ui.detailsupplier.service.ServiceFragment;
+import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -35,6 +39,7 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
     private Typeface fontBold;
     private ArrayList<TextView> textViewArrayList = new ArrayList<>();
     public static final String EXTRA_SUPPLIER_ID = "extra_supplier_id";
+    public static final String EXTRA_IS_DYNAMIC_LINK = "extra_is_dynamic_link";
 
     @Override
     protected int getLayoutId() {
@@ -49,6 +54,9 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
     @Override
     public boolean backPressed() {
         getViewController().backFromAddFragment(null);
+        if (getArguments().getBoolean(EXTRA_IS_DYNAMIC_LINK)) {
+            return true;
+        }
         return false;
     }
 
@@ -102,6 +110,8 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
                 case R.id.imv_left:
                     getViewController().backFromAddFragment(null);
                     break;
+                case R.id.imv_right:
+                    break;
             }
         });
         binding.btnMenu.setOnClickListener(view -> {
@@ -114,6 +124,19 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
         });
         binding.carts.cslCart.setOnClickListener(view -> {
             getViewController().addFragment(CartFragment.class, null);
+        });
+        binding.llShare.setOnClickListener(view -> {
+            DynamicLinkFirebase.getInstance().createDynamicLink(new DynamicLinkFirebase.DynamicLinkListener() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    setImplicitIntent(uri);
+                }
+
+                @Override
+                public void onError() {
+                    ToastUtil.show(getContext(), getString(R.string.handle_error));
+                }
+            }, "Chi tiết nhà cung cấp HandyCart", "supplierId", getArguments().getInt(EXTRA_SUPPLIER_ID, -1));
         });
     }
 
@@ -169,5 +192,17 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
             }
         });
         onTabChoose(TAB_MENU);
+    }
+
+    private void setImplicitIntent(Uri shortLink) {
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "HandyCart");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shortLink.toString());
+            startActivity(Intent.createChooser(shareIntent, "Choose one application"));
+        } catch (Exception e) {
+            //e.toString();
+        }
     }
 }

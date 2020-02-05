@@ -72,6 +72,9 @@ public class BaseToolbar extends CustomViewConstraintLayout {
         tvMenu.setOnClickListener(view -> {
             listener.onClick(view.getId());
         });
+        rightButton.setOnClickListener(view -> {
+            listener.onClick(view.getId());
+        });
     }
 
     @Override

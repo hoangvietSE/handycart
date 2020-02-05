@@ -1,6 +1,8 @@
 package com.soict.hoangviet.handycart.ui.detailproduct;
 
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -9,15 +11,21 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.DetailProductAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.custom.BottomSheetFragment;
+import com.soict.hoangviet.handycart.custom.firebase.DynamicLinkFirebase;
 import com.soict.hoangviet.handycart.databinding.FragmentDetailProductBinding;
 import com.soict.hoangviet.handycart.entity.response.DetailProductResponse;
 import com.soict.hoangviet.handycart.ui.detailproduct.description.DescriptionProductFragment;
 import com.soict.hoangviet.handycart.ui.detailproduct.guide.GuideProductFragment;
+import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -25,6 +33,7 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
     private static final int TAB_DESCRIPTION = 0;
     private static final int TAB_GUIDE = 1;
     public static final String EXTRA_PRODUCT_ID = "extra_product_id";
+    public static final String EXTRA_IS_DYNAMIC_LINK = "extra_is_dynamic_link";
     private ArrayList<TextView> textViewArrayList = new ArrayList<>();
     private Typeface fontRegular;
     private Typeface fontBold;
@@ -46,6 +55,9 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
     @Override
     public boolean backPressed() {
         getViewController().backFromAddFragment(null);
+        if (getArguments().getBoolean(EXTRA_IS_DYNAMIC_LINK)) {
+            return true;
+        }
         return false;
     }
 
@@ -86,7 +98,6 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
 
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailProductViewModel.class);
-
     }
 
     private int getProductId() {
@@ -130,7 +141,11 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
         binding.toolbar.setOnToolbarClickListener(viewId -> {
             switch (viewId) {
                 case R.id.imv_left:
-                    getViewController().backFromAddFragment(null);
+                    backPressed();
+                    break;
+                case R.id.imv_right:
+                    shareDynamicLink();
+                    break;
             }
         });
         mViewModel.getDetailProduct().observe(this, response -> {
@@ -139,6 +154,32 @@ public class DetailProductFragment extends BaseFragment<FragmentDetailProductBin
         binding.btnBuyProduct.setOnClickListener(view -> {
             mBottomSheetFragment.show(getChildFragmentManager(), mBottomSheetFragment.getTag());
         });
+    }
+
+    private void shareDynamicLink() {
+        DynamicLinkFirebase.getInstance().createDynamicLink(new DynamicLinkFirebase.DynamicLinkListener() {
+            @Override
+            public void onSuccess(Uri uri) {
+                setImplicitIntent(uri);
+            }
+
+            @Override
+            public void onError() {
+                ToastUtil.show(getContext(), getString(R.string.handle_error));
+            }
+        }, "Chi tiết sản phẩm HanyCart", "productId", getArguments().getInt(EXTRA_PRODUCT_ID, -1));
+    }
+
+    private void setImplicitIntent(Uri shortLink) {
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "HandyCart");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shortLink.toString());
+            startActivity(Intent.createChooser(shareIntent, "Choose one application"));
+        } catch (Exception e) {
+            //e.toString();
+        }
     }
 
     private void onTabChoose(int tabDescription) {
