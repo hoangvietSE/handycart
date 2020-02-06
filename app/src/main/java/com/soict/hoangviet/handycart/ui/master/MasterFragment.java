@@ -50,7 +50,6 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
             closeDrawer();
             return false;
         } else {
-            getViewController().backFromAddFragment(null);
             return true;
         }
     }

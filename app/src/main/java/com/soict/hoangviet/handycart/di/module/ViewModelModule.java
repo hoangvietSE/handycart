@@ -22,6 +22,7 @@ import com.soict.hoangviet.handycart.ui.login.LoginViewModel;
 import com.soict.hoangviet.handycart.ui.main.MainViewModel;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
 import com.soict.hoangviet.handycart.ui.master.MasterViewModel;
+import com.soict.hoangviet.handycart.ui.multilanguage.MultiLanguageViewModel;
 import com.soict.hoangviet.handycart.ui.notification.NotificationViewModel;
 import com.soict.hoangviet.handycart.ui.profile.ProfileViewModel;
 import com.soict.hoangviet.handycart.ui.search.SearchViewModel;
@@ -129,6 +130,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ListProductViewModel.class)
     abstract ViewModel bindListProductViewModel(ListProductViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MultiLanguageViewModel.class)
+    abstract ViewModel bindMultiLanguageViewModel(MultiLanguageViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

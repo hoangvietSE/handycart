@@ -17,9 +17,6 @@ import com.soict.hoangviet.handycart.ui.listproduct.ListProductFragment;
 import javax.inject.Inject;
 
 public class CartFragment extends BaseFragment<FragmentCartBinding> {
-    @Inject
-    public ISharePreference mSharePreference;
-
     private CartViewModel mViewModel;
     private CartDetailAdapter cartDetailAdapter;
 
@@ -52,8 +49,8 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
             @Override
             public void onDelete(int position) {
                 ProductListItem data = cartDetailAdapter.getItem(position, ProductListItem.class);
-                mViewModel.getIsUpdateCart().setValue(true);
-                if (mSharePreference.isLogin()) {
+                mViewModel.getIsUpdateCart().setValue(false);
+                if (mViewModel.getmSharePreference().isLogin()) {
                     mViewModel.deleteItemCartWithAuth(data);
                 } else {
                     mViewModel.deleteItemCartNoAuth(data);
@@ -64,7 +61,7 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
             public void onChangeQuantity(int quantity, int position) {
                 ProductListItem data = cartDetailAdapter.getItem(position, ProductListItem.class);
                 mViewModel.getIsUpdateCart().setValue(true);
-                if (mSharePreference.isLogin()) {
+                if (mViewModel.getmSharePreference().isLogin()) {
                     mViewModel.updateCartDetailWithAuth(data, quantity);
                 } else {
                     mViewModel.updateCartDetailNoAuth(data, quantity);
@@ -94,7 +91,7 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
     }
 
     private void getCartDetail() {
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             mViewModel.setCartDetailWithAuth();
         } else {
             mViewModel.setCartDetailNoAuth();
@@ -121,8 +118,7 @@ public class CartFragment extends BaseFragment<FragmentCartBinding> {
             binding.setCartDetailResponse((CartDetailResponse) data);
             binding.tvBadgeCart.setNumber(((CartDetailResponse) data).getTotalQuantity(), true);
             if (!mViewModel.getIsUpdateCart().getValue()) {
-                cartDetailAdapter.clear();
-                cartDetailAdapter.addModels(((CartDetailResponse) data).getProductList(), false);
+                cartDetailAdapter.refresh(((CartDetailResponse) data).getProductList());
             }
         }
     }

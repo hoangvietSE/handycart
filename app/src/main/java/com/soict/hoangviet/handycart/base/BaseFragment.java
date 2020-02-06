@@ -150,15 +150,15 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     protected <U> void handleObjectResponse(ObjectResponse<U> response) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-                LoadingUtil.getInstance(getContext()).show();
+                showLoading();
                 break;
             case Define.ResponseStatus.SUCCESS:
-                LoadingUtil.getInstance(getContext()).hidden();
+                hideLoading();
                 getObjectResponse(response.getData());
                 break;
             case Define.ResponseStatus.ERROR:
+                hideLoading();
                 handleNetworkError(response.getError(), true);
-                LoadingUtil.getInstance(getContext()).hidden();
         }
     }
 
@@ -194,6 +194,14 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
         }
 
         return false;
+    }
+
+    protected void showLoading() {
+        LoadingUtil.getInstance(getContext()).show();
+    }
+
+    protected void hideLoading() {
+        LoadingUtil.getInstance(getContext()).hidden();
     }
 
     public abstract void backFromAddFragment();

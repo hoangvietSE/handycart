@@ -19,6 +19,10 @@ public class BaseViewModel extends ViewModel {
         this.context = context;
     }
 
+    public ISharePreference getmSharePreference() {
+        return mSharePreference;
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();

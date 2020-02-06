@@ -30,8 +30,6 @@ import javax.inject.Inject;
 
 public class ListProductFragment extends BaseFragment<FragmentListProductBinding> {
     public static final String EXTRA_CATEGORY_ID = "extra_category_id";
-    @Inject
-    public ISharePreference mSharePreference;
     private ListProductViewModel mViewModel;
     private HomeViewModel mHomeViewModel;
     private ListProductAdapter mListProductAdapter;
@@ -84,7 +82,7 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
 
     private void getData(boolean isRefresh) {
         getProduct(isRefresh);
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             getCartAmountWithAuth();
         } else {
             getCartAmountNoAuth();
@@ -92,7 +90,7 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
     }
 
     private void getProduct(boolean isRefresh) {
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             getListProductWithAuth(isRefresh);
         } else {
             getListProductNoAuth(isRefresh);
@@ -166,7 +164,7 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
 
             @Override
             public void onFavoriteClick(int position) {
-                if (mSharePreference.isLogin()) {
+                if (mViewModel.getmSharePreference().isLogin()) {
                     tempPosition = position;
                     try {
                         HomeProductResponse data = mListProductAdapter.getItem(position, HomeProductResponse.class);
@@ -214,7 +212,7 @@ public class ListProductFragment extends BaseFragment<FragmentListProductBinding
             @Override
             public void onAnimationEnd(Animator animation) {
                 HomeProductResponse data = mListProductAdapter.getItem(position, HomeProductResponse.class);
-                if (mSharePreference.isLogin()) {
+                if (mViewModel.getmSharePreference().isLogin()) {
                     mHomeViewModel.addToCartWithAuth(data.getId(), quantity);
                 } else {
                     mHomeViewModel.addToCartNoAuth(data.getId(), quantity);

@@ -15,6 +15,7 @@ import com.soict.hoangviet.handycart.ui.home.HomeFragment;
 import com.soict.hoangviet.handycart.ui.listproduct.ListProductFragment;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
+import com.soict.hoangviet.handycart.ui.multilanguage.MultiLanguageFragment;
 import com.soict.hoangviet.handycart.ui.notification.NotificationFragment;
 import com.soict.hoangviet.handycart.ui.profile.ProfileFragment;
 import com.soict.hoangviet.handycart.ui.search.SearchFragment;
@@ -80,6 +81,9 @@ public abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract ListProductFragment bindListProductFragment();
+
+    @ContributesAndroidInjector
+    abstract MultiLanguageFragment bindMultiLanguageFragment();
 
     @ContributesAndroidInjector
     abstract GuideProductFragment bindGuideProductFragment();

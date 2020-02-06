@@ -14,75 +14,86 @@ public class SharePreference implements ISharePreference {
         this.context = context;
     }
 
-    private SharedPreferences getSharePreference() {
+    private SharedPreferences getSharePreference(String fileName) {
         if (context != null) {
-            return context.getSharedPreferences(Define.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            return context.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         }
         return null;
     }
-
-    private SharedPreferences getDeviceSharePreference() {
-        if (context != null) {
-            return context.getSharedPreferences(Define.PREF_DEVICE, Context.MODE_PRIVATE);
-        }
-        return null;
-    }
-
 
     private <T> String toJsonFromObject(T object) {
         String rawString = new Gson().toJson(object);
         return rawString;
     }
 
-    private <T> T toGsonFromJson(String json, Class<T> tClass) {
-        return new Gson().fromJson(json, tClass);
+    private <T> T toGsonFromJson(String json, Class<T> anonymousClass) {
+        return new Gson().fromJson(json, anonymousClass);
     }
 
-    private void setString(String key, String value) {
-        getSharePreference().edit().putString(key, value).apply();
+    @SuppressWarnings("unchecked")
+    public <T> T get(String fileName, String key, Class<T> anonymousClass) {
+        if (anonymousClass == String.class) {
+            return (T) getSharePreference(fileName).getString(key, "");
+        } else if (anonymousClass == Boolean.class) {
+            return (T) Boolean.valueOf(getSharePreference(fileName).getBoolean(key, false));
+        } else if (anonymousClass == Float.class) {
+            return (T) Float.valueOf(getSharePreference(fileName).getFloat(key, 0));
+        } else if (anonymousClass == Integer.class) {
+            return (T) Integer.valueOf(getSharePreference(fileName).getInt(key, 0));
+        } else if (anonymousClass == Long.class) {
+            return (T) Long.valueOf(getSharePreference(fileName).getLong(key, 0));
+        } else {
+            return toGsonFromJson(getSharePreference(fileName).getString(key, ""), anonymousClass);
+        }
     }
 
-    private String getString(String key) {
-        return getSharePreference().getString(key, "");
-    }
-
-    private void setBoolean(String key, boolean value) {
-        getSharePreference().edit().putBoolean(key, value).apply();
-    }
-
-    private boolean getBoolean(String key) {
-        return getSharePreference().getBoolean(key, false);
+    public <T> void put(String fileName, String key, T data) {
+        SharedPreferences.Editor editor = getSharePreference(fileName).edit();
+        if (data instanceof String) {
+            editor.putString(key, (String) data);
+        } else if (data instanceof Boolean) {
+            editor.putBoolean(key, (Boolean) data);
+        } else if (data instanceof Float) {
+            editor.putFloat(key, (Float) data);
+        } else if (data instanceof Integer) {
+            editor.putInt(key, (Integer) data);
+        } else if (data instanceof Long) {
+            editor.putLong(key, (Long) data);
+        } else {
+            editor.putString(key, toJsonFromObject(data));
+        }
+        editor.apply();
     }
 
     @Override
     public void setDeviceTokenId(String deviceTokenId) {
-        getDeviceSharePreference().edit().putString(Define.Api.Key.DEVICE_TOKEN_ID, deviceTokenId).apply();
+        put(Define.PREF_DEVICE, Define.Api.Key.DEVICE_TOKEN_ID, deviceTokenId);
     }
 
     @Override
     public String getDeviceTokenId() {
-        return getDeviceSharePreference().getString(Define.Api.Key.DEVICE_TOKEN_ID, "");
+        return get(Define.PREF_DEVICE, Define.Api.Key.DEVICE_TOKEN_ID, String.class);
     }
 
     @Override
     public void setLoginStatus(boolean isLogin) {
-        setBoolean(Define.Api.Key.IS_LOGIN, isLogin);
+        put(Define.PREF_FILE_NAME, Define.Api.Key.IS_LOGIN, isLogin);
     }
 
     @Override
     public boolean isLogin() {
-        return getBoolean(Define.Api.Key.IS_LOGIN);
+        return get(Define.PREF_FILE_NAME, Define.Api.Key.IS_LOGIN, Boolean.class);
     }
 
     @Override
     public void setLoginData(LoginResponse loginResponse) {
-        setString(Define.Api.Key.LOGIN_RESPONSE, toJsonFromObject(loginResponse));
+        put(Define.PREF_FILE_NAME, Define.Api.Key.LOGIN_RESPONSE, loginResponse);
         setLoginStatus(true);
     }
 
     @Override
     public LoginResponse getLoginResponse() {
-        return toGsonFromJson(getString(Define.Api.Key.LOGIN_RESPONSE), LoginResponse.class);
+        return get(Define.PREF_FILE_NAME, Define.Api.Key.LOGIN_RESPONSE, LoginResponse.class);
     }
 
     @Override
@@ -104,6 +115,16 @@ public class SharePreference implements ISharePreference {
 
     @Override
     public void clearAllPreference() {
-        getSharePreference().edit().clear().apply();
+        getSharePreference(Define.PREF_FILE_NAME).edit().clear().apply();
+    }
+
+    @Override
+    public String getCurrentLanguage() {
+        return get(Define.PREF_LANGUAGE, Define.Api.Key.LANGUAGE, String.class);
+    }
+
+    @Override
+    public void setCurrentLanguage(String codeLocale) {
+        put(Define.PREF_LANGUAGE, Define.Api.Key.LANGUAGE, codeLocale);
     }
 }

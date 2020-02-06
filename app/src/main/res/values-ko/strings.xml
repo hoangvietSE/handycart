@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="language">ko</string>
+    <string name="app_name">HandyCart</string>
+    <string name="cart_buy_more">" 더 구매"</string>
+    <string name="cart_buy_condition">" 신청서는 150,000 VND 이상이어야합니다"</string>
+    <string name="cart_delete">삭제</string>
+    <string name="cart_sum_money">" 총 돈"</string>
+    <string name="need_login">" 기능은 로그인이 필요합니다"</string>
+    <string name="profile_changepassword_title">" 비밀번호 변경 "</string>
+    <string name="profile_contact_title">" 연락주세요"</string>
+    <string name="profile_faq_title">" 자주 묻는 질문"</string>
+    <string name="profile_language_title">" 언어 설정"</string>
+    <string name="profile_link_title">" 계정 연결"</string>
+    <string name="profile_login_title">"로그인 "</string>
+    <string name="profile_logout_title">"로그 아웃 "</string>
+    <string name="profile_notification_title">" 알림 설정 "</string>
+    <string name="profile_person_title">개인 정보</string>
+</resources>

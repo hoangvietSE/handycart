@@ -13,6 +13,9 @@ import com.soict.hoangviet.handycart.entity.request.CartTransactionDeleteRequest
 import com.soict.hoangviet.handycart.entity.request.CartTransactionRequest;
 import com.soict.hoangviet.handycart.entity.response.CartDetailResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductListItem;
+import com.soict.hoangviet.handycart.eventbus.CartAmountEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -120,9 +123,9 @@ public class CartViewModel extends BaseViewModel {
         mCompositeDisposable.add(
                 repository.deleteItemCartWithAuth(mSharePreference.getAccessToken(), request)
                         .doOnSubscribe(disposable -> {
-                            getCartDetail().setValue(new ObjectResponse<CartDetailResponse>().loading());
                         })
                         .subscribe(response -> {
+                            EventBus.getDefault().postSticky(new CartAmountEvent());
                             getCartDetail().setValue(new ObjectResponse<CartDetailResponse>().success(response.getData()));
 
                         }, throwable -> {
@@ -140,9 +143,9 @@ public class CartViewModel extends BaseViewModel {
         mCompositeDisposable.add(
                 repository.deleteItemCartNoAuth(request)
                         .doOnSubscribe(disposable -> {
-                            getCartDetail().setValue(new ObjectResponse<CartDetailResponse>().loading());
                         })
                         .subscribe(response -> {
+                            EventBus.getDefault().postSticky(new CartAmountEvent());
                             getCartDetail().setValue(new ObjectResponse<CartDetailResponse>().success(response.getData()));
 
                         }, throwable -> {

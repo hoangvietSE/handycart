@@ -2,14 +2,14 @@ package com.soict.hoangviet.handycart.di.module;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.soict.hoangviet.handycart.BuildConfig;
 import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.data.network.LanguageInterceptor;
 import com.soict.hoangviet.handycart.data.network.NetworkCheckerInterceptor;
 import com.soict.hoangviet.handycart.data.network.TokenInterceptor;
 import com.soict.hoangviet.handycart.utils.Define;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 

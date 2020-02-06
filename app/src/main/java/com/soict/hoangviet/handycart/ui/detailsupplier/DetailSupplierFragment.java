@@ -29,8 +29,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierBinding> {
-    @Inject
-    public ISharePreference mSharePreference;
     private static final int TAB_MENU = 0;
     private static final int TAB_SERVICE = 1;
     private DetailSupplierViewModel mViewModel;
@@ -86,7 +84,7 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
     }
 
     private void getSupplierDetail() {
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             mViewModel.getCartAmountWithAuth();
         } else {
             mViewModel.getCartAmountNoAuth();

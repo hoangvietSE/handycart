@@ -44,9 +44,6 @@ import javax.inject.Inject;
 
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
-
-    @Inject
-    public ISharePreference mSharePreference;
     private HomeViewModel mViewModel;
     private BannerInfiniteAdapter bannerInfiniteAdapter;
     private HomeProductAdapter homeProductAdapter;
@@ -75,7 +72,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         initViewModel();
         getListBanner();
         initHomeDecoration();
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             getListProductWithAuth(false);
             getListSupplierWithAuth(false);
             getCartAmountWithAuth();
@@ -167,7 +164,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     }
 
     public void refreshData() {
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             getListProductWithAuth(true);
             getListSupplierWithAuth(true);
             getCartAmountWithAuth();
@@ -179,7 +176,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     }
 
     private void refreshCartAmount(){
-        if (mSharePreference.isLogin()) {
+        if (mViewModel.getmSharePreference().isLogin()) {
             getCartAmountWithAuth();
         } else {
             getCartAmountNoAuth();
@@ -198,7 +195,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
         homeSupplierAdapter = new HomeSupplierAdapter(getContext(), new FavoriteSupplierListener() {
             @Override
             public void onFavoriteClick(int position) {
-                if (mSharePreference.isLogin()) {
+                if (mViewModel.getmSharePreference().isLogin()) {
                     tempPosition = position;
                     try {
                         HomeSupplierResponse data = homeSupplierAdapter.getItem(position, HomeSupplierResponse.class);
@@ -255,7 +252,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
             @Override
             public void onAnimationEnd(Animator animation) {
                 HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);
-                if (mSharePreference.isLogin()) {
+                if (mViewModel.getmSharePreference().isLogin()) {
                     mViewModel.addToCartWithAuth(data.getId(), quantity);
                 } else {
                     mViewModel.addToCartNoAuth(data.getId(), quantity);
@@ -292,7 +289,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
 
             @Override
             public void onFavoriteClick(int position) {
-                if (mSharePreference.isLogin()) {
+                if (mViewModel.getmSharePreference().isLogin()) {
                     tempPosition = position;
                     try {
                         HomeProductResponse data = homeProductAdapter.getItem(position, HomeProductResponse.class);

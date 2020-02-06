@@ -23,4 +23,8 @@ public interface ISharePreference {
 
     void clearAllPreference();
 
+    String getCurrentLanguage();
+
+    void setCurrentLanguage(String codeLocale);
+
 }

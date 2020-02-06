@@ -1,9 +1,12 @@
 package com.soict.hoangviet.handycart.utils;
 
 public class Define {
-    private Define(){}
+    private Define() {
+    }
+
     public static final String PREF_FILE_NAME = "oab_pref";
     public static final String PREF_DEVICE = "device_pref";
+    public static final String PREF_LANGUAGE = "language_pref";
     public static final String REALM_NAME = "oab_database";
 
     public static final long DEFAULT_TIMEOUT = 5L;
@@ -45,6 +48,7 @@ public class Define {
             public static final String DEVICE_TOKEN_ID = "device_token_id";
             public static final String IS_LOGIN = "is_login";
             public static final String LOGIN_RESPONSE = "login_response";
+            public static final String LANGUAGE = "language";
         }
 
         public static class Http {
@@ -55,7 +59,7 @@ public class Define {
             public static final int NOT_FOUND = 404;
         }
 
-        public static class Query{
+        public static class Query {
             public static final String ID = "id";
             public static final String DEVICE_ID = "device_id";
             public static final String CATEGORY = "category_id";
@@ -67,7 +71,7 @@ public class Define {
 
         }
 
-        public static class Method{
+        public static class Method {
             public static final String PUT = "PUT";
             public static final String DELETE = "DELETE";
         }
@@ -119,13 +123,18 @@ public class Define {
         public static final String MASTER_DATA = "masterData";
     }
 
-    public static class Favorite{
+    public static class Favorite {
         public static final int STATUS_UNLIKE = 0;
         public static final int STATUS_LIKE = 1;
     }
 
-    public static class Product{
+    public static class Product {
         public static final int OUT_OF_STOCK = 0;
         public static final int IN_STOCK = 1;
+    }
+
+    public static class Languages {
+        public static final String VIETNAM = "vi";
+        public static final String KOREA = "ko";
     }
 }

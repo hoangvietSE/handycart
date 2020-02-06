@@ -4,27 +4,21 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.custom.firebase.DynamicLinkFirebase;
 import com.soict.hoangviet.handycart.databinding.SplashFragmentBinding;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.detailsupplier.DetailSupplierFragment;
-import com.soict.hoangviet.handycart.ui.home.HomeFragment;
-import com.soict.hoangviet.handycart.ui.login.LoginFragment;
 import com.soict.hoangviet.handycart.ui.main.MainActivity;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
+import com.soict.hoangviet.handycart.ui.multilanguage.MultiLanguageFragment;
 import com.soict.hoangviet.handycart.utils.CommonExtensionUtil;
+import com.soict.hoangviet.handycart.utils.LanguageUtil;
 
 import java.util.HashMap;
-import java.util.concurrent.Executor;
 
 
 public class SplashFragment extends BaseFragment<SplashFragmentBinding> {
@@ -81,7 +75,7 @@ public class SplashFragment extends BaseFragment<SplashFragmentBinding> {
                         return;
                     }
                 } else {
-                    mViewController.addFragment(MasterFragment.class, null);
+                    handleMultiLanguage();
                 }
             }
 
@@ -90,6 +84,14 @@ public class SplashFragment extends BaseFragment<SplashFragmentBinding> {
                 Log.w(TAG, "getDynamicLink:onFailure", e);
             }
         });
+    }
+
+    private void handleMultiLanguage() {
+        if (mViewModel.getmSharePreference().getCurrentLanguage() == "") {
+            mViewController.addFragment(MultiLanguageFragment.class, null);
+        } else {
+            mViewController.addFragment(MasterFragment.class, null);
+        }
     }
 
     private void showSupplierDetail(String supplierId) {
