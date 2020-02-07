@@ -7,11 +7,14 @@ import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentProfileBinding;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.ui.login.LoginFragment;
+import com.soict.hoangviet.handycart.ui.multilanguage.MultiLanguageFragment;
 import com.soict.hoangviet.handycart.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.HashMap;
 
 public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     public static final String LOGIN_RESULT = "login_result";
@@ -56,6 +59,11 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
     @Override
     public void initListener() {
+        binding.rowChangeLanguage.setOnClickListener(view -> {
+            HashMap<String, Boolean> data = new HashMap<>();
+            data.put(MultiLanguageFragment.IS_SETTING, true);
+            getViewController().addFragment(MultiLanguageFragment.class, data);
+        });
         binding.rowLogin.setOnClickListener(view -> {
             getViewController().addFragment(LoginFragment.class, null);
         });

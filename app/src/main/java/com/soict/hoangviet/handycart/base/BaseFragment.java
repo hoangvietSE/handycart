@@ -1,5 +1,6 @@
 package com.soict.hoangviet.handycart.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
 
     @Inject
     protected ViewModelProvider.Factory viewModelFactory;
+    private LoadingUtil mLoadingUtil;
 
     protected T binding;
 
@@ -49,9 +51,14 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initProgressDialog();
         initView();
         initData();
         initListener();
+    }
+
+    private void initProgressDialog() {
+        mLoadingUtil = LoadingUtil.getInstance(getContext());
     }
 
     protected void enableDrawer(boolean enable) {
@@ -66,7 +73,7 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
         }
     }
 
-    protected boolean isOpenDrawer(){
+    protected boolean isOpenDrawer() {
         if (getActivity() != null && getActivity() instanceof MainActivity) {
             return ((MainActivity) getActivity()).isOpenDrawer();
         }
@@ -120,30 +127,30 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     protected void handleListResponse(ListResponse<?> response) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-                LoadingUtil.getInstance(getContext()).show();
+                showLoading();
                 break;
             case Define.ResponseStatus.SUCCESS:
                 getListResponse(response.getData());
-                LoadingUtil.getInstance(getContext()).hidden();
+                hideLoading();
                 break;
             case Define.ResponseStatus.ERROR:
                 handleNetworkError(response.getError(), true);
-                LoadingUtil.getInstance(getContext()).hidden();
+                hideLoading();
         }
     }
 
     protected void handleLoadMoreResponse(ListResponse<?> response, boolean isRefresh, boolean canLoadmore) {
         switch (response.getType()) {
             case Define.ResponseStatus.LOADING:
-                LoadingUtil.getInstance(getContext()).show();
+                showLoading();
                 break;
             case Define.ResponseStatus.SUCCESS:
                 getListResponse(response.getData(), isRefresh, canLoadmore);
-                LoadingUtil.getInstance(getContext()).hidden();
+                hideLoading();
                 break;
             case Define.ResponseStatus.ERROR:
                 handleNetworkError(response.getError(), true);
-                LoadingUtil.getInstance(getContext()).hidden();
+                hideLoading();
         }
     }
 
@@ -197,11 +204,11 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends DaggerFrag
     }
 
     protected void showLoading() {
-        LoadingUtil.getInstance(getContext()).show();
+        mLoadingUtil.show();
     }
 
     protected void hideLoading() {
-        LoadingUtil.getInstance(getContext()).hidden();
+        mLoadingUtil.hidden();
     }
 
     public abstract void backFromAddFragment();

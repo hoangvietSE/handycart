@@ -9,6 +9,7 @@ import com.soict.hoangviet.handycart.data.network.ApiInterface;
 import com.soict.hoangviet.handycart.data.network.LanguageInterceptor;
 import com.soict.hoangviet.handycart.data.network.NetworkCheckerInterceptor;
 import com.soict.hoangviet.handycart.data.network.TokenInterceptor;
+import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.utils.Define;
 
 import java.util.concurrent.TimeUnit;
@@ -28,11 +29,11 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideHttpClient(Context context) {
+    OkHttpClient provideHttpClient(Context context, ISharePreference sharePreference) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        LanguageInterceptor languageInterceptor = new LanguageInterceptor();
+        LanguageInterceptor languageInterceptor = new LanguageInterceptor(sharePreference);
         TokenInterceptor tokenInterceptor = new TokenInterceptor();
         NetworkCheckerInterceptor networkCheckerInterceptor = new NetworkCheckerInterceptor(context);
 

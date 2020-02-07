@@ -27,7 +27,6 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class FragmentBindingModule {
 
-    //TODO bind fragment
     @ContributesAndroidInjector
     abstract SplashFragment bindSplashFragment();
 

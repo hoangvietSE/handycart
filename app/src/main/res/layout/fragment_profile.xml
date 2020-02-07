@@ -49,6 +49,7 @@
                     app:rmp_image="@drawable/ic_thongbao" />
 
                 <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                    android:id="@+id/row_change_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_language_title"

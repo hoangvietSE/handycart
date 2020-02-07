@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
-            android:text="Hết Hàng"
+            android:text="@string/detail_product_out_of_stock"
             android:textColor="@color/md_white_1000"
             android:textSize="@dimen/textsize_20_sp"
             android:textStyle="bold"

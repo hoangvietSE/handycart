@@ -16,7 +16,6 @@ import com.soict.hoangviet.handycart.ui.main.MainActivity;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
 import com.soict.hoangviet.handycart.ui.multilanguage.MultiLanguageFragment;
 import com.soict.hoangviet.handycart.utils.CommonExtensionUtil;
-import com.soict.hoangviet.handycart.utils.LanguageUtil;
 
 import java.util.HashMap;
 

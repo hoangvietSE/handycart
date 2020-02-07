@@ -84,12 +84,12 @@ public class DetailSupplierFragment extends BaseFragment<FragmentDetailSupplierB
     }
 
     private void getSupplierDetail() {
+        mViewModel.setDetailSupplier(getArguments().getInt(EXTRA_SUPPLIER_ID, -1));
         if (mViewModel.getmSharePreference().isLogin()) {
             mViewModel.getCartAmountWithAuth();
         } else {
             mViewModel.getCartAmountNoAuth();
         }
-        mViewModel.setDetailSupplier(getArguments().getInt(EXTRA_SUPPLIER_ID, -1));
     }
 
     private void getDataIntent() {

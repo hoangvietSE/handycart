@@ -1,8 +1,6 @@
 package com.soict.hoangviet.handycart.ui.multilanguage;
 
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Handler;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,17 +9,21 @@ import androidx.lifecycle.ViewModelProviders;
 import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentMultiLanguageBinding;
+import com.soict.hoangviet.handycart.eventbus.CategoryProductEvent;
+import com.soict.hoangviet.handycart.ui.main.MainActivity;
 import com.soict.hoangviet.handycart.ui.master.MasterFragment;
 import com.soict.hoangviet.handycart.utils.Define;
 import com.soict.hoangviet.handycart.utils.LanguageUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MultiLanguageFragment extends BaseFragment<FragmentMultiLanguageBinding> {
     private static final int FLAG_KR = 0;
     private static final int FLAG_VN = 1;
+    public static final String IS_SETTING = "is_setting";
     private MultiLanguageViewModel mViewModel;
     private List<ImageView> imageViewList;
 
@@ -37,6 +39,10 @@ public class MultiLanguageFragment extends BaseFragment<FragmentMultiLanguageBin
 
     @Override
     public boolean backPressed() {
+        if (getArguments() != null && getArguments().getBoolean(IS_SETTING)) {
+            getViewController().backFromAddFragment(null);
+            return false;
+        }
         return true;
     }
 
@@ -85,21 +91,28 @@ public class MultiLanguageFragment extends BaseFragment<FragmentMultiLanguageBin
         showLoadingChangeLanguage();
     }
 
-    private void showLoadingChangeLanguage(){
+    private void showLoadingChangeLanguage() {
         binding.cslLoading.setVisibility(View.VISIBLE);
     }
 
-    private void hideLoadingChangeLanguage(){
+    private void hideLoadingChangeLanguage() {
         binding.cslLoading.setVisibility(View.INVISIBLE);
     }
 
     private void setCurrentLanguage(String codeLocale) {
         mViewModel.getmSharePreference().setCurrentLanguage(codeLocale);
         LanguageUtil.setCurrentLanguage(getContext(), codeLocale);
-        goToHomeScreen();
+        if (getArguments() != null && getArguments().getBoolean(IS_SETTING)) {
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else {
+            goToHomeScreen();
+        }
     }
 
     private void goToHomeScreen() {
+        EventBus.getDefault().postSticky(new CategoryProductEvent(true));
         mViewController.replaceFragment(MasterFragment.class, null);
     }
 }

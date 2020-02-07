@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+
         <variable
             name="detailProductResponse"
             type="com.soict.hoangviet.handycart.entity.response.DetailProductResponse" />
@@ -22,7 +24,8 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/md_white_1000">
+                android:background="@color/md_white_1000"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
@@ -153,17 +156,23 @@
                         tools:background="@drawable/bg_tab_unselected_detail_product" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.viewpager.widget.ViewPager
-                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                android:id="@+id/detail_view_pager"
+            <androidx.core.widget.NestedScrollView
+                android:fillViewport="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="@dimen/content_padding_10_dp"
-                android:paddingEnd="@dimen/content_padding_10_dp" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/detail_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/content_padding_10_dp"
+                    android:paddingEnd="@dimen/content_padding_10_dp" />
+            </androidx.core.widget.NestedScrollView>
+
 
             <include
                 android:id="@+id/sheets"

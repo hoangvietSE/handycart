@@ -23,9 +23,16 @@ import com.soict.hoangviet.handycart.base.ListResponse;
 import com.soict.hoangviet.handycart.databinding.ActivityMainBinding;
 import com.soict.hoangviet.handycart.entity.response.CategoryResponse;
 import com.soict.hoangviet.handycart.entity.response.SubCategoriesItem;
+import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+import com.soict.hoangviet.handycart.eventbus.CategoryProductEvent;
 import com.soict.hoangviet.handycart.ui.detailproduct.DetailProductFragment;
 import com.soict.hoangviet.handycart.ui.listproduct.ListProductFragment;
+import com.soict.hoangviet.handycart.ui.master.MasterFragment;
 import com.soict.hoangviet.handycart.ui.splash.SplashFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +94,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public <T> void setData(Class<T> tClass, int categoryId) {
         HashMap<String, Integer> data = new HashMap<>();
         data.put(ListProductFragment.EXTRA_CATEGORY_ID, categoryId);
-        getViewController().addFragment(tClass, data);
+        if(getViewController().getCurrentFragment() instanceof MasterFragment){
+            getViewController().addFragment(tClass, data);
+        }else{
+            getViewController().backFromAddFragment(null);
+            getViewController().addFragment(tClass, data);
+        }
+
     }
 
     private void initCategoryAdapter(ListResponse<CategoryResponse> response) {
@@ -98,6 +111,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private void getListCategory() {
         mViewModel.setListCategory();
     }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onCategoryProductEvent(CategoryProductEvent categoryProductEvent) {
+        if(categoryProductEvent.isFirst()){
+            getListCategory();
+        }
+        EventBus.getDefault().removeStickyEvent(categoryProductEvent);
+    }
+
 
     public void enableNavigationDrawer(boolean enable) {
         if (enable) {
@@ -119,6 +141,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     public boolean isOpenDrawer() {
         return binding.navigationDrawer.isDrawerOpen(GravityCompat.END);
+    }
+
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
 }

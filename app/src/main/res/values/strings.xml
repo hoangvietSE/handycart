@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HandyCart</string>
-    <string name="language">vi</string>
-    <string name="handle_error">Có lỗi xảy ra. Vui lòng thử lại.</string>
+    <string name="language" translatable="false">vi</string>
+    <string name="handle_error" translatable="false">Có lỗi xảy ra. Vui lòng thử lại.</string>
 
     <!--    Master-->
     <string name="master_home_title">Trang chủ</string>
@@ -59,6 +59,7 @@
 
     <!--    Detail product-->
     <string name="detail_product_button_title">Mua hàng</string>
+    <string name="detail_product_out_of_stock">Hết hàng</string>
     <string name="detail_product_title">Chi tiết sản phẩm</string>
     <string name="detail_product_description_title">Mô tả</string>
     <string name="detail_product_guide_title">Hướng dẫn</string>
@@ -77,7 +78,7 @@
     <string name="detail_supplier_share_title">Chia sẻ</string>
     <string name="detail_supplier_service_title">Dịch vụ</string>
     <string name="detail_supplier_like_quantity_title">Lượt yêu thích:</string>
-    <string name="detail_supplier_des_one">Thưởng thức món ăn Hàn Quốc với giá cả hợp lý\n*Thời gian nấu dự kiến: 20-30 phút\n*Thời gian đặt hàng: 10:00-19:00\n*Thời gian giao hàng: 10:00-21:00</string>
+    <string name="detail_supplier_des_one">Thưởng thức món ăn Hàn Quốc với giá cả hợp lý *Thời gian nấu dự kiến: 20-30 phút *Thời gian đặt hàng: 10:00-19:00 *Thời gian giao hàng: 10:00-21:00</string>
     <string name="detail_supplier_des_two">*Thời gian nấu dự kiến: 20-30 phút</string>
     <string name="detail_supplier_des_three">*Thời gian đặt hàng: 10:00-19:00</string>
     <string name="detail_supplier_des_four" translatable="false">*Thời gian giao hàng: 10:00-21:00</string>

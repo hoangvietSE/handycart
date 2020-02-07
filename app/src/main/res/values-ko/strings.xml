@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="language">ko</string>
     <string name="app_name">HandyCart</string>
     <string name="cart_buy_more">" 더 구매"</string>
     <string name="cart_buy_condition">" 신청서는 150,000 VND 이상이어야합니다"</string>
@@ -16,4 +15,47 @@
     <string name="profile_logout_title">"로그 아웃 "</string>
     <string name="profile_notification_title">" 알림 설정 "</string>
     <string name="profile_person_title">개인 정보</string>
+    <string name="cart_market">시장</string>
+    <string name="cart_toolbar_title">"기행 "</string>
+    <string name="detail_product_button_title">"무아 행 "</string>
+    <string name="detail_product_description_title">" 설명"</string>
+    <string name="detail_product_guide_title">"  지시 사항"</string>
+    <string name="detail_product_title">" 제품 세부 사항"</string>
+    <string name="detail_supplier_des_four" translatable="false">* 배달 시간 : 10 : 00-21 : 00</string>
+    <string name="detail_supplier_like_quantity_title">" 즐겨 찾기 :"</string>
+    <string name="detail_supplier_like_title">" 좋아함"</string>
+    <string name="detail_supplier_menu_title">메뉴</string>
+    <string name="detail_supplier_service_title">"서비스 "</string>
+    <string name="detail_supplier_share_title">"공유하기 "</string>
+    <string name="favorite_cancel">중단</string>
+    <string name="favorite_message">기능은 로그인이 필요합니다</string>
+    <string name="favorite_need_login">로그인</string>
+    <string name="favorite_product_title">" 좋아하는 제품"</string>
+    <string name="favorite_supplier_title">"좋아하는 식당 "</string>
+    <string name="favorite_title">공지 사항</string>
+    <string name="guide_toolbar_title">지시 사항</string>
+    <string name="handle_error" translatable="false">" 오류가 발생했습니다. 다시 시도하십시오."</string>
+    <string name="list_product_toolbar_title">" 제품 목록"</string>
+    <string name="login_button">" 로그인"</string>
+    <string name="login_forgot_password">비밀번호를 잊어 버렸습니다</string>
+    <string name="login_password">비밀번호</string>
+    <string name="login_social_fb">페이스 북으로 로그인</string>
+    <string name="login_social_google">"Google에 로그인 "</string>
+    <string name="login_social_kakao">카카오 톡에 로그인</string>
+    <string name="login_success_request">"로그인 성공 "</string>
+    <string name="login_title">로그인</string>
+    <string name="login_user_already">"이미 회원 "</string>
+    <string name="login_username">이메일 / 전화 번호</string>
+    <string name="login_validate_email_empty">이메일 또는 전화 번호를 입력하십시오</string>
+    <string name="login_validate_email_error">"유효한 이메일 또는 전화 번호를 입력하십시오 "</string>
+    <string name="login_validate_password_empty">" 비밀번호를 입력하십시오"</string>
+    <string name="login_validate_password_error">" 비밀번호는 문자와 숫자를 포함하여 6 자보다 커야합니다"</string>
+    <string name="master_favorite_title">" 즐겨 찾기 "</string>
+    <string name="master_home_title">" 홈"</string>
+    <string name="master_notification_title">" 공지 사항 "</string>
+    <string name="master_profile_title">"개인 "</string>
+    <string name="master_search_title">" 검색"</string>
+    <string name="multi_language_change_title">" 언어 설정"</string>
+    <string name="detail_product_out_of_stock">" 품절"</string>
+    <string name="search_hint">키워드를 입력하십시오</string>
 </resources>

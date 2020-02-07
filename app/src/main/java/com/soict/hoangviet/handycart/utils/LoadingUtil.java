@@ -11,12 +11,14 @@ import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
-import com.soict.hoangviet.handycart.databinding.DialogLoadingBinding;
 import com.soict.hoangviet.handycart.R;
+import com.soict.hoangviet.handycart.databinding.DialogLoadingBinding;
 
 
 public class LoadingUtil {
-    private LoadingUtil(){}
+    private LoadingUtil() {
+    }
+
     private static boolean shown = false;
 
     private AlertDialog dialog = null;
@@ -28,12 +30,8 @@ public class LoadingUtil {
     private Context context;
 
     public static LoadingUtil getInstance(Context context) {
-        if (instance != null) {
-            return instance;
-        } else {
-            instance = new LoadingUtil(context);
-            return instance;
-        }
+        instance = new LoadingUtil(context);
+        return instance;
     }
 
     private LoadingUtil(Context context) {
