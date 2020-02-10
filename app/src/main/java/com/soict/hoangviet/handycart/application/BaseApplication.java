@@ -3,10 +3,16 @@ package com.soict.hoangviet.handycart.application;
 import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.data.sharepreference.ISharePreference;
 import com.soict.hoangviet.handycart.di.DaggerAppComponent;
+import com.soict.hoangviet.handycart.ui.main.MainActivity;
 import com.soict.hoangviet.handycart.utils.LanguageUtil;
 
 import javax.inject.Inject;
@@ -36,6 +42,12 @@ public class BaseApplication extends Application implements HasActivityInjector 
         if (mSharePreference.getCurrentLanguage() != "") {
             LanguageUtil.setCurrentLanguage(this, mSharePreference.getCurrentLanguage());
         }
+        subscribeTopic();
+    }
+
+    private void subscribeTopic() {
+        FirebaseMessaging.getInstance().subscribeToTopic("anhkt");
+
     }
 
     private void getDeviceTokenId() {

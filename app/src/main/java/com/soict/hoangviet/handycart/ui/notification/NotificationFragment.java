@@ -1,5 +1,10 @@
 package com.soict.hoangviet.handycart.ui.notification;
 
+import android.app.Dialog;
+import android.text.Html;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -8,8 +13,11 @@ import com.soict.hoangviet.handycart.adapter.NotificationAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.custom.NotificationItemDecoration;
 import com.soict.hoangviet.handycart.databinding.FragmentNotificationBinding;
+import com.soict.hoangviet.handycart.entity.response.NotificationResponse;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
 import com.soict.hoangviet.handycart.ui.main.MainViewModel;
+import com.soict.hoangviet.handycart.utils.Define;
+import com.soict.hoangviet.handycart.utils.DialogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,7 +64,26 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
             getNotification(true);
         });
         binding.rcvNotification.setOnItemClickListener((adapter, viewHolder, viewType, position) -> {
-
+            NotificationResponse notificationResponse = notificationAdapter.getItem(position, NotificationResponse.class);
+            notificationResponse.setStatus(Define.Notification.ALREADY_READ);
+            notificationAdapter.notifyItemChanged(position);
+            DialogUtil.showContentDialog(
+                    getContext(),
+                    R.layout.layout_dialog_show_notification,
+                    true,
+                    notificationResponse,
+                    new DialogUtil.OnAddDataToDialogListener() {
+                        @Override
+                        public <T> void onData(View view, T data) {
+                            if (data instanceof NotificationResponse) {
+                                TextView tvTitle = view.findViewById(R.id.tv_title);
+                                TextView tvContent = view.findViewById(R.id.tv_content);
+                                tvTitle.setText(Html.fromHtml(((NotificationResponse) data).getTitle()));
+                                tvContent.setText(Html.fromHtml(((NotificationResponse) data).getBody()));
+                            }
+                        }
+                    }
+            );
         });
         binding.rcvNotification.setListLayoutManager(LinearLayoutManager.VERTICAL);
         binding.rcvNotification.addItemDecoration(itemDecoration);

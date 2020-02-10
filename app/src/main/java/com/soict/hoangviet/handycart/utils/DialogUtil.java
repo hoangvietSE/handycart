@@ -1,7 +1,13 @@
 package com.soict.hoangviet.handycart.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+
 import androidx.annotation.ArrayRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
@@ -11,6 +17,21 @@ import java.util.ArrayList;
 
 public class DialogUtil {
     private DialogUtil() {
+    }
+
+    public static <T> void showContentDialog(
+            Context context,
+            int layoutId,
+            boolean cancelable,
+            T data,
+            OnAddDataToDialogListener listener) {
+        Dialog dialog = new Dialog(context);
+        View view = LayoutInflater.from(context).inflate(layoutId, null, false);
+        dialog.setCancelable(cancelable);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        listener.onData(view, data);
+        dialog.setContentView(view);
+        dialog.show();
     }
 
     public static void showMessageDialog(
@@ -122,10 +143,14 @@ public class DialogUtil {
         alertDialog.show();
     }
 
-    interface ChoiceItemListener {
+    public interface ChoiceItemListener {
         void onPositiveClick(ArrayList mSelectedItems);
 
         void onNegativeClick();
+    }
+
+    public interface OnAddDataToDialogListener {
+        <T> void onData(View view, T data);
     }
 
 }

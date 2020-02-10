@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_radius_16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:padding="@dimen/content_padding_16_dp"
+        android:textColor="@color/color_brown"
+        android:textSize="@dimen/textsize_16_sp"
+        tools:text="Chúc mừng bạn đã đặt hàng thành công trên handycart.vn.
+\nThông tin mã đơn hàng của bạn là: 1581581323486" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:fontFamily="@font/lato_regular"
+        android:paddingStart="@dimen/content_padding_16_dp"
+        android:paddingEnd="@dimen/content_padding_16_dp"
+        android:paddingBottom="@dimen/content_padding_16_dp"
+        android:textSize="@dimen/textsize_16_sp"
+        tools:text="Chúc mừng bạn đã đặt hàng thành công trên handycart.vn.
+\nThông tin mã đơn hàng của bạn là: 1581581323486" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_content"
+        android:background="@drawable/bg_notification_show"
+        android:padding="@dimen/content_padding_8_dp" />
+
+
+</RelativeLayout>
