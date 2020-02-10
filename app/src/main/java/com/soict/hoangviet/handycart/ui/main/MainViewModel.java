@@ -1,7 +1,6 @@
 package com.soict.hoangviet.handycart.ui.main;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -14,8 +13,6 @@ import com.soict.hoangviet.handycart.utils.Define;
 
 import javax.inject.Inject;
 
-import io.reactivex.disposables.CompositeDisposable;
-
 public class MainViewModel extends BaseViewModel {
     private Repository repository;
 
@@ -26,10 +23,16 @@ public class MainViewModel extends BaseViewModel {
     }
 
     private MutableLiveData<ListResponse<CategoryResponse>> listCategory;
+    private MutableLiveData<Boolean> notificationBadge;
 
     public MutableLiveData<ListResponse<CategoryResponse>> getListCategory() {
         if (listCategory == null) listCategory = new MutableLiveData<>();
         return listCategory;
+    }
+
+    public MutableLiveData<Boolean> getNotificationBadge() {
+        if (notificationBadge == null) notificationBadge = new MutableLiveData<>();
+        return notificationBadge;
     }
 
     public void setListCategory() {
@@ -43,7 +46,6 @@ public class MainViewModel extends BaseViewModel {
                                     getListCategory().setValue(response);
                                 },
                                 throwable -> {
-                                    Log.v("ahihi","error : " +throwable.getLocalizedMessage());
                                 })
         );
     }

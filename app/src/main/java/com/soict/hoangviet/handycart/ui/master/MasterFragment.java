@@ -7,6 +7,7 @@ import com.soict.hoangviet.handycart.R;
 import com.soict.hoangviet.handycart.adapter.MasterAdapter;
 import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.databinding.FragmentMasterBinding;
+import com.soict.hoangviet.handycart.ui.main.MainViewModel;
 
 public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int HOME_FRAGMENT = 0;
@@ -16,6 +17,7 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     private static final int PROFILE_FRAGMENT = 4;
 
     private MasterViewModel mViewModel;
+    private MainViewModel mainViewModel;
     private MasterAdapter masterAdapter;
 
     @Override
@@ -63,6 +65,7 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
 
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(MasterViewModel.class);
+        mainViewModel = ViewModelProviders.of(getActivity(), viewModelFactory).get(MainViewModel.class);
         binding.setMasterViewModel(mViewModel);
     }
 
@@ -75,6 +78,10 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
     @Override
     public void initListener() {
         binding.bottomBar.setOnBottomBarClickListener(position -> {
+            if (position == NOTIFICATION_FRAGMENT) {
+                //hide badge
+                binding.bottomBar.handleNotification(false);
+            }
             binding.masterContainer.setCurrentItem(position, true);
             setToolbar(position);
         });
@@ -85,6 +92,9 @@ public class MasterFragment extends BaseFragment<FragmentMasterBinding> {
                     openDrawer();
                     break;
             }
+        });
+        mainViewModel.getNotificationBadge().observe(this, response -> {
+            binding.bottomBar.handleNotification(response);
         });
     }
 

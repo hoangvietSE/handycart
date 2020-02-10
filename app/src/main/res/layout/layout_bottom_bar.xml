@@ -44,6 +44,21 @@
         app:layout_constraintStart_toEndOf="@id/search_tab"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imv_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_notice_notification"
+        app:layout_constraintStart_toEndOf="@id/guide_line"
+        app:layout_constraintTop_toTopOf="@id/notification_tab" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
     <TextView
         android:id="@+id/profile_tab"
         style="@style/BottomBarStyle"

@@ -10,7 +10,7 @@ import java.util.List;
 
 import io.reactivex.annotations.Nullable;
 
-public class ListResponse<T> extends BaseResponse{
+public class ListResponse<T> extends BaseResponse {
     private int type;
 
     @SerializedName("total_page")
@@ -18,6 +18,9 @@ public class ListResponse<T> extends BaseResponse{
 
     @SerializedName("total_item")
     private int totalItem;
+
+    @SerializedName("count_user_notifications")
+    private int countUserNotifications;
 
     @Nullable
     private List<T> data;
@@ -60,6 +63,14 @@ public class ListResponse<T> extends BaseResponse{
 
     public Throwable getError() {
         return error;
+    }
+
+    public int getCountUserNotifications() {
+        return countUserNotifications;
+    }
+
+    public void setCountUserNotifications(int countUserNotifications) {
+        this.countUserNotifications = countUserNotifications;
     }
 
     public ListResponse<T> loading() {

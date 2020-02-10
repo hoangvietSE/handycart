@@ -9,6 +9,7 @@ import com.soict.hoangviet.handycart.base.BaseFragment;
 import com.soict.hoangviet.handycart.custom.NotificationItemDecoration;
 import com.soict.hoangviet.handycart.databinding.FragmentNotificationBinding;
 import com.soict.hoangviet.handycart.eventbus.AuthorizationEvent;
+import com.soict.hoangviet.handycart.ui.main.MainViewModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class NotificationFragment extends BaseFragment<FragmentNotificationBinding> {
     private NotificationViewModel mViewModel;
+    private MainViewModel mainViewModel;
     private NotificationItemDecoration itemDecoration;
     private NotificationAdapter notificationAdapter;
 
@@ -62,6 +64,7 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
 
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this, viewModelFactory).get(NotificationViewModel.class);
+        mainViewModel = ViewModelProviders.of(getActivity(), viewModelFactory).get(MainViewModel.class);
         binding.setNotificationViewModel(mViewModel);
     }
 
@@ -82,6 +85,9 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
     public void initListener() {
         mViewModel.getNotifications().observe(this, response -> {
             handleLoadMoreResponse(response, response.isRefresh(), response.isCanLoadmore());
+        });
+        mViewModel.getNotificationBadge().observe(this, isShowBadge -> {
+            mainViewModel.getNotificationBadge().setValue(isShowBadge);
         });
     }
 

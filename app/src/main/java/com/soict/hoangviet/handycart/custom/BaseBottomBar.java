@@ -3,6 +3,8 @@ package com.soict.hoangviet.handycart.custom;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -30,6 +32,7 @@ public class BaseBottomBar extends CustomViewConstraintLayout {
     private TextView searchTab;
     private TextView notificationTab;
     private TextView profileTab;
+    private ImageView imvNotificaton;
     private OnBottomBarClickListener listener;
 
     private ArrayList<Integer> mTabIconSelected;
@@ -55,6 +58,7 @@ public class BaseBottomBar extends CustomViewConstraintLayout {
         searchTab = view.findViewById(R.id.search_tab);
         notificationTab = view.findViewById(R.id.notification_tab);
         profileTab = view.findViewById(R.id.profile_tab);
+        imvNotificaton = view.findViewById(R.id.imv_notification);
         mTabs = new ArrayList<>(Arrays.asList(
                 homeTab,
                 favoriteTab,
@@ -73,7 +77,7 @@ public class BaseBottomBar extends CustomViewConstraintLayout {
                 R.drawable.ic_tab_search_disselect_,
                 R.drawable.ic_tab_notification_disselect,
                 R.drawable.ic_tab_profile_disselect));
-        for(int index = 0; index < mTabs.size(); index++){
+        for (int index = 0; index < mTabs.size(); index++) {
             int finalIndex = index;
             mTabs.get(index).setOnClickListener(view -> {
                 onTabClick(finalIndex);
@@ -112,5 +116,13 @@ public class BaseBottomBar extends CustomViewConstraintLayout {
 
     public interface OnBottomBarClickListener {
         void onBottomBarClick(int position);
+    }
+
+    public void handleNotification(boolean isShow) {
+        if (isShow) {
+            imvNotificaton.setVisibility(VISIBLE);
+        } else {
+            imvNotificaton.setVisibility(GONE);
+        }
     }
 }

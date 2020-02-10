@@ -20,6 +20,7 @@ public class NotificationViewModel extends BaseViewModel {
     private Repository repository;
     private int pageIndexNotification = 1;
     private MutableLiveData<ListLoadmoreReponse<NotificationResponse>> notifications;
+    private MutableLiveData<Boolean> notificationBadge;
 
     @Inject
     public NotificationViewModel(Context context, Repository repository, ISharePreference mSharePreference) {
@@ -30,6 +31,11 @@ public class NotificationViewModel extends BaseViewModel {
     public MutableLiveData<ListLoadmoreReponse<NotificationResponse>> getNotifications() {
         if (notifications == null) notifications = new MutableLiveData<>();
         return notifications;
+    }
+
+    public MutableLiveData<Boolean> getNotificationBadge() {
+        if (notificationBadge == null) notificationBadge = new MutableLiveData<>();
+        return notificationBadge;
     }
 
     public void setListNotificationWithAuth(boolean isRefresh) {
@@ -45,6 +51,7 @@ public class NotificationViewModel extends BaseViewModel {
                         .subscribe(
                                 response -> {
                                     pageIndexNotification++;
+                                    getNotificationBadge().setValue(response.getCountUserNotifications() != 0);
                                     getNotifications().setValue(new ListLoadmoreReponse<NotificationResponse>().success(
                                             response.getData(),
                                             isRefresh,
