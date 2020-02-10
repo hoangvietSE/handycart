@@ -23,6 +23,7 @@ import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.ItemMenuDetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
+import com.soict.hoangviet.handycart.entity.response.NotificationResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
 import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
@@ -191,4 +192,14 @@ public interface ApiInterface {
             @Body CartTransactionDeleteRequest request
     );
 
+    @GET(ApiConstant.NOTIFICATIONS)
+    Single<ListResponse<NotificationResponse>> getNotificationWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @QueryMap HashMap<String, Object> data
+    );
+
+    @GET(ApiConstant.NOTIFICATIONS)
+    Single<ListResponse<NotificationResponse>> getNotificationNoAuth(
+            @QueryMap HashMap<String, Object> data
+    );
 }

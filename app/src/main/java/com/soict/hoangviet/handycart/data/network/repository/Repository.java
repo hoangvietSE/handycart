@@ -24,6 +24,7 @@ import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.ItemMenuDetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
+import com.soict.hoangviet.handycart.entity.response.NotificationResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
 import com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse;
@@ -224,5 +225,19 @@ public class Repository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Single<ListResponse<NotificationResponse>> getNotificationWithAuth(String accessToken, HashMap<String,Object> data) {
+        return apiInterface.getNotificationWithAuth(accessToken, data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<ListResponse<NotificationResponse>> getNotificationNoAuth(HashMap<String,Object> data) {
+        return apiInterface.getNotificationNoAuth(data)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
 
 }

@@ -137,4 +137,10 @@ public class Define {
         public static final String VIETNAM = "vi";
         public static final String KOREA = "ko";
     }
+
+    public static class Notification {
+        public static final int UN_READ = 0;
+        public static final int ALREADY_READ = 1;
+
+    }
 }

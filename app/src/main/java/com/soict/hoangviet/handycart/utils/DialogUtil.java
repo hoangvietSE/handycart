@@ -2,15 +2,17 @@ package com.soict.hoangviet.handycart.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
-
 import androidx.annotation.ArrayRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 
 public class DialogUtil {
-    private DialogUtil(){}
+    private DialogUtil() {
+    }
+
     public static void showMessageDialog(
             Context context,
             @StringRes int titleRes,
@@ -44,6 +46,28 @@ public class DialogUtil {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    public static void showConfirmDialog(
+            Context context,
+            @StringRes int titleRes,
+            @StringRes int messageRes,
+            @DrawableRes int icon,
+            @StringRes int positiveRes,
+            @StringRes int negativeRes,
+            DialogInterface.OnClickListener positiveListener,
+            DialogInterface.OnClickListener negativeListener
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(titleRes)
+                .setIcon(icon)
+                .setCancelable(true)
+                .setMessage(messageRes)
+                .setPositiveButton(positiveRes, positiveListener)
+                .setNegativeButton(negativeRes, negativeListener);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 
     public static void showChooseItemDialog(
             Context context,

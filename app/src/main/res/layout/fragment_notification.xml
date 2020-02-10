@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="notificationViewModel"
             type="com.soict.hoangviet.handycart.ui.notification.NotificationViewModel" />
@@ -13,9 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            bind:isVisible="@{notificationViewModel.login}"
-            layout="@layout/layout_need_login" />
+        <com.soict.hoangviet.handycart.base.BaseRecyclerView
+            android:id="@+id/rcv_notification"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

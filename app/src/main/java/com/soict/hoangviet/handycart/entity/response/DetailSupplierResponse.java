@@ -242,6 +242,5 @@ public class DetailSupplierResponse {
                 view.setText(Html.fromHtml(description));
             }
         }
-
     }
 }
