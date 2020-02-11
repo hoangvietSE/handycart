@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">HandyCart</string>
+    <string name="facebook_app_id">529093347957821</string>
+    <string name="fb_login_protocol_scheme">fb529093347957821</string>
     <string name="language" translatable="false">vi</string>
     <string name="handle_error" translatable="false">Có lỗi xảy ra. Vui lòng thử lại.</string>
     <string name="default_notification_channel_id" translatable="false">channel_id</string>
+
 
     <!--    Master-->
     <string name="master_home_title">Trang chủ</string>
