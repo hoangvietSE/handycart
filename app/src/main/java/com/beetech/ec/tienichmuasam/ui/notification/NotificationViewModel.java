@@ -125,6 +125,4 @@ public class NotificationViewModel extends BaseViewModel {
                                 })
         );
     }
-
-
 }

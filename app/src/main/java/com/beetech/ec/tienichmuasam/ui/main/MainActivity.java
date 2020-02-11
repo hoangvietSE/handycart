@@ -1,5 +1,8 @@
 package com.beetech.ec.tienichmuasam.ui.main;
 
+import android.content.Intent;
+
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
@@ -13,6 +16,7 @@ import com.beetech.ec.tienichmuasam.entity.response.CategoryResponse;
 import com.beetech.ec.tienichmuasam.entity.response.SubCategoriesItem;
 import com.beetech.ec.tienichmuasam.eventbus.CategoryProductEvent;
 import com.beetech.ec.tienichmuasam.ui.listproduct.ListProductFragment;
+import com.beetech.ec.tienichmuasam.ui.login.LoginFragment;
 import com.beetech.ec.tienichmuasam.ui.master.MasterFragment;
 import com.beetech.ec.tienichmuasam.ui.splash.SplashFragment;
 
@@ -77,9 +81,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public <T> void setData(Class<T> tClass, int categoryId) {
         HashMap<String, Integer> data = new HashMap<>();
         data.put(ListProductFragment.EXTRA_CATEGORY_ID, categoryId);
-        if(getViewController().getCurrentFragment() instanceof MasterFragment){
+        if (getViewController().getCurrentFragment() instanceof MasterFragment) {
             getViewController().addFragment(tClass, data);
-        }else{
+        } else {
             getViewController().backFromAddFragment(null);
             getViewController().addFragment(tClass, data);
         }
@@ -97,7 +101,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onCategoryProductEvent(CategoryProductEvent categoryProductEvent) {
-        if(categoryProductEvent.isFirst()){
+        if (categoryProductEvent.isFirst()) {
             getListCategory();
         }
         EventBus.getDefault().removeStickyEvent(categoryProductEvent);
@@ -137,5 +141,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
-
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        if (getViewController().getCurrentFragment() instanceof LoginFragment) {
+//            getViewController().getCurrentFragment().onActivityResult(requestCode, resultCode, data);
+//        } else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
 }
