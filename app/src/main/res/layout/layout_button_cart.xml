@@ -16,7 +16,7 @@
             android:padding="12dp"
             android:src="@drawable/ic_cart" />
 
-        <com.soict.hoangviet.handycart.custom.NotificationBadge
+        <com.beetech.ec.tienichmuasam.custom.NotificationBadge
             android:id="@+id/tv_badge_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

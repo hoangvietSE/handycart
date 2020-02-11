@@ -7,7 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.soict.hoangviet.handycart.ui.splash.SplashFragment">
+        tools:context="com.beetech.ec.tienichmuasam.ui.splash.SplashFragment">
 
         <ImageView
             android:id="@+id/imv_splash"

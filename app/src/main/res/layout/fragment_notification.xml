@@ -7,14 +7,14 @@
 
         <variable
             name="notificationViewModel"
-            type="com.soict.hoangviet.handycart.ui.notification.NotificationViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.notification.NotificationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.soict.hoangviet.handycart.base.BaseRecyclerView
+        <com.beetech.ec.tienichmuasam.base.BaseRecyclerView
             android:id="@+id/rcv_notification"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

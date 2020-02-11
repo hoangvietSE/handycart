@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+        <import type="com.beetech.ec.tienichmuasam.utils.NumberUtil" />
 
         <variable
             name="detailProductResponse"
-            type="com.soict.hoangviet.handycart.entity.response.DetailProductResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.DetailProductResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +111,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <com.soict.hoangviet.handycart.custom.BaseToolbar
+                    <com.beetech.ec.tienichmuasam.custom.BaseToolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

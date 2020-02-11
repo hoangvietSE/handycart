@@ -6,11 +6,11 @@
 
     <data>
 
-        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+        <import type="com.beetech.ec.tienichmuasam.utils.NumberUtil" />
 
         <variable
             name="searchProductResponse"
-            type="com.soict.hoangviet.handycart.entity.response.SearchProductResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.SearchProductResponse" />
     </data>
 
     <LinearLayout

@@ -8,7 +8,7 @@
 
         <variable
             name="searchViewModel"
-            type="com.soict.hoangviet.handycart.ui.search.SearchViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

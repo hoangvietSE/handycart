@@ -7,7 +7,7 @@
 
         <variable
             name="notificationResponse"
-            type="com.soict.hoangviet.handycart.entity.response.NotificationResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.NotificationResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

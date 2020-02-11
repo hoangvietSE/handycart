@@ -6,14 +6,14 @@
 
         <variable
             name="guideViewModel"
-            type="com.soict.hoangviet.handycart.ui.guide.GuideViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.guide.GuideViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.soict.hoangviet.handycart.custom.BaseToolbar
+        <com.beetech.ec.tienichmuasam.custom.BaseToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

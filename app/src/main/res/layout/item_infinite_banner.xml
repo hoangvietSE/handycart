@@ -4,7 +4,7 @@
     <data>
         <variable
             name="dataItem"
-            type="com.soict.hoangviet.handycart.entity.response.DataItem" />
+            type="com.beetech.ec.tienichmuasam.entity.response.DataItem" />
     </data>
 
     <ImageView

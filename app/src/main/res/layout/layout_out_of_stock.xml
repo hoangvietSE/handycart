@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.soict.hoangviet.handycart.custom.SquareTextView
+        <com.beetech.ec.tienichmuasam.custom.SquareTextView
             android:id="@+id/textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

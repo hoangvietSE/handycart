@@ -5,15 +5,15 @@
 
     <data>
 
-        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+        <import type="com.beetech.ec.tienichmuasam.utils.NumberUtil" />
 
         <variable
             name="detailProductResponse"
-            type="com.soict.hoangviet.handycart.entity.response.DetailProductResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.DetailProductResponse" />
 
         <variable
             name="detailProductViewModel"
-            type="com.soict.hoangviet.handycart.ui.detailproduct.DetailProductViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.detailproduct.DetailProductViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +71,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="29.750 VND" />
 
-        <com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView
+        <com.beetech.ec.tienichmuasam.custom.QuantitySelectedCustomView
             android:id="@+id/item_quantity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

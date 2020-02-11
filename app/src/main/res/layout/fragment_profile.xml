@@ -8,7 +8,7 @@
 
         <variable
             name="profileViewModel"
-            type="com.soict.hoangviet.handycart.ui.profile.ProfileViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,44 +30,44 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_person_title"
                     app:rmp_image="@drawable/ic_canhan" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_faq_title"
                     app:rmp_image="@drawable/ic_faq" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_notification_title"
                     app:rmp_image="@drawable/ic_thongbao" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:id="@+id/row_change_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_language_title"
                     app:rmp_image="@drawable/ic_ngonngu" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_link_title"
                     app:rmp_image="@drawable/ic_contact_us" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:rmp_detail="@string/profile_contact_title"
                     app:rmp_image="@drawable/ic_contact" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:id="@+id/row_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                     app:rmp_image="@drawable/ic_changepass"
                     android:visible="@{profileViewModel.isVisibleLiveData}" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:id="@+id/row_login"
                     android:visible="@{!profileViewModel.isVisibleLiveData}"
                     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     app:rmp_enable_navigate="false"
                     app:rmp_image="@drawable/ic_dangnhap" />
 
-                <com.soict.hoangviet.handycart.custom.BaseRowMainProfile
+                <com.beetech.ec.tienichmuasam.custom.BaseRowMainProfile
                     android:visible="@{profileViewModel.isVisibleLiveData}"
                     android:id="@+id/row_logout"
                     android:layout_width="match_parent"

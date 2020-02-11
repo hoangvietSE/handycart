@@ -6,13 +6,13 @@
 
     <data>
 
-        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+        <import type="com.beetech.ec.tienichmuasam.utils.NumberUtil" />
 
         <import type="android.view.View" />
 
         <variable
             name="listProductResponse"
-            type="com.soict.hoangviet.handycart.entity.response.HomeProductResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.HomeProductResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.soict.hoangviet.handycart.custom.SquareImageView
+            <com.beetech.ec.tienichmuasam.custom.SquareImageView
                 android:scaleType="centerCrop"
                 android:background="@drawable/bg_radius_10dp"
                 android:id="@+id/imv_product"
@@ -41,7 +41,7 @@
                 app:imageUrl="@{listProductResponse.thumbnail}"
                 tools:src="@drawable/ic_add_cart" />
 
-            <com.soict.hoangviet.handycart.custom.SquareImageView
+            <com.beetech.ec.tienichmuasam.custom.SquareImageView
                 android:background="@drawable/bg_radius_10dp"
                 android:id="@+id/imv_product_copy"
                 android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView
+                <com.beetech.ec.tienichmuasam.custom.QuantitySelectedCustomView
                     android:id="@+id/item_quantity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

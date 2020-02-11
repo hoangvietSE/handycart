@@ -7,7 +7,7 @@
 
         <variable
             name="detailSupplierResponse"
-            type="com.soict.hoangviet.handycart.entity.response.DetailSupplierResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.DetailSupplierResponse" />
     </data>
 
     <RelativeLayout
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.soict.hoangviet.handycart.custom.BaseToolbar
+            <com.beetech.ec.tienichmuasam.custom.BaseToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"

@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+        <import type="com.beetech.ec.tienichmuasam.utils.NumberUtil" />
 
         <variable
             name="productListItem"
-            type="com.soict.hoangviet.handycart.entity.response.ProductListItem" />
+            type="com.beetech.ec.tienichmuasam.entity.response.ProductListItem" />
     </data>
 
     <LinearLayout
@@ -120,7 +120,7 @@
                     android:textSize="@dimen/textsize_16_sp"
                     tools:text="29.750 VND" />
 
-                <com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView
+                <com.beetech.ec.tienichmuasam.custom.QuantitySelectedCustomView
                     android:id="@+id/qsc_cart"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"

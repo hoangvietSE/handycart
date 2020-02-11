@@ -7,7 +7,7 @@
 
         <variable
             name="homeSupplierResponse"
-            type="com.soict.hoangviet.handycart.entity.response.SupplierFavoriteResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.SupplierFavoriteResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.soict.hoangviet.handycart.custom.SquareImageView
+            <com.beetech.ec.tienichmuasam.custom.SquareImageView
                 android:id="@+id/imv_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

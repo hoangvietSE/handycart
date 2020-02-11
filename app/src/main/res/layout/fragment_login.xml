@@ -6,7 +6,7 @@
 
         <variable
             name="loginViewModel"
-            type="com.soict.hoangviet.handycart.ui.login.LoginViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.login.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -15,7 +15,7 @@
         android:background="@drawable/bg_white"
         android:orientation="vertical">
 
-        <com.soict.hoangviet.handycart.custom.BaseToolbar
+        <com.beetech.ec.tienichmuasam.custom.BaseToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

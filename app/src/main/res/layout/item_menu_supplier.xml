@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.soict.hoangviet.handycart.utils.NumberUtil" />
+        <import type="com.beetech.ec.tienichmuasam.utils.NumberUtil" />
 
         <variable
             name="itemMenuDetailSupplierResponse"
-            type="com.soict.hoangviet.handycart.entity.response.ItemMenuDetailSupplierResponse" />
+            type="com.beetech.ec.tienichmuasam.entity.response.ItemMenuDetailSupplierResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,7 +80,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_name_product"
                     tools:text="40.000 VND" />
 
-                <com.soict.hoangviet.handycart.custom.QuantitySelectedCustomView
+                <com.beetech.ec.tienichmuasam.custom.QuantitySelectedCustomView
                     android:id="@+id/qsc_cart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

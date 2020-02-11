@@ -6,20 +6,20 @@
 
         <variable
             name="masterViewModel"
-            type="com.soict.hoangviet.handycart.ui.master.MasterViewModel" />
+            type="com.beetech.ec.tienichmuasam.ui.master.MasterViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.soict.hoangviet.handycart.custom.BaseToolbar
+        <com.beetech.ec.tienichmuasam.custom.BaseToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:icon_right="menu" />
 
-        <com.soict.hoangviet.handycart.custom.LockedViewPager
+        <com.beetech.ec.tienichmuasam.custom.LockedViewPager
             android:id="@+id/master_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             style="@style/LineHorizontal"
             android:layout_above="@id/bottom_bar" />
 
-        <com.soict.hoangviet.handycart.custom.BaseBottomBar
+        <com.beetech.ec.tienichmuasam.custom.BaseBottomBar
             android:id="@+id/bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
