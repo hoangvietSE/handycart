@@ -116,8 +116,6 @@ public abstract class EndlessLoadingRecyclerViewAdapter<T extends ViewDataBindin
 //    protected abstract void bindLoadingViewHolder(LoadingViewHolder loadingViewHolder, int position);
 
     public static class LoadingViewHolder extends RecyclerView.ViewHolder {
-
-
         public LoadingViewHolder(View itemView) {
             super(itemView);
         }

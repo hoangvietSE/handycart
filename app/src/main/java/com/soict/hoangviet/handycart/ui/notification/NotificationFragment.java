@@ -1,6 +1,5 @@
 package com.soict.hoangviet.handycart.ui.notification;
 
-import android.app.Dialog;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -85,6 +84,9 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
                     }
             );
         });
+        binding.rcvNotification.setOnLoadingMoreListener(() -> {
+            getNotification(false);
+        });
         binding.rcvNotification.setListLayoutManager(LinearLayoutManager.VERTICAL);
         binding.rcvNotification.addItemDecoration(itemDecoration);
     }
@@ -120,7 +122,7 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
 
     @Override
     protected void getListResponse(List<?> data, boolean isRefresh, boolean canLoadmore) {
-        if (canLoadmore) binding.rcvNotification.enableLoadmore(canLoadmore);
+        binding.rcvNotification.enableLoadmore(canLoadmore);
         if (isRefresh) {
             binding.rcvNotification.refresh(data);
         } else {

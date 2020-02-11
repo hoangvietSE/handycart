@@ -59,6 +59,7 @@ public class BaseApplication extends Application implements HasActivityInjector 
                     }
                     // Get new Instance ID token
                     String token = task.getResult().getToken();
+                    Log.w(TAG, "getInstanceId failed"+token);
                     mSharePreference.setDeviceTokenId(token);
                 });
     }
