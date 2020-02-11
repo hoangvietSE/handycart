@@ -22,16 +22,9 @@ public class NotificationItemDecoration extends BaseDecoration {
     @Override
     void setupOutRect(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view);
-        if (position == 0) {
-            outRect.left = getPaddingStart();
-            outRect.right = getPaddingEnd();
-            outRect.top = getPaddingTop();
-            outRect.bottom = getPaddingBottom();
-        } else {
-            outRect.left = getPaddingStart();
-            outRect.right = getPaddingEnd();
-            outRect.bottom = getPaddingBottom();
-        }
+        outRect.left = getPaddingStart();
+        outRect.right = getPaddingEnd();
+        outRect.bottom = getPaddingBottom();
     }
 
 }
