@@ -23,6 +23,7 @@ import com.soict.hoangviet.handycart.entity.response.HomeProductResponse;
 import com.soict.hoangviet.handycart.entity.response.HomeSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.ItemMenuDetailSupplierResponse;
 import com.soict.hoangviet.handycart.entity.response.LoginResponse;
+import com.soict.hoangviet.handycart.entity.response.NotificationReadResponse;
 import com.soict.hoangviet.handycart.entity.response.NotificationResponse;
 import com.soict.hoangviet.handycart.entity.response.ProductFavoriteResponse;
 import com.soict.hoangviet.handycart.entity.response.SearchProductResponse;
@@ -201,5 +202,18 @@ public interface ApiInterface {
     @GET(ApiConstant.NOTIFICATIONS)
     Single<ListResponse<NotificationResponse>> getNotificationNoAuth(
             @QueryMap HashMap<String, Object> data
+    );
+
+    @GET(ApiConstant.NOTIFICATIONS_READ)
+    Single<ObjectResponse<NotificationReadResponse>> updateNotificationnWithAuth(
+            @Header(Define.Api.Query.AUTHORIZATION) String accessToken,
+            @Path(Define.Api.Query.ID) int notificationId,
+            @Query(Define.Api.Query.DEVICE_ID) String deviceId
+    );
+
+    @GET(ApiConstant.NOTIFICATIONS_READ)
+    Single<ObjectResponse<NotificationReadResponse>> updateNotificationNoAuth(
+            @Path(Define.Api.Query.ID) int notificationId,
+            @Query(Define.Api.Query.DEVICE_ID) String deviceId
     );
 }

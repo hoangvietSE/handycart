@@ -19,4 +19,5 @@ public class ApiConstant {
     public static final String CART = "cart";
     public static final String PRODUCT = "product/{" + Define.Api.Query.ID + "}";
     public static final String NOTIFICATIONS = "notifications";
+    public static final String NOTIFICATIONS_READ = "notifications/{" + Define.Api.Query.ID + "}";
 }

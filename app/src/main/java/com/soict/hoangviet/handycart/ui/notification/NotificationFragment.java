@@ -64,8 +64,11 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
         });
         binding.rcvNotification.setOnItemClickListener((adapter, viewHolder, viewType, position) -> {
             NotificationResponse notificationResponse = notificationAdapter.getItem(position, NotificationResponse.class);
-            notificationResponse.setStatus(Define.Notification.ALREADY_READ);
-            notificationAdapter.notifyItemChanged(position);
+            if (notificationResponse.getStatus() == Define.Notification.UN_READ) {
+                notificationResponse.setStatus(Define.Notification.ALREADY_READ);
+                notificationAdapter.notifyItemChanged(position);
+                updateNotification(notificationResponse);
+            }
             DialogUtil.showContentDialog(
                     getContext(),
                     R.layout.layout_dialog_show_notification,
@@ -89,6 +92,14 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
         });
         binding.rcvNotification.setListLayoutManager(LinearLayoutManager.VERTICAL);
         binding.rcvNotification.addItemDecoration(itemDecoration);
+    }
+
+    private void updateNotification(NotificationResponse notificationResponse) {
+        if (mViewModel.getmSharePreference().isLogin()) {
+            mViewModel.updateNotificationWithAuth(notificationResponse);
+        } else {
+            mViewModel.updateNotificationNoAuth(notificationResponse);
+        }
     }
 
     private void initViewModel() {
